@@ -7,12 +7,18 @@
 
 import SwiftUI
 
+/// SwiftUI view for a circular button with a plus icon.
 struct CircleButtonWithPlusView: View {
+    // MARK: - Variables
+    var onPlusClick: () -> Void
+}
 
-    //MARK: - Body
+// MARK: - Body
+extension CircleButtonWithPlusView {
+
     var body: some View {
         Button(action: {
-            // TODO: Add Plus Tap Action
+            onPlusClick()
         }) {
             Image(systemName: SystemImage.plusIcon)
                 .resizable()
@@ -23,8 +29,4 @@ struct CircleButtonWithPlusView: View {
         .background(SystemColors.primaryBorder.opacity(0.6)) // Setting the background color of the button.
         .cornerRadius(AppConstants.cornerRadius) // Applying corner radius to the button.
     }
-}
-
-#Preview {
-    CircleButtonWithPlusView() // Preview of CircleButtonWithPlusView
 }

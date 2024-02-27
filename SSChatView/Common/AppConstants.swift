@@ -53,3 +53,11 @@ enum ChatInputViewConstants {
     static let textFieldPadding: CGFloat = 10
     static let sendViewPadding: CGFloat = 8
 }
+
+// MARK: MessageViewConstants
+enum MessageViewConstants {
+    static let helloText = "Hello!"
+    static let helloReplyText = "Hi, there!"
+    static let textPadding: CGFloat = 15
+    static let spacing: CGFloat  = 10
+}
