@@ -7,18 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E96742BF2FD3205659B22B6 /* Pods_SSChatView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */; };
 		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
 		8336C9A92A60210F006D8431 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A82A60210F006D8431 /* ContentView.swift */; };
-		8336C9AB2A602110006D8431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AA2A602110006D8431 /* Assets.xcassets */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
+		8339ACB42A78CDD500D0BB42 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339ACB32A78CDD500D0BB42 /* AppConstants.swift */; };
+		8339ACB62A78CE0000D0BB42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACB52A78CE0000D0BB42 /* Localizable.strings */; };
+		8339ACC72A78E5A600D0BB42 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC22A78E5A600D0BB42 /* Poppins-Medium.ttf */; };
+		8339ACC82A78E5A600D0BB42 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC32A78E5A600D0BB42 /* Poppins-Thin.ttf */; };
+		8339ACC92A78E5A600D0BB42 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC42A78E5A600D0BB42 /* Poppins-SemiBold.ttf */; };
+		8339ACCA2A78E5A600D0BB42 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC52A78E5A600D0BB42 /* Poppins-Bold.ttf */; };
+		8339ACCB2A78E5A600D0BB42 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC62A78E5A600D0BB42 /* Poppins-Regular.ttf */; };
+		8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339ACCD2A78E66200D0BB42 /* Font+Extension.swift */; };
+		836035FD2A7CD15E00186504 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836035FC2A7CD15E00186504 /* R.generated.swift */; };
+		839736692A78C7B50021D895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736662A78C7B50021D895 /* Assets.xcassets */; };
+		8397366A2A78C7B50021D895 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736672A78C7B50021D895 /* Color.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.release.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.release.xcconfig"; sourceTree = "<group>"; };
+		2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSChatView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8336C9A32A60210F006D8431 /* SSChatView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSChatView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8336C9A62A60210F006D8431 /* SSChatViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatViewApp.swift; sourceTree = "<group>"; };
 		8336C9A82A60210F006D8431 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		8336C9AA2A602110006D8431 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8336C9AD2A602110006D8431 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8339ACB32A78CDD500D0BB42 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		8339ACB52A78CE0000D0BB42 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8339ACC22A78E5A600D0BB42 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		8339ACC32A78E5A600D0BB42 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		8339ACC42A78E5A600D0BB42 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		8339ACC52A78E5A600D0BB42 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		8339ACC62A78E5A600D0BB42 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		8339ACCD2A78E66200D0BB42 /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		836035FC2A7CD15E00186504 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		8360BAE12A791651002B0AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		839736662A78C7B50021D895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		839736672A78C7B50021D895 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		E2F12E46BDDA97E2C2A2FA7C /* Pods-SSChatView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.debug.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E96742BF2FD3205659B22B6 /* Pods_SSChatView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +63,8 @@
 			children = (
 				8336C9A52A60210F006D8431 /* SSChatView */,
 				8336C9A42A60210F006D8431 /* Products */,
+				A41B9A4AD065F7E8169EDDA1 /* Pods */,
+				89476420BA7024637795AE5C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,9 +79,12 @@
 		8336C9A52A60210F006D8431 /* SSChatView */ = {
 			isa = PBXGroup;
 			children = (
+				8360BAE12A791651002B0AEE /* Info.plist */,
 				8336C9A62A60210F006D8431 /* SSChatViewApp.swift */,
-				8336C9A82A60210F006D8431 /* ContentView.swift */,
-				8336C9AA2A602110006D8431 /* Assets.xcassets */,
+				8339ACCC2A78E65500D0BB42 /* Extensions */,
+				8339ACB72A78CF2C00D0BB42 /* UI */,
+				8339ACB22A78CDC000D0BB42 /* Common */,
+				839736652A78C7B50021D895 /* Resources */,
 				8336C9AC2A602110006D8431 /* Preview Content */,
 			);
 			path = SSChatView;
@@ -67,6 +98,72 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8339ACB22A78CDC000D0BB42 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8339ACB32A78CDD500D0BB42 /* AppConstants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8339ACB72A78CF2C00D0BB42 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8336C9A82A60210F006D8431 /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		8339ACCC2A78E65500D0BB42 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8339ACCD2A78E66200D0BB42 /* Font+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		839736652A78C7B50021D895 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				836035FC2A7CD15E00186504 /* R.generated.swift */,
+				839736662A78C7B50021D895 /* Assets.xcassets */,
+				839736672A78C7B50021D895 /* Color.xcassets */,
+				839736682A78C7B50021D895 /* Fonts */,
+				8339ACB52A78CE0000D0BB42 /* Localizable.strings */,
+			);
+			name = Resources;
+			path = SSChatView/Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		839736682A78C7B50021D895 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8339ACC52A78E5A600D0BB42 /* Poppins-Bold.ttf */,
+				8339ACC22A78E5A600D0BB42 /* Poppins-Medium.ttf */,
+				8339ACC62A78E5A600D0BB42 /* Poppins-Regular.ttf */,
+				8339ACC42A78E5A600D0BB42 /* Poppins-SemiBold.ttf */,
+				8339ACC32A78E5A600D0BB42 /* Poppins-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		89476420BA7024637795AE5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A41B9A4AD065F7E8169EDDA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E2F12E46BDDA97E2C2A2FA7C /* Pods-SSChatView.debug.xcconfig */,
+				1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +171,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8336C9B12A602110006D8431 /* Build configuration list for PBXNativeTarget "SSChatView" */;
 			buildPhases = (
+				73E42AEE1F012FBA2FA313A5 /* [CP] Check Pods Manifest.lock */,
+				839736632A78C49F0021D895 /* R.swift */,
 				8336C99F2A60210F006D8431 /* Sources */,
 				8336C9A02A60210F006D8431 /* Frameworks */,
 				8336C9A12A60210F006D8431 /* Resources */,
+				3D2F779582D5A245D808C706 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,19 +226,89 @@
 			buildActionMask = 2147483647;
 			files = (
 				8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */,
-				8336C9AB2A602110006D8431 /* Assets.xcassets in Resources */,
+				8339ACC92A78E5A600D0BB42 /* Poppins-SemiBold.ttf in Resources */,
+				8339ACB62A78CE0000D0BB42 /* Localizable.strings in Resources */,
+				8339ACCB2A78E5A600D0BB42 /* Poppins-Regular.ttf in Resources */,
+				8339ACCA2A78E5A600D0BB42 /* Poppins-Bold.ttf in Resources */,
+				8397366A2A78C7B50021D895 /* Color.xcassets in Resources */,
+				8339ACC82A78E5A600D0BB42 /* Poppins-Thin.ttf in Resources */,
+				839736692A78C7B50021D895 /* Assets.xcassets in Resources */,
+				8339ACC72A78E5A600D0BB42 /* Poppins-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3D2F779582D5A245D808C706 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SSChatView/Pods-SSChatView-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SSChatView/Pods-SSChatView-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SSChatView/Pods-SSChatView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73E42AEE1F012FBA2FA313A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SSChatView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		839736632A78C49F0021D895 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = R.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/SSChatView/Resources/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/SSChatView/Resources/R.generated.swift\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 /* Begin PBXSourcesBuildPhase section */
 		8336C99F2A60210F006D8431 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836035FD2A7CD15E00186504 /* R.generated.swift in Sources */,
 				8336C9A92A60210F006D8431 /* ContentView.swift in Sources */,
+				8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */,
 				8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */,
+				8339ACB42A78CDD500D0BB42 /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,15 +431,18 @@
 		};
 		8336C9B22A602110006D8431 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2F12E46BDDA97E2C2A2FA7C /* Pods-SSChatView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SSChatView/Preview Content\"";
 				DEVELOPMENT_TEAM = K7XJG666ZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SSChatView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -290,15 +463,18 @@
 		};
 		8336C9B32A602110006D8431 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SSChatView/Preview Content\"";
 				DEVELOPMENT_TEAM = K7XJG666ZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SSChatView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
