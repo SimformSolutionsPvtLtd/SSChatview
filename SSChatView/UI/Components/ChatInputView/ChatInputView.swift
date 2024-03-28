@@ -10,7 +10,8 @@ import SwiftUI
 struct ChatInputView: View {
 
     //MARK: - Variables
-    @State var messageText: String = ""
+    @Binding var message: String
+    var onSendMsgTap: () -> Void
 }
 
 //MARK: - Body
@@ -18,20 +19,27 @@ extension ChatInputView {
 
     var body: some View {
         VStack {
-            TextfieldView(messageText: $messageText) // Displaying the text input field.
+            TextfieldView(messageText: $message) // Displaying the text input field.
                 .padding(ChatInputViewConstants.textFieldEdgeInsets)
                 .overlay(
-                    CircleButtonWithPlusView() // Displaying the button for adding attachments.
+                    CircleButtonWithPlusView(onPlusClick: { // Displaying the button for adding attachments.
+                        // TODO: Add on Click of Plus
+                    })
                         .offset(x: 0, y: ChatInputViewConstants.offsetMinus15)
                         .padding(.horizontal, AppConstants.horizontalPadding),
                     alignment: .bottomLeading
                 )
                 .overlay(
                     Group {
-                        if messageText.isEmpty {
-                            MicView() // Displaying the microphone icon when no text is entered.
+                        if message.isEmpty {
+                            MicView { // Displaying the microphone icon when no text is entered.
+                                //TODO: Handle Mic Tap Action
+                            }
                         } else {
-                            CircleButtonWithSendView() // Displaying the send button when text is entered.
+                            CircleButtonWithSendView { // Displaying the send button when text is entered.
+                                onSendMsgTap()
+                                message = ""
+                            }
                         }
                     }
                         .offset(x: 0, y: ChatInputViewConstants.offsetMinus8)
@@ -41,8 +49,3 @@ extension ChatInputView {
         }
     }
 }
-
-#Preview {
-    ChatInputView() // Preview of ChatInputView.
-}
-

@@ -8,25 +8,21 @@
 import SwiftUI
 
 struct ChatScreenView: View {
-
     //MARK: - Variables
-    @State var messageText: String = "" // State variable to store the text input in the chat screen.
+    @State private var currentMessage: String = ""
+    @StateObject private var viewModel = ChatScreenViewModel()
 }
 
 //MARK: - Body
 extension ChatScreenView {
-
-    //MARK: - Body
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
-                ChatInputView() // Displaying the chat input view.
+                MessageView(viewModel: MessageViewModel(messages: viewModel.messageArray)) // Displaying the messages view.
+                ChatInputView(message: $currentMessage) { // Displaying the chat input view.
+                    viewModel.addMessage(message: currentMessage)
+                }
             }
         }
     }
-}
-
-#Preview {
-    ChatScreenView() // Preview of ChatScreenView.
 }

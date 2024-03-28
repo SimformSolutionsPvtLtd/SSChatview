@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+/// SwiftUI view for a circular button with a send icon.
 struct CircleButtonWithSendView: View {
+    // MARK: - Variables
+    var onSendClick: () -> Void
+}
 
-    //MARK: - Body
+// MARK: - Body
+extension CircleButtonWithSendView {
+    
     var body: some View {
         ZStack {
             Circle()
@@ -23,11 +29,7 @@ struct CircleButtonWithSendView: View {
         }
         .padding(ChatInputViewConstants.sendViewPadding) // Adding padding around the ZStack.
         .onTapGesture {
-            // TODO: Add Send Tap Action
+            onSendClick()
         }
     }
-}
-
-#Preview {
-    CircleButtonWithSendView() // Preview of CircleButtonWithSendView.
 }
