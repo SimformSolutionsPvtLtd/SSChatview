@@ -15,16 +15,19 @@ struct MessageUI: View {
 
 // MARK: - Body
 extension MessageUI {
-
+    
     var body: some View {
         HStack(alignment: .bottom, spacing: MessageViewConstants.spacing) {
             if currentMessage.isCurrentUser {
-                Spacer()
+                Spacer() // Add a spacer to right-align the current user's message
             }
+
+            /// Display the MessageCell with the content and sender information
             MessageCell(contentMessage: currentMessage.content,
                         isCurrentUser: currentMessage.isCurrentUser)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading) // Ensure the HStack fills the available width
+        .padding() // Apply padding around the HStack
     }
 }
+

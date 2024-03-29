@@ -20,6 +20,7 @@
 		8339ACCB2A78E5A600D0BB42 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC62A78E5A600D0BB42 /* Poppins-Regular.ttf */; };
 		8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339ACCD2A78E66200D0BB42 /* Font+Extension.swift */; };
 		837EA8EE2B9106E2001578F3 /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837EA8ED2B9106E2001578F3 /* ChatScreenViewModel.swift */; };
+		837EA8F12B93B8DE001578F3 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837EA8F02B93B8DE001578F3 /* MessageBubble.swift */; };
 		839736692A78C7B50021D895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736662A78C7B50021D895 /* Assets.xcassets */; };
 		8397366A2A78C7B50021D895 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736672A78C7B50021D895 /* Color.xcassets */; };
 		83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E4632B877E5600C51561 /* ChatScreenView.swift */; };
@@ -52,6 +53,7 @@
 		8339ACCD2A78E66200D0BB42 /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		8360BAE12A791651002B0AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		837EA8ED2B9106E2001578F3 /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
+		837EA8F02B93B8DE001578F3 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		839736662A78C7B50021D895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		839736672A78C7B50021D895 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		83C3E4632B877E5600C51561 /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				83D46ECB2B8DFD7100D275FE /* MessageUI.swift */,
 				83D46ECC2B8DFD7100D275FE /* MessageCell.swift */,
 				83D46ECD2B8DFD7100D275FE /* MessageView.swift */,
+				837EA8F02B93B8DE001578F3 /* MessageBubble.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				83D46EBD2B8DF29B00D275FE /* CircleButtonWithPlusView.swift in Sources */,
 				83D46EC52B8DF36400D275FE /* ChatInputView.swift in Sources */,
 				83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */,
+				837EA8F12B93B8DE001578F3 /* MessageBubble.swift in Sources */,
 				83D46ED02B8DFD7100D275FE /* MessageView.swift in Sources */,
 				8339ACB42A78CDD500D0BB42 /* AppConstants.swift in Sources */,
 				83D46EC32B8DF30900D275FE /* TextfieldView.swift in Sources */,
