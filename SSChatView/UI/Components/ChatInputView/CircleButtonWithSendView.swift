@@ -15,16 +15,22 @@ struct CircleButtonWithSendView: View {
 
 // MARK: - Body
 extension CircleButtonWithSendView {
-    
+
     var body: some View {
         ZStack {
             Circle()
                 .fill(.white) // Filling the circle with a white color.
-                .frame(width: ChatInputViewConstants.sendImageSize, height: ChatInputViewConstants.sendImageSize) // Setting the frame size of the circle.
+                .frame(
+                    width: ChatInputViewConstants.sendImageSize,
+                    height: ChatInputViewConstants.sendImageSize
+                ) // Setting the frame size of the circle.
             Image(systemName: SystemImage.sendIcon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: ChatInputViewConstants.sendImageSize, height: ChatInputViewConstants.sendImageSize) // Setting the frame size of the send icon.
+                .frame(
+                    width: ChatInputViewConstants.sendImageSize,
+                    height: ChatInputViewConstants.sendImageSize
+                ) // Setting the frame size of the send icon.
                 .foregroundColor(.green) // Setting the color of the send icon.
         }
         .padding(ChatInputViewConstants.sendViewPadding) // Adding padding around the ZStack.

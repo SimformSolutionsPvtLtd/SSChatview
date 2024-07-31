@@ -28,16 +28,27 @@ struct MessageCell: View {
                 messageContent
             }
             .overlay(reactionView) // Overlay reaction view on top of message content
-            .frame(width: UIScreen.main.bounds.width * 0.7, alignment: currentMessage.isCurrentUser ? .trailing : .leading) // Width is 70% of screen width
+            .frame(
+                width: UIScreen.main.bounds.width * 0.7,
+                alignment: currentMessage.isCurrentUser ? .trailing : .leading
+            ) // Width is 70% of screen width
         }
-        .frame(maxWidth: .infinity, alignment: currentMessage.isCurrentUser ? .trailing : .leading) // Ensure HStack fills the available width
+        .frame(
+            maxWidth: .infinity,
+            alignment: currentMessage.isCurrentUser ? .trailing : .leading
+        ) // Ensure HStack fills the available width
         .padding() // Padding around HStack
     }
 
     // MARK: - MessageContent
     private var messageContent: some View {
         Text(currentMessage.content) // Display message content
-            .modifier(MessageText(currentMessage: currentMessage, isCurrentUser: currentMessage.isCurrentUser))
+            .modifier(
+                MessageText(
+                    currentMessage: currentMessage,
+                    isCurrentUser: currentMessage.isCurrentUser
+                )
+            )
             .onTapGesture {
                 resetReaction() // Reset reactions on tap
             }
@@ -57,7 +68,10 @@ struct MessageCell: View {
                 RoundedRectangle(cornerRadius: 28)
                     .fill(Color(UIColor.tertiarySystemGroupedBackground))
                     .frame(width: 280, height: 60)
-                    .scaleEffect(isBlurred && currentMessage.id == activeMessageID ? 1 : 0, anchor: .bottomTrailing)
+                    .scaleEffect(
+                        isBlurred && currentMessage.id == activeMessageID ? 1 : 0,
+                        anchor: .bottomTrailing
+                    )
                     .animation(
                         .interpolatingSpring(stiffness: 170, damping: 15).delay(0.05),
                         value: isBlurred
@@ -78,10 +92,12 @@ struct MessageCell: View {
                         Button(action: {
                             debugPrint(reaction.imageName) // Debugging action
                             resetReaction() // Reset reactions on button tap
-                        }) {
+                        }, label: {
                             Image(reaction.imageName)
-                                .scaleEffect(reactionState.isActive(reaction) ? 1 : 0) // Scale reaction image based on state
-                        }
+                                .scaleEffect(
+                                    reactionState.isActive(reaction) ? 1 : 0
+                                ) // Scale reaction image based on state
+                        })
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
@@ -93,7 +109,12 @@ struct MessageCell: View {
             }
 
             Text(currentMessage.content) // Display message content
-                .modifier(MessageText(currentMessage: currentMessage, isCurrentUser: currentMessage.isCurrentUser))
+                .modifier(
+                    MessageText(
+                        currentMessage: currentMessage,
+                        isCurrentUser: currentMessage.isCurrentUser
+                    )
+                )
                 .opacity(isBlurred && currentMessage.id == activeMessageID ? 1 : 0)
         }
     }
@@ -102,7 +123,10 @@ struct MessageCell: View {
     private func showReactionAnimation(shouldShow: Bool) {
         let delayIncrement = 0.1
         ReactionType.allCases.enumerated().forEach { index, reaction in
-            withAnimation(.interpolatingSpring(stiffness: 170, damping: 15).delay(Double(index) * delayIncrement)) {
+            withAnimation(
+                .interpolatingSpring(stiffness: 170, damping: 15)
+                .delay(Double(index) * delayIncrement)
+            ) {
                 reactionState.update(reaction, shouldShow: shouldShow)
             }
         }
@@ -143,10 +167,18 @@ private struct MessageText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding() // Padding around the text
-            .foregroundColor(isCurrentUser ? Color.white : SystemColors.textColor) // Text color based on sender
-            .background(isCurrentUser ? Color.blue : Color(UIColor.systemGray6)) // Background color based on sender
-            .clipShape(MessageBubble(myMessage: isCurrentUser)) // Clip shape to message bubble
-            .contentShape(.contextMenuPreview, MessageBubble(myMessage: isCurrentUser)) // Set content shape for context menu
+            .foregroundColor(
+                isCurrentUser ? Color.white : SystemColors.textColor
+            ) // Text color based on sender
+            .background(
+                isCurrentUser ? Color.blue : Color(UIColor.systemGray6)
+            ) // Background color based on sender
+            .clipShape(
+                MessageBubble(myMessage: isCurrentUser)
+            ) // Clip shape to message bubble
+            .contentShape(
+                .contextMenuPreview, MessageBubble(myMessage: isCurrentUser)
+            ) // Set content shape for context menu
     }
 }
 

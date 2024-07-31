@@ -16,7 +16,10 @@ struct MicView: View {
 extension MicView {
     var body: some View {
         Image(systemName: SystemImage.micIcon) // Displaying an image with the mic icon.
-            .frame(width: ChatInputViewConstants.micImageSize, height: ChatInputViewConstants.micImageSize) // Setting the frame size of the image.
+            .frame(
+                width: ChatInputViewConstants.micImageSize,
+                height: ChatInputViewConstants.micImageSize
+            ) // Setting the frame size of the image.
             .foregroundColor(.gray) // Setting the foreground color of the image to gray.
             .padding(AppConstants.horizontalPadding) // Adding padding around the image.
             .onTapGesture {
