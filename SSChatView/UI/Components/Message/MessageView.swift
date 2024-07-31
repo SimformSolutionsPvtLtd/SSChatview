@@ -9,8 +9,11 @@ import SwiftUI
 
 /// SwiftUI View for displaying messages in the chat.
 struct MessageView: View {
+    
     // MARK: - Variables
     @ObservedObject var viewModel: MessageViewModel
+    @Binding var isBlurred: Bool
+    @State var activeMessageID = ""
     @State private var scrollToBottom = false // Added state variable
 }
 
@@ -21,12 +24,11 @@ extension MessageView {
             ScrollViewReader { scrollView in
                 ScrollView {
                     if viewModel.messages.isEmpty {
-                        NoMessageView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding(.vertical, (UIScreen.main.bounds.height - 100) / 2)
+                        // If there are no messages, just add a spacer to occupy space
+                        Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         ForEach(viewModel.messages, id: \.id) { message in
-                            MessageUI(currentMessage: message)
+                            MessageCell(currentMessage: message, isBlurred: $isBlurred, activeMessageID: $activeMessageID)
                                 .id(message.id)
                         }
                         .onChange(of: viewModel.messages) { _ in
@@ -41,8 +43,8 @@ extension MessageView {
                         }
                     }
                 }
-                .scrollDismissesKeyboard(.immediately) // Drag to dismiss keyboard.
-                .disabled(viewModel.messages.isEmpty) // Disable scroll if there are no messages
+                .scrollDisabled(isBlurred)
+                .scrollDismissesKeyboard(.immediately)
                 .onChange(of: scrollToBottom) { _ in // Detect changes in scrollToBottom
                     if scrollToBottom {
                         scrollView.scrollTo(viewModel.messages.last?.id, anchor: .bottom)

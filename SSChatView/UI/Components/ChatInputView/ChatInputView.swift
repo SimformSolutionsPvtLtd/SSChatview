@@ -11,6 +11,7 @@ struct ChatInputView: View {
 
     //MARK: - Variables
     @Binding var message: String
+    @Binding var isBlurred: Bool
     var onSendMsgTap: () -> Void
 }
 
@@ -21,6 +22,7 @@ extension ChatInputView {
         VStack {
             TextfieldView(messageText: $message) // Displaying the text input field.
                 .padding(ChatInputViewConstants.textFieldEdgeInsets)
+                .disabled(isBlurred)
                 .overlay(
                     CircleButtonWithPlusView(onPlusClick: { // Displaying the button for adding attachments.
                         // TODO: Add on Click of Plus

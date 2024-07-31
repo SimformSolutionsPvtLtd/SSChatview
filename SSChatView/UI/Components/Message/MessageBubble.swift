@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct MessageBubble: Shape {
+
     // MARK: - Variable
     var myMessage: Bool
+    // MARK: - Additional Properties
+    var rectangleWidth: CGFloat = 180 // Adjust for desired rectangle size
+    var rectangleHeight: CGFloat = 50 // Adjust for desired rectangle size
+    var rectangleSpacing: CGFloat = 65 // Adjust for spacing between bubble and rectangle
+    var rectangleCornerRadius: CGFloat = 20
 }
 
 // MARK: - Body
@@ -25,6 +31,8 @@ extension MessageBubble {
         let cornerRadius: CGFloat = 20 // Adjust this value as needed
 
         let bezierPath = UIBezierPath()
+        let adjustedFrame = !myMessage ? CGRect(x: rectangleSpacing, y: -rectangleSpacing, width: rectangleWidth, height: rectangleHeight) : CGRect(x: width - rectangleWidth - rectangleSpacing, y: -rectangleSpacing, width: rectangleWidth, height: rectangleHeight)
+
         if !myMessage {
             /// Bottom-left rounded corner
             bezierPath.move(to: CGPoint(x: cornerRadius, y: height)) // Move to the starting point of the bezier path at the bottom-left corner with a rounded edge
@@ -45,6 +53,10 @@ extension MessageBubble {
             bezierPath.addLine(to: CGPoint(x: -1, y: height)) // Add a line back up to close the arrow shape
             bezierPath.addCurve(to: CGPoint(x: 12, y: height - 4), controlPoint1: CGPoint(x: 4, y: height + 1), controlPoint2: CGPoint(x: 8, y: height - 1)) // Add a curve to smooth out the bottom part of the bubble near the arrow
             bezierPath.addCurve(to: CGPoint(x: cornerRadius, y: height), controlPoint1: CGPoint(x: 15, y: height), controlPoint2: CGPoint(x: cornerRadius, y: height)) // Add a curve to close the bubble with a rounded bottom-left corner
+
+            let rectanglePath = UIBezierPath(roundedRect: adjustedFrame, cornerRadius: rectangleCornerRadius)
+
+            bezierPath.append(rectanglePath)
         } else {
             /// Bottom-right rounded corner
             bezierPath.move(to: CGPoint(x: width - cornerRadius, y: height)) // Move to the starting point of the bezier path at the bottom-right corner with a rounded edge
@@ -65,6 +77,10 @@ extension MessageBubble {
             bezierPath.addLine(to: CGPoint(x: width + 1, y: height)) // Add a line back up to close the arrow shape
             bezierPath.addCurve(to: CGPoint(x: width - 12, y: height - 4), controlPoint1: CGPoint(x: width - 4, y: height + 1), controlPoint2: CGPoint(x: width - 8, y: height - 1)) // Add a curve to smooth out the bottom part of the bubble near the arrow
             bezierPath.addCurve(to: CGPoint(x: width - cornerRadius, y: height), controlPoint1: CGPoint(x: width - 15, y: height), controlPoint2: CGPoint(x: width - cornerRadius, y: height)) // Add a curve to close the bubble with a rounded bottom-right corner
+
+            let rectanglePath = UIBezierPath(roundedRect: adjustedFrame, cornerRadius: rectangleCornerRadius)
+
+            bezierPath.append(rectanglePath)
         }
         return Path(bezierPath.cgPath)
     }

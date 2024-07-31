@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    // MARK: - Variables
+    @State var isBlurred = false
+
+    // MARK: - Body
     var body: some View {
-      ChatScreenView()
+        VStack {
+            ChatScreenView(isBlurred: $isBlurred)
+        }
+        .background(SystemColors.primaryBackground.ignoresSafeArea(.all, edges: .all))
+        .ignoresSafeArea(.all, edges: .top)
+        .onTapGesture {
+            isBlurred = false
+        }
     }
 }
 

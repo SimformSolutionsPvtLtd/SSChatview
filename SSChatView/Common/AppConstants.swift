@@ -69,5 +69,14 @@ enum MessageViewConstants {
     static let messagesDesc = "Messages you send or receive will appear here."
     static let helloText = "Hello!"
     static let helloReplyText = "Hi, there!"
-    static let spacing: CGFloat  = 10
+    static let spacing: CGFloat = 10
+}
+
+// MARK: - Reaction Types
+enum ReactionType: String, CaseIterable {
+    case love, like, dislike, laugh, exclaim
+
+    var imageName: String {
+        return self.rawValue
+    }
 }
