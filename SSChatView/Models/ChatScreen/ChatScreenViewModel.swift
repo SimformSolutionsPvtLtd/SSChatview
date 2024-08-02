@@ -9,7 +9,11 @@ import Foundation
 
 class ChatScreenViewModel: ObservableObject {
     //MARK: - Variables
-    @Published var messageArray: [MessageResponseModel] = [MessageResponseModel(content: MessageViewConstants.helloText, isCurrentUser: false), MessageResponseModel(content: MessageViewConstants.helloReplyText, isCurrentUser: true)]
+    //TODO: Will be removed on database integration
+    @Published var messageArray: [MessageResponseModel] = [
+        MessageResponseModel(content: MessageViewConstants.helloText, isCurrentUser: false), MessageResponseModel(content: MessageViewConstants.helloReplyText, isCurrentUser: true),
+        MessageResponseModel(content: MessageViewConstants.helloText, isCurrentUser: false), MessageResponseModel(content: MessageViewConstants.helloReplyText, isCurrentUser: true),
+        MessageResponseModel(content: MessageViewConstants.helloText, isCurrentUser: false), MessageResponseModel(content: MessageViewConstants.helloReplyText, isCurrentUser: true)]
 }
 
 // MARK: - Add Message

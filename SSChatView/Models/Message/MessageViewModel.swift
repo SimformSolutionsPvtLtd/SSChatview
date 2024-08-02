@@ -9,7 +9,7 @@ import SwiftUI
 
 /// Model representing a message in the chat.
 struct MessageResponseModel: Hashable {
-    var id = UUID()
+    var id = UUID().uuidString
     var content: String = ""
     var isCurrentUser: Bool = false
 }
