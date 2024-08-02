@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E96742BF2FD3205659B22B6 /* Pods_SSChatView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */; };
+		830F60472BDFC6D200D93090 /* NoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F60462BDFC6D200D93090 /* NoMessageView.swift */; };
 		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
 		8336C9A92A60210F006D8431 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A82A60210F006D8431 /* ContentView.swift */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.release.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.release.xcconfig"; sourceTree = "<group>"; };
 		2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSChatView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		830F60462BDFC6D200D93090 /* NoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMessageView.swift; sourceTree = "<group>"; };
 		8336C9A32A60210F006D8431 /* SSChatView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSChatView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8336C9A62A60210F006D8431 /* SSChatViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatViewApp.swift; sourceTree = "<group>"; };
 		8336C9A82A60210F006D8431 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				83D46ECC2B8DFD7100D275FE /* MessageCell.swift */,
 				83D46ECD2B8DFD7100D275FE /* MessageView.swift */,
 				837EA8F02B93B8DE001578F3 /* MessageBubble.swift */,
+				830F60462BDFC6D200D93090 /* NoMessageView.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */,
 				83D46EC12B8DF2EC00D275FE /* MicView.swift in Sources */,
 				8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */,
+				830F60472BDFC6D200D93090 /* NoMessageView.swift in Sources */,
 				83D46EBD2B8DF29B00D275FE /* CircleButtonWithPlusView.swift in Sources */,
 				83D46EC52B8DF36400D275FE /* ChatInputView.swift in Sources */,
 				83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */,

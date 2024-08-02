@@ -9,15 +9,24 @@ import Foundation
 import SwiftUI
 
 // MARK: - R.swift variables
-let appString             = R.string.localizable
-let appColor              = R.color
-let appFont               = R.font
+let appString = R.string.localizable
+let appColor = R.color
+let appFont = R.font
 
 // MARK: SystemImage
 enum SystemImage {
-    static let plusIcon                      = "plus"
-    static let micIcon                       = "mic.fill"
-    static let sendIcon                      = "arrow.up.circle.fill"
+    static let plusIcon = "plus"
+    static let micIcon = "mic.fill"
+    static let sendIcon = "arrow.up.circle.fill"
+    static let messageIcon = "message.fill"
+}
+
+// MARK: FontSize
+enum SystemFontSize {
+    static let smallFontSize: CGFloat = 14
+    static let regularFontSize: CGFloat = 18
+    static let mediumFontSize: CGFloat = 20
+    static let largeFontSize: CGFloat = 32
 }
 
 // MARK: SystemColors
@@ -56,6 +65,8 @@ enum ChatInputViewConstants {
 
 // MARK: MessageViewConstants
 enum MessageViewConstants {
+    static let noMessagesText = "No Messages"
+    static let messagesDesc = "Messages you send or receive will appear here."
     static let helloText = "Hello!"
     static let helloReplyText = "Hi, there!"
     static let spacing: CGFloat  = 10
