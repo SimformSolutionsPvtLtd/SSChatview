@@ -19,6 +19,7 @@ enum SystemImage {
     static let micIcon = "mic.fill"
     static let sendIcon = "arrow.up.circle.fill"
     static let messageIcon = "message.fill"
+    static let arrowIcon = "chevron.right"
 }
 
 // MARK: FontSize
@@ -79,4 +80,10 @@ enum ReactionType: String, CaseIterable {
     var imageName: String {
         return self.rawValue
     }
+}
+
+// MARK: ProfileConstants
+enum ProfileConstants {
+    static let profileImage = "profile"
+    static let profileName = "Test"
 }

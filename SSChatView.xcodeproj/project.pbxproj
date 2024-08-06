@@ -34,6 +34,7 @@
 		83D46EC92B8DFD5900D275FE /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46EC82B8DFD5900D275FE /* MessageViewModel.swift */; };
 		83D46ECF2B8DFD7100D275FE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46ECC2B8DFD7100D275FE /* MessageCell.swift */; };
 		83D46ED02B8DFD7100D275FE /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46ECD2B8DFD7100D275FE /* MessageView.swift */; };
+		83F177012C57C787005D3AC6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F177002C57C787005D3AC6 /* ProfileImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		83D46EC82B8DFD5900D275FE /* MessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		83D46ECC2B8DFD7100D275FE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		83D46ECD2B8DFD7100D275FE /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		83F177002C57C787005D3AC6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		E2F12E46BDDA97E2C2A2FA7C /* Pods-SSChatView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.debug.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 		83D46EBA2B8DF25500D275FE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				83F176FF2C57C770005D3AC6 /* ProfileView */,
 				83D46ECA2B8DFD7100D275FE /* Message */,
 				83D46EBB2B8DF26100D275FE /* ChatInputView */,
 			);
@@ -237,6 +240,14 @@
 				830F60462BDFC6D200D93090 /* NoMessageView.swift */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		83F176FF2C57C770005D3AC6 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				83F177002C57C787005D3AC6 /* ProfileImageView.swift */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		89476420BA7024637795AE5C /* Frameworks */ = {
@@ -398,6 +409,7 @@
 			files = (
 				837EA8EE2B9106E2001578F3 /* ChatScreenViewModel.swift in Sources */,
 				83D46EBF2B8DF2CD00D275FE /* CircleButtonWithSendView.swift in Sources */,
+				83F177012C57C787005D3AC6 /* ProfileImageView.swift in Sources */,
 				8336C9A92A60210F006D8431 /* ContentView.swift in Sources */,
 				8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */,
 				83D46EC12B8DF2EC00D275FE /* MicView.swift in Sources */,
