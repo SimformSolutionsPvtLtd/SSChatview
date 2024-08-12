@@ -9,16 +9,20 @@ import SwiftUI
 
 struct TextfieldView: View {
 
-    //MARK: - Variables
+    // MARK: - Variables
     @Binding var messageText: String
 }
 
-//MARK: - Body
+// MARK: - Body
 extension TextfieldView {
 
     var body: some View {
         VStack {
-            TextField(appString.smsText(), text: $messageText, axis: .vertical) // Displaying a vertical text input field.
+            TextField(
+                appString.smsText(),
+                text: $messageText,
+                axis: .vertical
+            ) // Displaying a vertical text input field.
                 .padding(ChatInputViewConstants.textFieldPadding)
                 .background(
                     RoundedRectangle(cornerRadius: AppConstants.cornerRadius)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatScreenView: View {
-    //MARK: - Variables
+    // MARK: - Variables
     @State private var currentMessage: String = ""
     @Binding var isBlurred: Bool
     @StateObject private var viewModel = ChatScreenViewModel()
@@ -21,12 +21,13 @@ struct ChatScreenView: View {
     }
 }
 
-//MARK: - Body
+// MARK: - Body
 extension ChatScreenView {
     var body: some View {
         VStack {
             ProfileImageView(imageName: ProfileConstants.profileImage, isBlurred: $isBlurred)
                 .padding(.top, topPadding)
+
             MessageView(viewModel: MessageViewModel(messages: viewModel.messageArray), isBlurred: $isBlurred)
 
             // Displaying the messages view.

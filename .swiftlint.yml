@@ -1,0 +1,73 @@
+# SwiftLint configuration file
+
+# Rules to exclude from running
+disabled_rules: # rule identifiers to exclude from running
+ - todo
+
+# Opt-in rules are not enabled by default; add them here if needed
+opt_in_rules: # some rules are only opt-in
+  - control_statement  # Improve control statements readability.
+  - trailing_newline  # Ensure files end with a newline.
+  - colon  # Consistent spacing around colons.
+  - comma  # Consistent spacing around commas.
+  - empty_count # Catch empty collections
+  # Find all the available rules by running:
+  # swiftlint rules
+
+# Paths to include and exclude during linting
+included: # `--path` is ignored if present.
+# - Source  # Adjust based on your directory structure.
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - Source/ExcludedFolder
+  - Source/ExcludedFile.swift
+  - Source/*/ExcludedFile.swift # Exclude files with a wildcard
+  - SSChatView/Resources/R.generated.swift
+
+# Experimental rules run by `swiftlint analyze`
+analyzer_rules:
+  - explicit_self
+
+# Configurable rules with their severity levels
+force_cast:
+  severity: warning  # Force casts can be dangerous, but not always critical.
+force_try:
+  severity: warning  # Force tries can cause crashes if not handled properly.
+
+# Limits for type and function lengths
+line_length: 120
+
+type_body_length:
+  - 300 # Warning for types that are too large.
+  - 400 # Error for overly large types.
+type_name:
+  min_length: 3 # Warning if type names are too short.
+  max_length:
+    warning: 40 # Warning if type names exceed this length.
+    error: 50 # Error if type names are excessively long.
+  excluded: iPhone # Exclude specific names from this rule.
+  allowed_symbols: ["_"] # Allowed symbols in type names.
+
+# Limits for function length
+function_body_length:
+  - 50 # Warning for functions that are too large.
+  - 60 # Error for overly large functions.
+
+# Limits for file length
+file_length:
+  - 400 # Warning for large files.
+  - 500 # Error for very large files.
+
+# Naming rules for identifiers
+identifier_name:
+  min_length:
+    error: 4 # Minimum length for identifiers.
+  excluded:
+    - id
+    - URL
+    - GlobalAPIKey # Excluded identifiers.
+
+# Reporter type
+reporter: "xcode" # Choose the reporter type that fits your development environment (xcode, json, etc.).

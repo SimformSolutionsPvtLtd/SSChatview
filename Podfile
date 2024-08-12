@@ -7,4 +7,5 @@ target 'SSChatView' do
 
   # Pods for SSChatView
   pod 'R.swift', '7.2.4'
+  pod 'SwiftLint'
 end

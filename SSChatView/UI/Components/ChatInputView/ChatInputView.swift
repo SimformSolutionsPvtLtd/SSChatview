@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ChatInputView: View {
 
-    //MARK: - Variables
+    // MARK: - Variables
     @Binding var message: String
     @Binding var isBlurred: Bool
     var onSendMsgTap: () -> Void
 }
 
-//MARK: - Body
+// MARK: - Body
 extension ChatInputView {
 
     var body: some View {
@@ -35,7 +35,7 @@ extension ChatInputView {
                     Group {
                         if message.isEmpty {
                             MicView { // Displaying the microphone icon when no text is entered.
-                                //TODO: Handle Mic Tap Action
+                                // TODO: Handle Mic Tap Action
                             }
                         } else {
                             CircleButtonWithSendView { // Displaying the send button when text is entered.

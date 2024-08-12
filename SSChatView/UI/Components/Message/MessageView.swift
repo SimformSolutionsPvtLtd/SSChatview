@@ -9,7 +9,7 @@ import SwiftUI
 
 /// SwiftUI View for displaying messages in the chat.
 struct MessageView: View {
-    
+
     // MARK: - Variables
     @ObservedObject var viewModel: MessageViewModel
     @Binding var isBlurred: Bool
@@ -28,8 +28,12 @@ extension MessageView {
                         Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         ForEach(viewModel.messages, id: \.id) { message in
-                            MessageCell(currentMessage: message, isBlurred: $isBlurred, activeMessageID: $activeMessageID)
-                                .id(message.id)
+                            MessageCell(
+                                currentMessage: message,
+                                isBlurred: $isBlurred,
+                                activeMessageID: $activeMessageID
+                            )
+                            .id(message.id)
                         }
                         .onChange(of: viewModel.messages) { _ in
                             withAnimation {
