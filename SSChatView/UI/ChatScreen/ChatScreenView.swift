@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view representing the chat screen, which includes a profile image, message list, and input field.
 struct ChatScreenView: View {
     // MARK: - Variables
     @State private var currentMessage: String = ""
@@ -28,11 +29,10 @@ extension ChatScreenView {
             ProfileImageView(imageName: ProfileConstants.profileImage, isBlurred: $isBlurred)
                 .padding(.top, topPadding)
 
-            MessageView(viewModel: MessageViewModel(messages: viewModel.messageArray), isBlurred: $isBlurred)
+            MessageView(messages: $viewModel.messageArray, isBlurred: $isBlurred)
 
-            // Displaying the messages view.
-            ChatInputView(message: $currentMessage, isBlurred: $isBlurred) { // Displaying the chat input view.
-                viewModel.addMessage(message: currentMessage)
+            ChatInputView(message: $currentMessage, isBlurred: $isBlurred) {
+                viewModel.addMessage(currentMessage)
                 currentMessage = ""
             }
             .blur(radius: isBlurred ? 10 : 0)
