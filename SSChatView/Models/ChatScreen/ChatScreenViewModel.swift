@@ -28,6 +28,21 @@ class ChatScreenViewModel: ObservableObject {
             content: MessageViewConstants.helloText,
             isCurrentUser: false,
             reaction: .like
+        ),
+        MessageResponseModel(
+            content: MessageViewConstants.helloText,
+            isCurrentUser: false,
+            reaction: nil
+        ),
+        MessageResponseModel(
+            content: MessageViewConstants.helloReplyText,
+            isCurrentUser: true,
+            reaction: .love
+        ),
+        MessageResponseModel(
+            content: MessageViewConstants.helloText,
+            isCurrentUser: false,
+            reaction: .like
         )
     ]
 }

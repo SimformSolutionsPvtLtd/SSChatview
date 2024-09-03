@@ -20,6 +20,11 @@ enum SystemImage {
     static let sendIcon = "arrow.up.circle.fill"
     static let messageIcon = "message.fill"
     static let arrowIcon = "chevron.right"
+    static let replyIcon = "arrowshape.turn.up.left"
+    static let editIcon = "pencil"
+    static let copyIcon = "doc.on.doc"
+    static let deleteIcon = "trash"
+    static let moreIcon = "ellipsis"
 }
 
 // MARK: FontSize
@@ -43,6 +48,11 @@ enum SystemColors {
     static var textColor: Color {
         return Color(UIColor.label)
     }
+
+    static var tertiarySystemGroupedBackground: Color {
+        return Color(UIColor.tertiarySystemGroupedBackground)
+    }
+
 }
 
 // MARK: AppConstants
@@ -86,4 +96,13 @@ enum ReactionType: String, CaseIterable {
 enum ProfileConstants {
     static let profileImage = "profile"
     static let profileName = "Test"
+}
+
+// MARK: CustomMenu
+enum CustomMenuTitles {
+    static let reply = "Reply"
+    static let edit = "Edit"
+    static let copy = "Copy"
+    static let delete = "Delete"
+    static let more = "More"
 }
