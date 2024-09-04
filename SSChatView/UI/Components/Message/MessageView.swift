@@ -15,6 +15,8 @@ struct MessageView: View {
     @Binding var isBlurred: Bool
     @State private var activeMessageID = ""
     @State private var scrollToBottom = false
+    @Binding var shouldShowSelectionView: Bool
+    @Binding var selectedMessageIDs: Set<String>
 }
 
 // MARK: - Body
@@ -25,7 +27,7 @@ extension MessageView {
                 ScrollView {
                     if messages.isEmpty {
                         Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         messageList
                     }
@@ -56,13 +58,23 @@ extension MessageView {
                         }
                     ),
                     isBlurred: $isBlurred,
-                    activeMessageID: $activeMessageID
+                    activeMessageID: $activeMessageID,
+                    shouldShowSelectionView: $shouldShowSelectionView,
+                    isSelected: selectedMessageIDs.contains(message.id),
+                    onMessageSelection: { messageId in
+                        selectDeleteMessage(id: messageId)
+                    }
                 )
-                .id(message.id)
+                .id("\(message.id) \(selectedMessageIDs.contains(message.id)) \(shouldShowSelectionView)")
             }
             .onChange(of: messages) { _ in
                 withAnimation {
                     scrollToBottom = true
+                }
+            }
+            .onChange(of: shouldShowSelectionView) { newValue in
+                if !newValue {
+                    selectedMessageIDs.removeAll()
                 }
             }
             .onAppear {
@@ -70,6 +82,14 @@ extension MessageView {
                     scrollToBottom = true
                 }
             }
+        }
+    }
+
+    private func selectDeleteMessage(id: String) {
+        if selectedMessageIDs.contains(id) {
+            selectedMessageIDs.remove(id)
+        } else {
+            selectedMessageIDs.insert(id)
         }
     }
 }

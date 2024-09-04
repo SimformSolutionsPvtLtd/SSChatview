@@ -14,21 +14,32 @@ struct MessageCell: View {
     @Binding var currentMessage: MessageResponseModel
     @Binding var isBlurred: Bool
     @Binding var activeMessageID: String
+    @Binding var shouldShowSelectionView: Bool
+    @State var isSelected: Bool
     @State private var reactionState = ReactionState()
+    var onMessageSelection: (String) -> Void
 }
 
 extension MessageCell {
     // MARK: - Body
     var body: some View {
-        HStack(alignment: .bottom, spacing: MessageViewConstants.spacing) {
+        HStack(alignment: .center, spacing: MessageViewConstants.spacing) {
+            if shouldShowSelectionView {
+                CircleCheckboxView(isSelected: isSelected)
+                    .onTapGesture {
+                        onMessageSelection(currentMessage.id)
+                    }
+            }
+
             if currentMessage.isCurrentUser {
                 Spacer() // Align the current user's message to the right
             }
 
-            ZStack {
+            ZStack(alignment: currentMessage.isCurrentUser ? .trailing : .leading) {
                 messageContent
                 if isBlurred && currentMessage.id == activeMessageID {
                     reactionView
+                        .offset(y: -60)
                 }
             }
         }
@@ -45,9 +56,11 @@ extension MessageCell {
                 .modifier(MessageText(isCurrentUser: currentMessage.isCurrentUser))
                 .onTapGesture {
                     resetReaction() // Reset reactions on tap
+                    guard shouldShowSelectionView else { return }
+                    onMessageSelection(currentMessage.id)
                 }
                 .onLongPressGesture {
-                    guard !isBlurred else { return }
+                    guard !isBlurred, !shouldShowSelectionView else { return }
                     isBlurred = true
                     showReactionAnimation(shouldShow: true) // Show reactions on long press
                     activeMessageID = currentMessage.id
@@ -201,7 +214,8 @@ extension MessageCell {
             customDivider(color: .gray)
 
             Button(action: {
-                // TODO: Implement Delete Action
+                shouldShowSelectionView = true
+                onMessageSelection(currentMessage.id)
                 resetReaction()
             }, label: {
                 menuButtonLabel(title: CustomMenuTitles.delete, systemImage: SystemImage.deleteIcon)

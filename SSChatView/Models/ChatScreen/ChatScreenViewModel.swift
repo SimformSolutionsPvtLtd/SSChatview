@@ -11,6 +11,9 @@ import Foundation
 class ChatScreenViewModel: ObservableObject {
 
     // MARK: - Variables
+    @Published var selectedMessageIDs: Set<String> = []
+    @Published var shouldShowSelectionView: Bool = false
+
     // TODO: This will be replaced by a database integration in the future.
     /// Array of messages in the chat.
     @Published var messageArray: [MessageResponseModel] = [
@@ -58,5 +61,15 @@ extension ChatScreenViewModel {
             MessageResponseModel(content: message, isCurrentUser: false)
         ]
         messageArray.append(contentsOf: newMessages)
+    }
+
+    func deleteSelectedMessages() {
+        messageArray.removeAll { selectedMessageIDs.contains($0.id) }
+        selectedMessageIDs.removeAll()
+        shouldShowSelectionView = false
+    }
+
+    func getDeleteMessage() -> String {
+        return "Delete \(selectedMessageIDs.count) Message\(selectedMessageIDs.count > 1 ? "s" : "")"
     }
 }

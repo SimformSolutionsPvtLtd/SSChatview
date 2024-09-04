@@ -13,6 +13,8 @@ struct ChatScreenView: View {
     @State private var currentMessage: String = ""
     @Binding var isBlurred: Bool
     @StateObject private var viewModel = ChatScreenViewModel()
+    @State private var shouldShowDelete: Bool = false
+
     private var topPadding: CGFloat {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -26,16 +28,89 @@ struct ChatScreenView: View {
 extension ChatScreenView {
     var body: some View {
         VStack {
-            ProfileImageView(imageName: ProfileConstants.profileImage, isBlurred: $isBlurred)
-                .padding(.top, topPadding)
-
-            MessageView(messages: $viewModel.messageArray, isBlurred: $isBlurred)
-
-            ChatInputView(message: $currentMessage, isBlurred: $isBlurred) {
-                viewModel.addMessage(currentMessage)
-                currentMessage = ""
+            ProfileImageView(
+                imageName: ProfileConstants.profileImage,
+                isBlurred: $isBlurred,
+                shouldShowSelectionView: $viewModel.shouldShowSelectionView
+            ) {
+                viewModel.shouldShowSelectionView = false
             }
-            .blur(radius: isBlurred ? 10 : 0)
+            .padding(.top, topPadding)
+            .disabledWithOpacity(isBlurred)
+
+            MessageView(
+                messages: $viewModel.messageArray,
+                isBlurred: $isBlurred,
+                shouldShowSelectionView: $viewModel.shouldShowSelectionView,
+                selectedMessageIDs: $viewModel.selectedMessageIDs
+            )
+            .onTapGesture {
+                withAnimation {
+                    shouldShowDelete = false
+                    isBlurred = false
+                }
+            }
+
+            if viewModel.shouldShowSelectionView {
+                ZStack(alignment: .bottom) {
+                    MessageActionView {
+                        withAnimation {
+                            shouldShowDelete = true
+                        }
+                    }
+                    .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
+
+                    if shouldShowDelete && !viewModel.selectedMessageIDs.isEmpty {
+                        deleteAlertView
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.3), value: shouldShowDelete)
+                            .opacity(shouldShowDelete ? 1 : 0)
+                            .zIndex(1)
+                    }
+                }
+            } else {
+                ChatInputView(
+                    message: $currentMessage,
+                    isBlurred: $isBlurred
+                ) {
+                    viewModel.addMessage(currentMessage)
+                    currentMessage = ""
+                }
+                .blur(radius: isBlurred ? 10 : 0)
+            }
         }
+    }
+}
+
+// MARK: - Bottom Action Buttons
+extension ChatScreenView {
+    private var deleteAlertView: some View {
+        VStack(spacing: 8) {
+            Button(action: {
+                viewModel.deleteSelectedMessages()
+            }, label: {
+                Text(viewModel.getDeleteMessage())
+                    .frame(maxWidth: .infinity, maxHeight: 60)
+                    .background(appColor.deleteAlertBackground.getColor())
+                    .foregroundColor(.red)
+                    .font(.headline)
+                    .cornerRadius(10)
+            })
+
+            Button(action: {
+                withAnimation {
+                    shouldShowDelete = false
+                }
+            }, label: {
+                Text(CustomMenuTitles.cancel)
+                    .frame(maxWidth: .infinity, maxHeight: 60)
+                    .background(appColor.deleteAlertBackground.getColor())
+                    .foregroundColor(.blue)
+                    .font(.headline)
+                    .cornerRadius(10)
+            })
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
     }
 }
