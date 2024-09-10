@@ -12,6 +12,7 @@
 		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
 		8336C9A92A60210F006D8431 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A82A60210F006D8431 /* ContentView.swift */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
+		8339031F2C8787EC0064F0A3 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339031E2C8787EC0064F0A3 /* CommonFunctions.swift */; };
 		8339ACB42A78CDD500D0BB42 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339ACB32A78CDD500D0BB42 /* AppConstants.swift */; };
 		8339ACB62A78CE0000D0BB42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACB52A78CE0000D0BB42 /* Localizable.strings */; };
 		8339ACC72A78E5A600D0BB42 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8339ACC22A78E5A600D0BB42 /* Poppins-Medium.ttf */; };
@@ -45,6 +46,7 @@
 		8336C9A62A60210F006D8431 /* SSChatViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatViewApp.swift; sourceTree = "<group>"; };
 		8336C9A82A60210F006D8431 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8336C9AD2A602110006D8431 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8339031E2C8787EC0064F0A3 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		8339ACB32A78CDD500D0BB42 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		8339ACB52A78CE0000D0BB42 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8339ACC22A78E5A600D0BB42 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8339ACB32A78CDD500D0BB42 /* AppConstants.swift */,
+				8339031E2C8787EC0064F0A3 /* CommonFunctions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */,
 				837EA8F12B93B8DE001578F3 /* MessageBubble.swift in Sources */,
 				83D46ED02B8DFD7100D275FE /* MessageView.swift in Sources */,
+				8339031F2C8787EC0064F0A3 /* CommonFunctions.swift in Sources */,
 				8339ACB42A78CDD500D0BB42 /* AppConstants.swift in Sources */,
 				83D46EC32B8DF30900D275FE /* TextfieldView.swift in Sources */,
 				83D46EC92B8DFD5900D275FE /* MessageResponseModel.swift in Sources */,
