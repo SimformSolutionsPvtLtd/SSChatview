@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// SwiftUI View for displaying messages in the chat.
-struct MessageView: View {
+struct MessageView: View, KeyboardReadable {
 
     // MARK: - Variables
     @Binding var messages: [MessageResponseModel]
@@ -17,6 +17,7 @@ struct MessageView: View {
     @State private var scrollToBottom = false
     @Binding var shouldShowSelectionView: Bool
     @Binding var selectedMessageIDs: Set<String>
+    @State private var previousMessageCount = 0
 }
 
 // MARK: - Body
@@ -34,9 +35,12 @@ extension MessageView {
                 }
                 .scrollDisabled(isBlurred)
                 .scrollDismissesKeyboard(.immediately)
+                .onReceive(keyboardPublisher, perform: { isKeyBoardVisible in
+                    scrollToBottom = isKeyBoardVisible
+                })
                 .onChange(of: scrollToBottom) { _ in
                     if scrollToBottom {
-                        scrollView.scrollTo(messages.last?.id, anchor: .bottom)
+                        scrollView.scrollTo(MessageViewConstants.bottomID, anchor: .bottom)
                         scrollToBottom = false
                     }
                 }
@@ -67,10 +71,11 @@ extension MessageView {
                 )
                 .id("\(message.id) \(selectedMessageIDs.contains(message.id)) \(shouldShowSelectionView)")
             }
-            .onChange(of: messages) { _ in
+            .onChange(of: messages.count) { _ in
                 withAnimation {
-                    scrollToBottom = true
+                    scrollToBottom = messages.count > previousMessageCount
                 }
+                previousMessageCount = messages.count
             }
             .onChange(of: shouldShowSelectionView) { newValue in
                 if !newValue {
@@ -78,11 +83,13 @@ extension MessageView {
                 }
             }
             .onAppear {
+                previousMessageCount = messages.count
                 withAnimation {
                     scrollToBottom = true
                 }
             }
         }
+        .id(MessageViewConstants.bottomID)
     }
 
     private func selectDeleteMessage(id: String) {
