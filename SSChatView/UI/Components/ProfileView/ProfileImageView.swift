@@ -70,7 +70,7 @@ extension ProfileImageView {
                 Button(action: {
                     onCancelTap()
                 }, label: {
-                    Text(CustomMenuTitles.cancel)
+                    Text(MessageViewConstants.cancel)
                         .foregroundColor(.blue)
                         .font(Font.system(size: 18).weight(.medium))
                 })

@@ -83,14 +83,15 @@ enum MessageViewConstants {
     static let helloReplyText = "Hi, there!"
     static let spacing: CGFloat = 10
     static let bottomID = "BottomID"
+    static let cancel = "Cancel"
 }
 
 // MARK: - Reaction Types
 enum ReactionType: String, CaseIterable {
-    case love, like, dislike, laugh, exclaim
+    case love, like, dislike, laugh, exclaim, none // `none` is used as default or null
 
     var imageName: String {
-        return self.rawValue
+        self == .none ? "" : self.rawValue
     }
 }
 
@@ -101,11 +102,20 @@ enum ProfileConstants {
 }
 
 // MARK: CustomMenu
-enum CustomMenuTitles {
-    static let reply = "Reply"
-    static let edit = "Edit"
-    static let copy = "Copy"
-    static let delete = "Delete"
-    static let more = "More"
-    static let cancel = "Cancel"
+enum CustomMenu: String, CaseIterable {
+    case edit = "Edit"
+    case delete = "Delete"
+    case reply = "Reply"
+    case copy = "Copy"
+    case more = "More"
+
+    var iconName: String {
+        switch self {
+        case .edit: return SystemImage.editIcon
+        case .delete: return SystemImage.deleteIcon
+        case .reply: return SystemImage.replyIcon
+        case .copy: return SystemImage.copyIcon
+        case .more: return SystemImage.moreIcon
+        }
+    }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct ChatScreenView: View {
     // MARK: - Variables
     @State private var currentMessage: String = ""
+    @State private var longPressPosition: CGPoint = .zero
     @Binding var isBlurred: Bool
     @StateObject private var viewModel = ChatScreenViewModel()
     @State private var shouldShowDelete: Bool = false
@@ -27,68 +28,105 @@ struct ChatScreenView: View {
 // MARK: - Body
 extension ChatScreenView {
     var body: some View {
-        VStack {
-            ProfileImageView(
-                imageName: ProfileConstants.profileImage,
-                isBlurred: $isBlurred,
-                shouldShowSelectionView: $viewModel.shouldShowSelectionView
-            ) {
-                viewModel.shouldShowSelectionView = false
-            }
-            .padding(.top, topPadding)
-            .disabledWithOpacity(isBlurred)
-
-            MessageView(
-                messages: $viewModel.messageArray,
-                isBlurred: $isBlurred,
-                shouldShowSelectionView: $viewModel.shouldShowSelectionView,
-                selectedMessageIDs: $viewModel.selectedMessageIDs
-            )
-            .onTapGesture {
-                withAnimation {
-                    shouldShowDelete = false
-                    isBlurred = false
+        ZStack(alignment: .topTrailing) {
+            VStack {
+                ProfileImageView(
+                    imageName: ProfileConstants.profileImage,
+                    isBlurred: $isBlurred,
+                    shouldShowSelectionView: $viewModel.shouldShowSelectionView
+                ) {
+                    viewModel.shouldShowSelectionView = false
                 }
-            }
+                .padding(.top, topPadding)
+                .disabledWithOpacity(isBlurred)
 
-            if viewModel.shouldShowSelectionView {
-                ZStack(alignment: .bottom) {
-                    MessageActionView {
-                        withAnimation {
-                            shouldShowDelete = true
+                MessageView(
+                    messages: $viewModel.messageArray,
+                    isBlurred: $isBlurred,
+                    shouldShowSelectionView: $viewModel.shouldShowSelectionView,
+                    selectedMessageIDs: $viewModel.selectedMessageIDs,
+                    onLongPress: {position, model in
+                        self.longPressPosition = position
+                        viewModel.selectedMessage = model
+                    }
+                )
+                .onTapGesture {
+                    withAnimation {
+                        shouldShowDelete = false
+                        isBlurred = false
+                        viewModel.selectedMessage = nil
+                    }
+                }
+
+                if viewModel.shouldShowSelectionView {
+                    ZStack(alignment: .bottom) {
+                        MessageActionView {
+                            withAnimation {
+                                shouldShowDelete = true
+                            }
+                        }
+                        .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
+
+                        .sheet(isPresented: $shouldShowDelete) {
+                            deleteBottomSheetView
+                                .presentationDetents([.height(150)])
+                                .presentationBackground(Color.clear)
                         }
                     }
-                    .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
-
-                    .sheet(isPresented: $shouldShowDelete) {
-                        deleteAlertView
-                            .presentationDetents([.height(150)])
-                            .presentationBackground(Color.clear)
+                } else {
+                    ChatInputView(
+                        message: $currentMessage,
+                        isBlurred: $isBlurred
+                    ) {
+                        viewModel.addMessage(currentMessage)
+                        currentMessage = ""
                     }
+                    .blur(radius: isBlurred ? 10 : 0)
                 }
-            } else {
-                ChatInputView(
-                    message: $currentMessage,
-                    isBlurred: $isBlurred
-                ) {
-                    viewModel.addMessage(currentMessage)
-                    currentMessage = ""
-                }
-                .blur(radius: isBlurred ? 10 : 0)
+            }
+            .moveContentAboveKeyboard()
+
+            if let selectedMessage = viewModel.selectedMessage, isBlurred {
+                messsageActionView(selectedMessage: selectedMessage)
             }
         }
-        .moveContentAboveKeyboard()
     }
 }
 
-// MARK: - Bottom Action Buttons
+// MARK: - ChatScreenView Extension
 extension ChatScreenView {
-    private var deleteAlertView: some View {
+
+    // MARK: - MessageFocusView
+    private func messsageActionView(selectedMessage: MessageResponseModel) -> some View {
+        VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
+            Spacer()
+                .frame(maxHeight: longPressPosition.y - 72)
+
+            MessageFocusView(
+                viewModel: .init(
+                    messageResponseModel: selectedMessage,
+                    onActionClick: { messageID, action in
+                        isBlurred = false
+                        viewModel.messageActionClick(messageID: messageID, action: action)
+                    },
+                    onReactionClick: { messageID, reaction in
+                        viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
+                        isBlurred = false
+                    }
+                )
+            )
+        }
+        .offset(x: selectedMessage.isCurrentUser ? -12 : 12)
+    }
+
+    // MARK: - DeleteBottomSheetView
+    private var deleteBottomSheetView: some View {
         VStack(spacing: 8) {
             Button(action: {
+                shouldShowDelete = false
                 viewModel.deleteSelectedMessages()
             }, label: {
-                Text(viewModel.getDeleteMessage())
+                Text(viewModel.getDeleteMessageCount())
                     .frame(maxWidth: .infinity, maxHeight: 60)
                     .background(appColor.deleteAlertBackground.getColor())
                     .foregroundColor(.red)
@@ -101,7 +139,7 @@ extension ChatScreenView {
                     shouldShowDelete = false
                 }
             }, label: {
-                Text(CustomMenuTitles.cancel)
+                Text(MessageViewConstants.cancel)
                     .frame(maxWidth: .infinity, maxHeight: 60)
                     .background(appColor.deleteAlertBackground.getColor())
                     .foregroundColor(.blue)
