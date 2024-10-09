@@ -13,11 +13,11 @@ struct MessageView: View, KeyboardReadable {
     // MARK: - Variables
     @Binding var messages: [MessageResponseModel]
     @Binding var isBlurred: Bool
-    @State private var activeMessageID = ""
     @State private var scrollToBottom = false
     @Binding var shouldShowSelectionView: Bool
     @Binding var selectedMessageIDs: Set<String>
     @State private var previousMessageCount = 0
+    var onLongPress: (CGPoint, MessageResponseModel) -> Void
 }
 
 // MARK: - Body
@@ -62,11 +62,13 @@ extension MessageView {
                         }
                     ),
                     isBlurred: $isBlurred,
-                    activeMessageID: $activeMessageID,
                     shouldShowSelectionView: $shouldShowSelectionView,
                     isSelected: selectedMessageIDs.contains(message.id),
                     onMessageSelection: { messageId in
                         selectDeleteMessage(id: messageId)
+                    },
+                    onLongPress: { position in
+                        self.onLongPress(position, message)
                     }
                 )
                 .id("\(message.id) \(selectedMessageIDs.contains(message.id)) \(shouldShowSelectionView)")

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-func customDivider(color: Color, thickness: CGFloat = 0.3) -> some View {
+func customDivider(color: Color = .gray, thickness: CGFloat = 0.3) -> some View {
     HStack {
         Rectangle()
             .fill(color)

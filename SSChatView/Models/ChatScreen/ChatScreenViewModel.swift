@@ -5,7 +5,7 @@
 //  Created by Palak Doshi on 01/03/24.
 //
 
-import Foundation
+import UIKit
 
 /// ViewModel for the chat screen, responsible for managing chat messages.
 class ChatScreenViewModel: ObservableObject {
@@ -13,6 +13,7 @@ class ChatScreenViewModel: ObservableObject {
     // MARK: - Variables
     @Published var selectedMessageIDs: Set<String> = []
     @Published var shouldShowSelectionView: Bool = false
+    @Published var selectedMessage: MessageResponseModel?
 
     // TODO: This will be replaced by a database integration in the future.
     /// Array of messages in the chat.
@@ -109,7 +110,36 @@ extension ChatScreenViewModel {
         shouldShowSelectionView = false
     }
 
-    func getDeleteMessage() -> String {
+    func getDeleteMessageCount() -> String {
         return "Delete \(selectedMessageIDs.count) Message\(selectedMessageIDs.count > 1 ? "s" : "")"
+    }
+
+    func updateReaction(messageID: String, selectedReaction: ReactionType) {
+        if let index = messageArray.firstIndex(where: { $0.id == messageID }) {
+            guard selectedReaction != .none else { return }
+            messageArray[index].reaction = selectedReaction
+        }
+        selectedMessage = nil
+    }
+
+    func messageActionClick(messageID: String, action: CustomMenu) {
+        switch action {
+        case .copy:
+            UIPasteboard.general.string = selectedMessage?.content
+        case .delete:
+            shouldShowSelectionView = true
+            onMessageSelection(messageID: messageID)
+        default:
+            return
+        }
+        selectedMessage = nil
+    }
+
+    private func onMessageSelection(messageID: String) {
+        if selectedMessageIDs.contains(messageID) {
+            selectedMessageIDs.remove(messageID)
+        } else {
+            selectedMessageIDs.insert(messageID)
+        }
     }
 }
