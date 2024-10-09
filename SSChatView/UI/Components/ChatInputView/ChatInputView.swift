@@ -33,7 +33,7 @@ extension ChatInputView {
                 )
                 .overlay(
                     Group {
-                        if message.isEmpty {
+                        if message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                             MicView { // Displaying the microphone icon when no text is entered.
                                 // TODO: Handle Mic Tap Action
                             }

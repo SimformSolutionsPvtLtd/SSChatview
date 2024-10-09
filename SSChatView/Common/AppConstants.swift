@@ -25,6 +25,8 @@ enum SystemImage {
     static let copyIcon = "doc.on.doc"
     static let deleteIcon = "trash"
     static let moreIcon = "ellipsis"
+    static let forwardIcon = "arrowshape.turn.up.right"
+    static let selectIcon = "checkmark"
 }
 
 // MARK: FontSize
@@ -52,7 +54,6 @@ enum SystemColors {
     static var tertiarySystemGroupedBackground: Color {
         return Color(UIColor.tertiarySystemGroupedBackground)
     }
-
 }
 
 // MARK: AppConstants
@@ -105,4 +106,5 @@ enum CustomMenuTitles {
     static let copy = "Copy"
     static let delete = "Delete"
     static let more = "More"
+    static let cancel = "Cancel"
 }
