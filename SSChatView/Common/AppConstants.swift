@@ -82,6 +82,7 @@ enum MessageViewConstants {
     static let helloText = "Hello!"
     static let helloReplyText = "Hi, there!"
     static let spacing: CGFloat = 10
+    static let bottomID = "BottomID"
 }
 
 // MARK: - Reaction Types

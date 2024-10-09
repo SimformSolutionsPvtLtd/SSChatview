@@ -60,12 +60,10 @@ extension ChatScreenView {
                     }
                     .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
 
-                    if shouldShowDelete && !viewModel.selectedMessageIDs.isEmpty {
+                    .sheet(isPresented: $shouldShowDelete) {
                         deleteAlertView
-                            .transition(.move(edge: .bottom))
-                            .animation(.easeInOut(duration: 0.3), value: shouldShowDelete)
-                            .opacity(shouldShowDelete ? 1 : 0)
-                            .zIndex(1)
+                            .presentationDetents([.height(150)])
+                            .presentationBackground(Color.clear)
                     }
                 }
             } else {
@@ -79,6 +77,7 @@ extension ChatScreenView {
                 .blur(radius: isBlurred ? 10 : 0)
             }
         }
+        .moveContentAboveKeyboard()
     }
 }
 

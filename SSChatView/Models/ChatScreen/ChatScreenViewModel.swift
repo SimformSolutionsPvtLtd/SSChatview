@@ -46,6 +46,46 @@ class ChatScreenViewModel: ObservableObject {
             content: MessageViewConstants.helloText,
             isCurrentUser: false,
             reaction: .like
+        ),
+        MessageResponseModel(
+            content: "1",
+            isCurrentUser: false,
+            reaction: .like
+        ),
+        MessageResponseModel(
+            content: "2",
+            isCurrentUser: false,
+            reaction: nil
+        ),
+        MessageResponseModel(
+            content: "3",
+            isCurrentUser: true,
+            reaction: .love
+        ),
+        MessageResponseModel(
+            content: "4",
+            isCurrentUser: false,
+            reaction: .like
+        ),
+        MessageResponseModel(
+            content: "5",
+            isCurrentUser: false,
+            reaction: .like
+        ),
+        MessageResponseModel(
+            content: "6",
+            isCurrentUser: false,
+            reaction: nil
+        ),
+        MessageResponseModel(
+            content: "7",
+            isCurrentUser: true,
+            reaction: .love
+        ),
+        MessageResponseModel(
+            content: "8",
+            isCurrentUser: false,
+            reaction: .like
         )
     ]
 }

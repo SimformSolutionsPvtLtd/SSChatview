@@ -61,6 +61,7 @@ extension MessageCell {
                 }
                 .onLongPressGesture {
                     guard !isBlurred, !shouldShowSelectionView else { return }
+                    dismissKeyboard()
                     isBlurred = true
                     showReactionAnimation(shouldShow: true) // Show reactions on long press
                     activeMessageID = currentMessage.id
