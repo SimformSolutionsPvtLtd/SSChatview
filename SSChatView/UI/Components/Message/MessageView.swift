@@ -8,47 +8,36 @@
 import SwiftUI
 
 /// SwiftUI View for displaying messages in the chat.
-struct MessageView: View, KeyboardReadable {
+struct MessageView: View {
 
     // MARK: - Variables
     @Binding var messages: [MessageResponseModel]
     @Binding var isBlurred: Bool
-    @State private var scrollToBottom = false
     @Binding var shouldShowSelectionView: Bool
     @Binding var selectedMessageIDs: Set<String>
+
+    @State private var scrollToBottom = false
     @State private var previousMessageCount = 0
+
     var onLongPress: (CGPoint, MessageResponseModel) -> Void
 }
 
 // MARK: - Body
 extension MessageView {
     var body: some View {
-        VStack {
-            ScrollViewReader { scrollView in
-                ScrollView {
-                    if messages.isEmpty {
-                        Spacer()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
-                        messageList
-                    }
-                }
-                .scrollDisabled(isBlurred)
-                .scrollDismissesKeyboard(.immediately)
-                .onReceive(keyboardPublisher, perform: { isKeyBoardVisible in
-                    scrollToBottom = isKeyBoardVisible
-                })
-                .onChange(of: scrollToBottom) { _ in
-                    if scrollToBottom {
-                        scrollView.scrollTo(MessageViewConstants.bottomID, anchor: .bottom)
-                        scrollToBottom = false
-                    }
-                }
+        CustomScrollView(scrollToBottom: $scrollToBottom, isScrollDisabled: $isBlurred) {
+            if messages.isEmpty {
+                Spacer()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                messageList
             }
         }
     }
+}
 
-    // MARK: - Message List
+// MARK: - Message List
+extension MessageView {
     private var messageList: some View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(messages) { message in
@@ -91,9 +80,12 @@ extension MessageView {
                 }
             }
         }
-        .id(MessageViewConstants.bottomID)
+        .id(AppConstants.bottomID)
     }
+}
 
+// MARK: - Delete Message Handling
+extension MessageView {
     private func selectDeleteMessage(id: String) {
         if selectedMessageIDs.contains(id) {
             selectedMessageIDs.remove(id)
