@@ -19,72 +19,87 @@ class ChatScreenViewModel: ObservableObject {
     /// Array of messages in the chat.
     @Published var messageArray: [MessageResponseModel] = [
         MessageResponseModel(
-            content: MessageViewConstants.helloText,
+            content: appString.helloText(),
             isCurrentUser: false,
             reaction: nil
         ),
         MessageResponseModel(
-            content: MessageViewConstants.helloReplyText,
+            content: appString.helloReplyText(),
             isCurrentUser: true,
             reaction: .love
         ),
         MessageResponseModel(
-            content: MessageViewConstants.helloText,
+            content: appString.helloText(),
             isCurrentUser: false,
             reaction: .like
         ),
         MessageResponseModel(
-            content: MessageViewConstants.helloText,
+            content: appString.helloText(),
             isCurrentUser: false,
             reaction: nil
         ),
         MessageResponseModel(
-            content: MessageViewConstants.helloReplyText,
+            content: appString.helloReplyText(),
             isCurrentUser: true,
             reaction: .love
         ),
         MessageResponseModel(
-            content: MessageViewConstants.helloText,
+            content: appString.helloText(),
             isCurrentUser: false,
             reaction: .like
         ),
         MessageResponseModel(
-            content: "1",
+            content: appString.longLoremText1(),
             isCurrentUser: false,
             reaction: .like
         ),
         MessageResponseModel(
-            content: "2",
+            content: appString.longLoremText1(),
+            isCurrentUser: true,
+            reaction: .like
+        ),
+        MessageResponseModel(
+            content: appString.singleNumberText2(),
             isCurrentUser: false,
             reaction: nil
         ),
         MessageResponseModel(
-            content: "3",
+            content: appString.singleNumberText3(),
             isCurrentUser: true,
             reaction: .love
         ),
         MessageResponseModel(
-            content: "4",
+            content: appString.shortLoremText1(),
             isCurrentUser: false,
             reaction: .like
         ),
         MessageResponseModel(
-            content: "5",
+            content: appString.shortLoremText2(),
             isCurrentUser: false,
             reaction: .like
         ),
         MessageResponseModel(
-            content: "6",
+            content: appString.mediumLoremText(),
             isCurrentUser: false,
             reaction: nil
         ),
         MessageResponseModel(
-            content: "7",
+            content: appString.mediumLoremText(),
+            isCurrentUser: true,
+            reaction: nil
+        ),
+        MessageResponseModel(
+            content: appString.extendedLoremText(),
             isCurrentUser: true,
             reaction: .love
         ),
         MessageResponseModel(
-            content: "8",
+            content: appString.extendedLoremText(),
+            isCurrentUser: false,
+            reaction: .love
+        ),
+        MessageResponseModel(
+            content: appString.briefLoremText(),
             isCurrentUser: false,
             reaction: .like
         )
@@ -111,7 +126,11 @@ extension ChatScreenViewModel {
     }
 
     func getDeleteMessageCount() -> String {
-        return "Delete \(selectedMessageIDs.count) Message\(selectedMessageIDs.count > 1 ? "s" : "")"
+        let deleteText = appString.deleteText()
+        let messageCount = selectedMessageIDs.count
+        let messageText = appString.messageText() + (selectedMessageIDs.count > 1 ? "s" : "")
+
+        return "\(deleteText) \(messageCount) \(messageText)"
     }
 
     func updateReaction(messageID: String, selectedReaction: ReactionType) {

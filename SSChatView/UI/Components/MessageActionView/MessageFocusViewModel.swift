@@ -48,4 +48,15 @@ extension MessageFocusViewModel {
     func onActionClick(action: CustomMenu) {
         onActionClick(messageResponseModel.id, action)
     }
+
+    func getMessageHeight(currentHeight: CGFloat) -> CGFloat {
+        return min(currentHeight, (AppConstants.screenHeight - AppConstants.reactionViewHeight))
+    }
+
+    func getScaleFactor(messageHeight: CGFloat) -> CGFloat {
+        let baseScale: CGFloat = 1.0
+        let availableHeight = AppConstants.screenHeight - AppConstants.reactionViewHeight
+        let dynamicScale = availableHeight / messageHeight
+        return min(dynamicScale, baseScale)
+    }
 }

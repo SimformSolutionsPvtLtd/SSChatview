@@ -39,37 +39,41 @@ extension MessageCell {
     private var messageContent: some View {
         ZStack(alignment: currentMessage.isCurrentUser ? .topLeading : .topTrailing) {
             HStack {
-                if currentMessage.isCurrentUser {
-                    Spacer() // Align the current user's message to the right
-                }
-
-                // Display message content
-                Text(currentMessage.content)
-                    .messageTextModifier(isCurrentUser: currentMessage.isCurrentUser)
-                    .onTapGesture {
-                        resetReaction() // Reset reactions on tap
-                        guard shouldShowSelectionView else { return }
-                        onMessageSelection(currentMessage.id)
-                    }
-                    .overlay(selectedReactionView,
-                             alignment: currentMessage.isCurrentUser ? .topLeading : .topTrailing)
-                    .blur(radius: isBlurred ? 10 : 0) // Blur message content if needed
-                    .overlay(
-                        GeometryReader { geometry in
-                            Color.clear
-                                .contentShape(Rectangle()) // Make sure the entire area is tappable
-                                .onLongPressGesture {
-                                    guard !isBlurred, !shouldShowSelectionView else { return }
-                                    dismissKeyboard()
-                                    isBlurred = true
-                                    let position = geometry.frame(in: .global)
-                                    onLongPress(CGPoint(x: position.maxX, y: position.minY))
-                                }
-                        })
+                if currentMessage.isCurrentUser { Spacer() }
+                messageBubbleContent
+                if !currentMessage.isCurrentUser { Spacer() }
             }
         }
-        .padding(.trailing, currentMessage.isCurrentUser ? 0 : 100)
-        .padding(.leading, currentMessage.isCurrentUser ? 100 : 0)
+    }
+
+    // MARK: - Message Bubble Content
+    private var messageBubbleContent: some View {
+        VStack(alignment: currentMessage.isCurrentUser ? .trailing : .leading, spacing: 0.5) {
+            // Message Content
+            Text(currentMessage.content)
+                .messageTextModifier(isCurrentUser: currentMessage.isCurrentUser)
+                .onTapGesture {
+                    resetReaction() // Reset reactions on tap
+                    guard shouldShowSelectionView else { return }
+                    onMessageSelection(currentMessage.id)
+                }
+                .overlay(selectedReactionView,
+                         alignment: currentMessage.isCurrentUser ? .topLeading : .topTrailing)
+                .overlay(
+                    GeometryReader { geometry in
+                        Color.clear
+                            .contentShape(Rectangle()) // Make sure the entire area is tappable
+                            .onLongPressGesture {
+                                guard !isBlurred, !shouldShowSelectionView else { return }
+                                dismissKeyboard()
+                                isBlurred = true
+                                let position = geometry.frame(in: .global)
+                                onLongPress(CGPoint(x: position.maxX, y: position.minY))
+                            }
+                    })
+                .frame(maxWidth: UIScreen.main.bounds.width * 0.7,
+                       alignment: currentMessage.isCurrentUser ? .trailing : .leading) // Max width constraint
+        }
     }
 
     // MARK: - Selected Reaction View

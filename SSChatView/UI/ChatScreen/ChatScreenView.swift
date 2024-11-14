@@ -15,6 +15,8 @@ struct ChatScreenView: View {
     @Binding var isBlurred: Bool
     @StateObject private var viewModel = ChatScreenViewModel()
     @State private var shouldShowDelete: Bool = false
+    @State private var messageViewHeight: CGFloat = 0.0
+    @State private var isLongMessage: Bool = false
 
     private var topPadding: CGFloat {
         UIApplication.shared.connectedScenes
@@ -57,6 +59,7 @@ extension ChatScreenView {
                         viewModel.selectedMessage = nil
                     }
                 }
+                .trackHeight($messageViewHeight)
 
                 if viewModel.shouldShowSelectionView {
                     ZStack(alignment: .bottom) {
@@ -81,10 +84,16 @@ extension ChatScreenView {
                         viewModel.addMessage(currentMessage)
                         currentMessage = ""
                     }
-                    .blur(radius: isBlurred ? 10 : 0)
+                    .layoutPriority(currentMessage.isEmpty ? 0 : 1)
                 }
             }
             .moveContentAboveKeyboard()
+            .blur(radius: isBlurred ? 10 : 0)
+
+            if isLongMessage && isBlurred {
+                SystemColors.primaryBackground
+                    .ignoresSafeArea()
+            }
 
             if let selectedMessage = viewModel.selectedMessage, isBlurred {
                 messsageActionView(selectedMessage: selectedMessage)
@@ -99,9 +108,12 @@ extension ChatScreenView {
     // MARK: - MessageFocusView
     private func messsageActionView(selectedMessage: MessageResponseModel) -> some View {
         VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
-            Spacer()
-                .frame(maxHeight: longPressPosition.y - 72)
-
+            if isLongMessage {
+                Spacer(minLength: 60)
+            } else {
+                Spacer()
+                    .frame(maxHeight: (longPressPosition.y - 72) > 0 ? (longPressPosition.y - 72) : .infinity)
+            }
             MessageFocusView(
                 viewModel: .init(
                     messageResponseModel: selectedMessage,
@@ -113,9 +125,12 @@ extension ChatScreenView {
                         viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
                         isBlurred = false
                     }
-                )
+                ),
+                messageViewHeight: $messageViewHeight,
+                isLongMessage: $isLongMessage
             )
         }
+
         .offset(x: selectedMessage.isCurrentUser ? -12 : 12)
     }
 

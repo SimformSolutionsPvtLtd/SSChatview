@@ -24,11 +24,18 @@ extension ChatInputView {
                 .padding(ChatInputViewConstants.textFieldEdgeInsets)
                 .disabled(isBlurred)
                 .overlay(
+                    RoundedRectangle(cornerRadius: TextfieldBorderConstants.cornerRadius)
+                        .stroke(SystemColors.primaryBorder, lineWidth: 1)
+                        .padding(.leading, TextfieldBorderConstants.leadingPadding)
+                        .padding(.trailing, TextfieldBorderConstants.trailingPadding)
+                        .padding(.bottom, TextfieldBorderConstants.bottomPadding)
+                )
+                .overlay(
                     CircleButtonWithPlusView(onPlusClick: { // Displaying the button for adding attachments.
                         // TODO: Add on Click of Plus
                     })
-                        .offset(x: 0, y: ChatInputViewConstants.offsetMinus15)
-                        .padding(.horizontal, AppConstants.horizontalPadding),
+                    .offset(x: 0, y: ChatInputViewConstants.offsetMinus15)
+                    .padding(.horizontal, AppConstants.horizontalPadding),
                     alignment: .bottomLeading
                 )
                 .overlay(

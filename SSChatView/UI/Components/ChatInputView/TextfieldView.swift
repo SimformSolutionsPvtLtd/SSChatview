@@ -25,14 +25,6 @@ extension TextfieldView {
                 axis: .vertical
             ) // Displaying a vertical text input field.
             .padding(ChatInputViewConstants.textFieldPadding)
-            .background(
-                RoundedRectangle(cornerRadius: AppConstants.cornerRadius)
-                    .fill(SystemColors.primaryBackground) // Setting the background color of the text field.
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AppConstants.cornerRadius)
-                            .stroke(SystemColors.primaryBorder, lineWidth: 1) // Adding a border to the text field.
-                    )
-            )
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
