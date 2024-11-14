@@ -15,6 +15,7 @@ struct MessageView: View {
     @Binding var isBlurred: Bool
     @Binding var shouldShowSelectionView: Bool
     @Binding var selectedMessageIDs: Set<String>
+    @Binding var editMessageID: String
 
     @State private var scrollToBottom = false
     @State private var previousMessageCount = 0
@@ -25,7 +26,9 @@ struct MessageView: View {
 // MARK: - Body
 extension MessageView {
     var body: some View {
-        CustomScrollView(scrollToBottom: $scrollToBottom, isScrollDisabled: $isBlurred) {
+        CustomScrollView(scrollToBottom: $scrollToBottom,
+                         isScrollDisabled: $isBlurred,
+                         scrollID: $editMessageID) {
             if messages.isEmpty {
                 Spacer()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -52,6 +55,7 @@ extension MessageView {
                     ),
                     isBlurred: $isBlurred,
                     shouldShowSelectionView: $shouldShowSelectionView,
+                    editMessageID: $editMessageID,
                     isSelected: selectedMessageIDs.contains(message.id),
                     onMessageSelection: { messageId in
                         selectDeleteMessage(id: messageId)
@@ -80,7 +84,7 @@ extension MessageView {
                 }
             }
         }
-        .id(AppConstants.bottomID)
+        .id(appString.bottomID())
     }
 }
 

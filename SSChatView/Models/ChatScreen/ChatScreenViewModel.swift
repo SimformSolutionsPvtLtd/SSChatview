@@ -14,6 +14,7 @@ class ChatScreenViewModel: ObservableObject {
     @Published var selectedMessageIDs: Set<String> = []
     @Published var shouldShowSelectionView: Bool = false
     @Published var selectedMessage: MessageResponseModel?
+    @Published var editMessageID: String = ""
 
     // TODO: This will be replaced by a database integration in the future.
     /// Array of messages in the chat.
@@ -61,12 +62,21 @@ class ChatScreenViewModel: ObservableObject {
         MessageResponseModel(
             content: appString.singleNumberText2(),
             isCurrentUser: false,
-            reaction: nil
+            reaction: nil,
+            editedMessages: [
+                appString.editedNumberText2_1(),
+                appString.editedNumberText2_2()
+            ]
         ),
         MessageResponseModel(
             content: appString.singleNumberText3(),
             isCurrentUser: true,
-            reaction: .love
+            reaction: .love,
+            editedMessages: [
+                appString.editedNumberText3_1(),
+                appString.editedNumberText3_2(),
+                appString.editedNumberText3_3()
+            ]
         ),
         MessageResponseModel(
             content: appString.shortLoremText1(),
@@ -148,6 +158,8 @@ extension ChatScreenViewModel {
         case .delete:
             shouldShowSelectionView = true
             onMessageSelection(messageID: messageID)
+        case .edit:
+            editMessageID = messageID
         default:
             return
         }

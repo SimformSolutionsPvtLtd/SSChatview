@@ -11,6 +11,7 @@ struct CustomScrollView<Content: View>: View, KeyboardReadable {
     // MARK: - Variables
     @Binding var scrollToBottom: Bool
     @Binding var isScrollDisabled: Bool
+    @Binding var scrollID: String
 
     @State private var scrollOffset: CGFloat = 0
     @State private var isKeyboardVisible = false
@@ -27,17 +28,17 @@ extension CustomScrollView {
             ScrollView {
                 GeometryReader { proxy in
                     // Track the scroll offset using GeometryReader
-                    let offset = proxy.frame(in: .named(AppConstants.scrollAreaID)).minY
+                    let offset = proxy.frame(in: .named(appString.scrollAreaID())).minY
                     Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                 }
 
                 content // Display the content passed to the scroll view
             }
-            .scrollDisabled(isScrollDisabled)
-            .coordinateSpace(name: AppConstants.scrollAreaID) // Set coordinate space for tracking
+            .scrollDisabled(isScrollDisabled || !scrollID.isEmpty)
+            .coordinateSpace(name: appString.scrollAreaID()) // Set coordinate space for tracking
             .onChange(of: scrollToBottom) { _ in
                 if scrollToBottom {
-                    scrollView.scrollTo(AppConstants.bottomID, anchor: .bottom)
+                    scrollView.scrollTo(appString.bottomID(), anchor: .bottom)
                     scrollToBottom = false
                 }
             }
@@ -46,18 +47,39 @@ extension CustomScrollView {
                     handleScrollChange(value: value, scrollView: scrollView)
                 }
             }
-        }
-        .onReceive(keyboardWillChangePublisher, perform: { keyboardVisible in
-            isKeyboardVisible = keyboardVisible
-        })
-        .onReceive(keyboardDidChangePublisher) { keyboardVisible in
-            DispatchQueue.main.async {
-                handleKeyboardVisibilityChange(visible: keyboardVisible)
+            .onReceive(keyboardWillChangePublisher, perform: { keyboardVisible in
+                isKeyboardVisible = keyboardVisible
+                if keyboardVisible && !scrollID.isEmpty {
+                    withAnimation {
+                        scrollToDisplayScrollID(scrollView: scrollView)
+                    }
+                }
+            })
+            .onReceive(keyboardDidChangePublisher) { keyboardVisible in
+                guard scrollID.isEmpty else { return }
+                DispatchQueue.main.async {
+                    handleKeyboardVisibilityChange(visible: keyboardVisible)
+                }
+            }
+            .onReceive(HeightChangePublisher.heightChangePublisher) { _ in
+                if isKeyboardVisible && !scrollID.isEmpty {
+                    withAnimation {
+                        scrollToDisplayScrollID(scrollView: scrollView)
+                    }
+                }
             }
         }
         .onAppear {
             isKeyboardTriggeredScroll = false
         }
+    }
+}
+
+// MARK: - scroll To Display ScrollID
+extension CustomScrollView {
+    /// Scrolls to the expanded text field, ensuring it’s visible above the keyboard
+    private func scrollToDisplayScrollID(scrollView: ScrollViewProxy) {
+        scrollView.scrollTo(scrollID, anchor: .bottom)
     }
 }
 
@@ -78,6 +100,7 @@ extension CustomScrollView {
     /// Handles scroll changes by analyzing the offset and scrolling behavior
     private func handleScrollChange(value: CGFloat?, scrollView: ScrollViewProxy) {
         DispatchQueue.main.async {
+            guard scrollID.isEmpty else { return }
             let offsetValue = value ?? 0
             let scrollSpeed = offsetValue - lastScrollOffset
             lastScrollOffset = offsetValue
@@ -87,7 +110,7 @@ extension CustomScrollView {
                 isKeyboardTriggeredScroll = false
                 return
             }
-            
+
             // Dismiss keyboard on fast scroll or when reaching top of scroll view
             if (scrollSpeed > 50 || offsetValue == 0) && isKeyboardVisible {
                 isKeyboardVisible = false
