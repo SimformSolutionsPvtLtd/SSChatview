@@ -17,6 +17,7 @@ struct MessageView: View {
     @Binding var selectedMessageIDs: Set<String>
     @Binding var editMessageID: String
 
+    @State private var showTimestamp: Bool = false
     @State private var scrollToBottom = false
     @State private var previousMessageCount = 0
 
@@ -26,9 +27,11 @@ struct MessageView: View {
 // MARK: - Body
 extension MessageView {
     var body: some View {
-        CustomScrollView(scrollToBottom: $scrollToBottom,
-                         isScrollDisabled: $isBlurred,
-                         scrollID: $editMessageID) {
+        CustomScrollView(
+            scrollToBottom: $scrollToBottom,
+            isScrollDisabled: $isBlurred,
+            scrollID: $editMessageID
+        ) {
             if messages.isEmpty {
                 Spacer()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,6 +39,23 @@ extension MessageView {
                 messageList
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.translation.width < -50 {
+                        // Show timestamp while dragging to the left
+                        withAnimation {
+                            showTimestamp = true
+                        }
+                    }
+                }
+                .onEnded { _ in
+                    // Hide timestamp when dragging ends
+                    withAnimation {
+                        showTimestamp = false
+                    }
+                }
+        )
     }
 }
 
@@ -43,7 +63,14 @@ extension MessageView {
 extension MessageView {
     private var messageList: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ForEach(messages) { message in
+            ForEach(messages.indices, id: \.self) { index in
+                let message = messages[index]
+
+                if shouldShowDateHeader(for: message, at: index) {
+                    DateHeaderView(date: message.timestamp)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+
                 MessageCell(
                     currentMessage: Binding(
                         get: { message },
@@ -56,6 +83,7 @@ extension MessageView {
                     isBlurred: $isBlurred,
                     shouldShowSelectionView: $shouldShowSelectionView,
                     editMessageID: $editMessageID,
+                    showTimestamp: $showTimestamp,
                     isSelected: selectedMessageIDs.contains(message.id),
                     onMessageSelection: { messageId in
                         selectDeleteMessage(id: messageId)
@@ -97,4 +125,17 @@ extension MessageView {
             selectedMessageIDs.insert(id)
         }
     }
+
+    /// Helper method to determine if a `DateHeaderView` should be shown for the message
+     private func shouldShowDateHeader(for message: MessageResponseModel, at index: Int) -> Bool {
+         let calendar = Calendar.current
+
+         if index == 0 {
+             return true // Always show the date for the first message
+         }
+         // Compare the current message's day with the previous message's day
+         let currentMessageDate = calendar.startOfDay(for: message.timestamp)
+         let previousMessageDate = calendar.startOfDay(for: messages[index - 1].timestamp)
+         return currentMessageDate != previousMessageDate
+     }
 }
