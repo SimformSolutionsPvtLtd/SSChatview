@@ -52,7 +52,7 @@ struct MoveContentAboveKeyboard: ViewModifier {
         // Apply animation when the keyboard frame changes.
         withAnimation(.easeOut(duration: keyboardAnimationDuration)) {
             // Adjust the offset based on whether the keyboard is visible or hidden.
-            let isKeyboardHidden = (keyboardFrame.origin.y == UIScreen.main.bounds.height)
+            let isKeyboardHidden = (keyboardFrame.origin.y == AppConstants.screenHeight)
             keyboardOffset = isKeyboardHidden ? 0 : -(keyboardFrame.height * 0.01)
         }
     }

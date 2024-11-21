@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-func customDivider(color: Color = .gray, thickness: CGFloat = 0.3) -> some View {
+// MARK: - Custom Divider
+/// Creates a custom horizontal divider with adjustable color.
+func customDivider(color: Color = .gray) -> some View {
     HStack {
         Rectangle()
-            .fill(color)
-            .frame(height: thickness) // Set the thickness of the divider
+            .fill(color.opacity(0.4))
+            .frame(height: 1)
     }
     .frame(maxWidth: .infinity) // Make sure the divider takes up the full width
 }

@@ -10,30 +10,28 @@ import SwiftUI
 struct MessageFocusView: View {
     // MARK: - Variables
     @StateObject var viewModel: MessageFocusViewModel
+    @Binding var messageViewHeight: CGFloat
+    @Binding var isLongMessage: Bool
+    @State private var messageHeight: CGFloat = 0
+    @State private var contextMenuHeight: CGFloat = 0
 }
 
 // MARK: - Body
 extension MessageFocusView {
 
     var body: some View {
-        VStack(alignment: viewModel.messageResponseModel.isCurrentUser ? .trailing : .leading, spacing: 0) {
+        VStack(alignment: viewModel.messageResponseModel.isCurrentUser ? .trailing : .leading, spacing: 2) {
             reactionView
-                .onAppear {
-                    resetReactionAnimation(shouldShow: true)
-                }
-
-            HStack(alignment: .top) {
-                if viewModel.messageResponseModel.isCurrentUser {
-                    dotsView
-                    messageTextView
-                } else {
-                    messageTextView
-                    dotsView
-                }
+            HStack {
+                if viewModel.messageResponseModel.isCurrentUser { Spacer() }
+                messageTextView
+                    .padding(.vertical, 12)
+                    .padding(viewModel.messageResponseModel.isCurrentUser ? .leading : .trailing, 12)
+                if !viewModel.messageResponseModel.isCurrentUser { Spacer() }
             }
-            .padding(.vertical, 12)
-
-            customContextMenuView
+            if !isLongMessage {
+                customContextMenuView
+            }
         }
     }
 }
@@ -67,6 +65,9 @@ extension MessageFocusView {
         .onTapGesture {
             viewModel.updateReaction(reaction: .none)
         }
+        .onAppear {
+            resetReactionAnimation(shouldShow: true)
+        }
     }
 }
 
@@ -75,30 +76,17 @@ extension MessageFocusView {
 
     // MARK: - DotsView
     private var dotsView: some View {
-        HStack {
-            if viewModel.messageResponseModel.isCurrentUser {
-                Spacer(minLength: 100)
-                circleView(isCurrentUser: true)
-            } else {
-                circleView(isCurrentUser: false)
-                Spacer(minLength: 100)
-            }
-        }
-    }
-
-    // MARK: - CircleView
-    private func circleView(isCurrentUser: Bool) -> some View {
         VStack(spacing: 0) {
             Circle()
                 .foregroundColor(SystemColors.tertiarySystemGroupedBackground)
-                .frame(width: 20, height: 20)
+                .frame(width: 18, height: 18)
 
             Circle()
                 .foregroundColor(SystemColors.tertiarySystemGroupedBackground)
-                .frame(width: 12, height: 12)
-                .offset(x: isCurrentUser ? -15 : 15, y: 0)
+                .frame(width: 10, height: 10)
+                .offset(x: viewModel.messageResponseModel.isCurrentUser ? -8 : 8)
         }
-        .offset(y: -10)
+        .offset(x: viewModel.messageResponseModel.isCurrentUser ? -15 : 15, y: -20)
     }
 }
 
@@ -107,8 +95,50 @@ extension MessageFocusView {
 
     // MARK: - MessageTextView
     private var messageTextView: some View {
-        Text(viewModel.messageResponseModel.content)
-            .messageTextModifier(isCurrentUser: viewModel.messageResponseModel.isCurrentUser)
+        ZStack(alignment: viewModel.messageResponseModel.isCurrentUser ? .bottomTrailing : .bottomLeading) {
+            VStack(alignment: viewModel.messageResponseModel.isCurrentUser ? .trailing : .leading) {
+                Text(viewModel.messageResponseModel.content)
+                    .messageTextModifier(isCurrentUser: viewModel.messageResponseModel.isCurrentUser)
+                    .trackHeight($messageHeight)
+                    .onChange(of: messageHeight) { newHeight in
+                        let availableHeight =
+                        AppConstants.screenHeight -
+                        AppConstants.reactionViewHeight -
+                        contextMenuHeight
+                        self.isLongMessage = newHeight >= availableHeight
+                    }
+                    .overlay(
+                        dotsView
+                            .scaleEffect(
+                                (1 / viewModel.getScaleFactor(messageHeight: messageHeight)),
+                                anchor: viewModel.messageResponseModel.isCurrentUser
+                                ? .topLeading : .topTrailing
+                            )
+                            .frame(width: 12, height: 12),
+                        alignment: viewModel.messageResponseModel.isCurrentUser ? .topLeading : .topTrailing
+                    )
+                    .overlay(
+                        alignment: viewModel.messageResponseModel.isCurrentUser
+                        ? .bottomTrailing : .bottomLeading) {
+                            if isLongMessage {
+                                customContextMenuView
+                                    .scaleEffect(
+                                        (1 / viewModel.getScaleFactor(messageHeight: messageHeight)),
+                                        anchor: viewModel.messageResponseModel.isCurrentUser
+                                        ? .bottomTrailing : .bottomLeading
+                                    )
+                            }
+                        }
+                        .scaleEffect(viewModel.getScaleFactor(messageHeight: messageHeight))
+                        .frame(
+                            maxWidth: UIScreen.main.bounds.width * 0.7,
+                            maxHeight: isLongMessage ? viewModel.getMessageHeight(currentHeight: messageHeight) : nil,
+                            alignment: viewModel.messageResponseModel.isCurrentUser ? .trailing : .leading
+                        )
+
+                if isLongMessage { Spacer() }
+            }
+        }
     }
 }
 
@@ -124,7 +154,7 @@ extension MessageFocusView {
                     resetReactionAnimation(shouldShow: false)
                 }, label: {
                     HStack {
-                        Text(action.rawValue)
+                        Text(action.localizedTitle)
                             .foregroundColor(SystemColors.textColor)
                         Spacer()
                         Image(systemName: action.iconName)
@@ -147,6 +177,7 @@ extension MessageFocusView {
         )
         .frame(width: 220)
         .transition(.opacity)
+        .trackHeight($contextMenuHeight)
     }
 }
 

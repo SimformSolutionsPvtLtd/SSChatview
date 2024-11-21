@@ -27,6 +27,7 @@
 		83413A952C8A1218000BEC2E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83413A942C8A1218000BEC2E /* Color+Extension.swift */; };
 		8345379E2C897CD90022FD17 /* CircleCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345379D2C897CD90022FD17 /* CircleCheckboxView.swift */; };
 		834537A02C897D6C0022FD17 /* MessageActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345379F2C897D6C0022FD17 /* MessageActionView.swift */; };
+		836A7C8D2CE7355E0018BC27 /* HeightTrackingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A7C8C2CE7355D0018BC27 /* HeightTrackingModifier.swift */; };
 		8371F1E32CA6B363000ED39A /* MessageFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371F1E22CA6B35F000ED39A /* MessageFocusView.swift */; };
 		8371F1E52CA6CEB7000ED39A /* MessageFocusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371F1E42CA6CEA7000ED39A /* MessageFocusViewModel.swift */; };
 		8371F1E72CA726B5000ED39A /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371F1E62CA726AB000ED39A /* CommonFunctions.swift */; };
@@ -73,6 +74,7 @@
 		8345379D2C897CD90022FD17 /* CircleCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckboxView.swift; sourceTree = "<group>"; };
 		8345379F2C897D6C0022FD17 /* MessageActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionView.swift; sourceTree = "<group>"; };
 		8360BAE12A791651002B0AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		836A7C8C2CE7355D0018BC27 /* HeightTrackingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightTrackingModifier.swift; sourceTree = "<group>"; };
 		8371F1E22CA6B35F000ED39A /* MessageFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFocusView.swift; sourceTree = "<group>"; };
 		8371F1E42CA6CEA7000ED39A /* MessageFocusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFocusViewModel.swift; sourceTree = "<group>"; };
 		8371F1E62CA726AB000ED39A /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		8339ACB22A78CDC000D0BB42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				836A7C8C2CE7355D0018BC27 /* HeightTrackingModifier.swift */,
 				830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */,
 				8371F1E62CA726AB000ED39A /* CommonFunctions.swift */,
 				83B833F12CA5D77A00368600 /* MessageTextModifier.swift */,
@@ -485,6 +488,7 @@
 				83B833F22CA5D77C00368600 /* MessageTextModifier.swift in Sources */,
 				83D46EC52B8DF36400D275FE /* ChatInputView.swift in Sources */,
 				83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */,
+				836A7C8D2CE7355E0018BC27 /* HeightTrackingModifier.swift in Sources */,
 				83A3A9D42CCA22D900700A9E /* CustomScrollView.swift in Sources */,
 				8371F1E52CA6CEB7000ED39A /* MessageFocusViewModel.swift in Sources */,
 				834537A02C897D6C0022FD17 /* MessageActionView.swift in Sources */,

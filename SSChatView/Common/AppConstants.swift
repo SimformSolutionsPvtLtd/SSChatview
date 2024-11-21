@@ -58,15 +58,17 @@ enum SystemColors {
 
 // MARK: AppConstants
 enum AppConstants {
+    static let screenHeight = UIScreen.main.bounds.height
     static let horizontalPadding: CGFloat = 14
     static let cornerRadius: CGFloat = 20
     static let bottomID = "BottomID"
     static let scrollAreaID = "ScrollAreaID"
+    static let reactionViewHeight: CGFloat = 180
 }
 
 // MARK: ChatInputViewConstants
 enum ChatInputViewConstants {
-    static let textFieldEdgeInsets = EdgeInsets(top: 0, leading: 60, bottom: 8, trailing: 14)
+    static let textFieldEdgeInsets = EdgeInsets(top: 5, leading: 60, bottom: 8, trailing: 45)
     static let plusImageSize: CGFloat = 15
     static let sendImageSize: CGFloat = 30
     static let buttonSize: CGFloat = 35
@@ -77,12 +79,16 @@ enum ChatInputViewConstants {
     static let sendViewPadding: CGFloat = 8
 }
 
+// MARK: TextfieldBorderConstants
+enum TextfieldBorderConstants {
+    static let cornerRadius: CGFloat = 25
+    static let trailingPadding: CGFloat = 15
+    static let bottomPadding: CGFloat = 8
+    static let leadingPadding: CGFloat = AppConstants.horizontalPadding + ChatInputViewConstants.buttonSize + 8
+}
+
 // MARK: MessageViewConstants
 enum MessageViewConstants {
-    static let noMessagesText = "No Messages"
-    static let messagesDesc = "Messages you send or receive will appear here."
-    static let helloText = "Hello!"
-    static let helloReplyText = "Hi, there!"
     static let spacing: CGFloat = 10
     static let cancel = "Cancel"
 }
@@ -104,11 +110,15 @@ enum ProfileConstants {
 
 // MARK: CustomMenu
 enum CustomMenu: String, CaseIterable {
-    case edit = "Edit"
-    case delete = "Delete"
-    case reply = "Reply"
-    case copy = "Copy"
-    case more = "More"
+    case edit
+    case delete
+    case reply
+    case copy
+    case more
+
+    var localizedTitle: String {
+       return self.rawValue.capitalized
+    }
 
     var iconName: String {
         switch self {
