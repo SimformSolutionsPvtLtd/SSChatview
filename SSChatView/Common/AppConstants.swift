@@ -60,6 +60,8 @@ enum SystemColors {
 enum AppConstants {
     static let horizontalPadding: CGFloat = 14
     static let cornerRadius: CGFloat = 20
+    static let bottomID = "BottomID"
+    static let scrollAreaID = "ScrollAreaID"
 }
 
 // MARK: ChatInputViewConstants
@@ -82,7 +84,6 @@ enum MessageViewConstants {
     static let helloText = "Hello!"
     static let helloReplyText = "Hi, there!"
     static let spacing: CGFloat = 10
-    static let bottomID = "BottomID"
     static let cancel = "Cancel"
 }
 

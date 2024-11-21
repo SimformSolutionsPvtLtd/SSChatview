@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E96742BF2FD3205659B22B6 /* Pods_SSChatView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */; };
+		830233B42CC930B700E0CF18 /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */; };
 		830F60472BDFC6D200D93090 /* NoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F60462BDFC6D200D93090 /* NoMessageView.swift */; };
 		833052FD2C9DA81800B8DF56 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833052FC2C9DA81500B8DF56 /* KeyboardReadable.swift */; };
 		833053012C9DC29200B8DF56 /* MoveContentAboveKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833053002C9DC28F00B8DF56 /* MoveContentAboveKeyboard.swift */; };
@@ -33,6 +34,7 @@
 		837EA8F12B93B8DE001578F3 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837EA8F02B93B8DE001578F3 /* MessageBubble.swift */; };
 		839736692A78C7B50021D895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736662A78C7B50021D895 /* Assets.xcassets */; };
 		8397366A2A78C7B50021D895 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839736672A78C7B50021D895 /* Color.xcassets */; };
+		83A3A9D42CCA22D900700A9E /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3A9D32CCA22D200700A9E /* CustomScrollView.swift */; };
 		83B833F22CA5D77C00368600 /* MessageTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B833F12CA5D77A00368600 /* MessageTextModifier.swift */; };
 		83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E4632B877E5600C51561 /* ChatScreenView.swift */; };
 		83C3E4682B87932F00C51561 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C3E4672B87932F00C51561 /* R.generated.swift */; };
@@ -50,6 +52,7 @@
 /* Begin PBXFileReference section */
 		1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.release.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.release.xcconfig"; sourceTree = "<group>"; };
 		2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSChatView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 		830F60462BDFC6D200D93090 /* NoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMessageView.swift; sourceTree = "<group>"; };
 		833052FC2C9DA81500B8DF56 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		833053002C9DC28F00B8DF56 /* MoveContentAboveKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveContentAboveKeyboard.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		837EA8F02B93B8DE001578F3 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		839736662A78C7B50021D895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		839736672A78C7B50021D895 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		83A3A9D32CCA22D200700A9E /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		83B833F12CA5D77A00368600 /* MessageTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextModifier.swift; sourceTree = "<group>"; };
 		83C3E4632B877E5600C51561 /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
 		83C3E4672B87932F00C51561 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 		8339ACB22A78CDC000D0BB42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */,
 				8371F1E62CA726AB000ED39A /* CommonFunctions.swift */,
 				83B833F12CA5D77A00368600 /* MessageTextModifier.swift */,
 				833053002C9DC28F00B8DF56 /* MoveContentAboveKeyboard.swift */,
@@ -270,6 +275,7 @@
 		83D46ECA2B8DFD7100D275FE /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				83A3A9D32CCA22D200700A9E /* CustomScrollView.swift */,
 				83D46ECC2B8DFD7100D275FE /* MessageCell.swift */,
 				83D46ECD2B8DFD7100D275FE /* MessageView.swift */,
 				837EA8F02B93B8DE001578F3 /* MessageBubble.swift */,
@@ -467,6 +473,7 @@
 			files = (
 				837EA8EE2B9106E2001578F3 /* ChatScreenViewModel.swift in Sources */,
 				83D46EBF2B8DF2CD00D275FE /* CircleButtonWithSendView.swift in Sources */,
+				830233B42CC930B700E0CF18 /* ScrollViewOffsetPreferenceKey.swift in Sources */,
 				83F177012C57C787005D3AC6 /* ProfileImageView.swift in Sources */,
 				8336C9A92A60210F006D8431 /* ContentView.swift in Sources */,
 				8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */,
@@ -478,6 +485,7 @@
 				83B833F22CA5D77C00368600 /* MessageTextModifier.swift in Sources */,
 				83D46EC52B8DF36400D275FE /* ChatInputView.swift in Sources */,
 				83C3E4642B877E5600C51561 /* ChatScreenView.swift in Sources */,
+				83A3A9D42CCA22D900700A9E /* CustomScrollView.swift in Sources */,
 				8371F1E52CA6CEB7000ED39A /* MessageFocusViewModel.swift in Sources */,
 				834537A02C897D6C0022FD17 /* MessageActionView.swift in Sources */,
 				8345379E2C897CD90022FD17 /* CircleCheckboxView.swift in Sources */,
