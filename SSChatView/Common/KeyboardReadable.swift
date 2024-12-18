@@ -16,6 +16,9 @@ protocol KeyboardReadable {
 
     /// A publisher that emits `true` when the keyboard has been shown and `false` when it's been hidden.
     var keyboardDidChangePublisher: AnyPublisher<Bool, Never> { get }
+
+    /// A publisher that emits the keyboard height when it shows and `0` when it hides.
+    var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> { get }
 }
 
 // MARK: - KeyboardReadable
@@ -49,5 +52,25 @@ extension KeyboardReadable {
                 .map { _ in false }
         )
         .eraseToAnyPublisher()
+    }
+
+    // MARK: - Keyboard Height Publisher
+    /// A publisher for detecting the keyboard height when it appears or disappears.
+    public var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+        let willShowPublisher = NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillShowNotification)
+            .map { notification -> CGFloat in
+                if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                    return keyboardFrame.height
+                }
+                return 0
+            }
+
+        let willHidePublisher = NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+
+        return Publishers.Merge(willShowPublisher, willHidePublisher)
+            .eraseToAnyPublisher()
     }
 }

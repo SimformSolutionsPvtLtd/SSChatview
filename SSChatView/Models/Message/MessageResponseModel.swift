@@ -15,4 +15,12 @@ struct MessageResponseModel: Identifiable, Equatable {
     var content: String
     var isCurrentUser: Bool
     var reaction: ReactionType?
+    var contentCopy: String = ""
+    var editedMessages: [String] = []
+    var showEditedMessage: Bool = false
+
+    mutating func updateEditedMessages(newMessage: String) {
+        editedMessages.append(content)
+        content = newMessage
+    }
 }

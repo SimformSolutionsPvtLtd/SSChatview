@@ -15,11 +15,10 @@ struct MessageTextModifier: ViewModifier {
     // MARK: - Body
     func body(content: Content) -> some View {
         content
-            .padding()
+            .padding(14)
             .foregroundColor(isCurrentUser ? Color.white : SystemColors.textColor)
             .background(isCurrentUser ? Color.blue : Color(UIColor.systemGray6))
-            .clipShape(MessageBubble(myMessage: isCurrentUser))
-            .contentShape(.contextMenuPreview, MessageBubble(myMessage: isCurrentUser))
+            .clipShape(ChatShapePathManager(isFromCurrentUser: isCurrentUser))
             .fixedSize(horizontal: false, vertical: true)
     }
 }

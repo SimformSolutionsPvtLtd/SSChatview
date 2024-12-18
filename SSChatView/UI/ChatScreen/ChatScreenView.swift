@@ -13,6 +13,7 @@ struct ChatScreenView: View {
     @State private var currentMessage: String = ""
     @State private var longPressPosition: CGPoint = .zero
     @Binding var isBlurred: Bool
+    @State private var isProfilePresented: Bool = false
     @StateObject private var viewModel = ChatScreenViewModel()
     @State private var shouldShowDelete: Bool = false
     @State private var messageViewHeight: CGFloat = 0.0
@@ -32,13 +33,18 @@ extension ChatScreenView {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack {
-                ProfileImageView(
-                    imageName: ProfileConstants.profileImage,
-                    isBlurred: $isBlurred,
-                    shouldShowSelectionView: $viewModel.shouldShowSelectionView
-                ) {
+                ProfileImageView(imageName: ProfileConstants.profileImage,
+                                 isPresented: $isProfilePresented,
+                                 shouldShowSelectionView: $viewModel.shouldShowSelectionView,
+                                 onCancelTap: {
                     viewModel.shouldShowSelectionView = false
-                }
+                }, onProfileTap: {
+                    if viewModel.editMessageID.isEmpty {
+                        isProfilePresented = true
+                    } else {
+                        viewModel.editMessageID = ""
+                    }
+                })
                 .padding(.top, topPadding)
                 .disabledWithOpacity(isBlurred)
 
@@ -47,9 +53,11 @@ extension ChatScreenView {
                     isBlurred: $isBlurred,
                     shouldShowSelectionView: $viewModel.shouldShowSelectionView,
                     selectedMessageIDs: $viewModel.selectedMessageIDs,
+                    editMessageID: $viewModel.editMessageID,
                     onLongPress: {position, model in
                         self.longPressPosition = position
                         viewModel.selectedMessage = model
+                        viewModel.editMessageID = ""
                     }
                 )
                 .onTapGesture {
@@ -57,6 +65,7 @@ extension ChatScreenView {
                         shouldShowDelete = false
                         isBlurred = false
                         viewModel.selectedMessage = nil
+                        viewModel.editMessageID = ""
                     }
                 }
                 .trackHeight($messageViewHeight)
@@ -84,6 +93,7 @@ extension ChatScreenView {
                         viewModel.addMessage(currentMessage)
                         currentMessage = ""
                     }
+                    .disabledWithOpacity(!viewModel.editMessageID.isEmpty)
                     .layoutPriority(currentMessage.isEmpty ? 0 : 1)
                 }
             }
@@ -154,7 +164,7 @@ extension ChatScreenView {
                     shouldShowDelete = false
                 }
             }, label: {
-                Text(MessageViewConstants.cancel)
+                Text(appString.cancelText())
                     .frame(maxWidth: .infinity, maxHeight: 60)
                     .background(appColor.deleteAlertBackground.getColor())
                     .foregroundColor(.blue)

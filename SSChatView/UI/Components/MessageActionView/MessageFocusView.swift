@@ -148,26 +148,28 @@ extension MessageFocusView {
     // MARK: - CustomContextMenuView
     private var customContextMenuView: some View {
         VStack(spacing: 8) {
-            ForEach(CustomMenu.allCases, id: \.self) { action in
-                Button(action: {
-                    viewModel.onActionClick(action: action)
-                    resetReactionAnimation(shouldShow: false)
-                }, label: {
-                    HStack {
-                        Text(action.localizedTitle)
-                            .foregroundColor(SystemColors.textColor)
-                        Spacer()
-                        Image(systemName: action.iconName)
-                            .foregroundColor(SystemColors.textColor)
-                    }
-                })
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
+            ForEach(CustomMenu.allCases.filter { $0 != .edit ||
+                viewModel.messageResponseModel.isCurrentUser &&
+                viewModel.messageResponseModel.editedMessages.count < 5 }, id: \.self) { action in
+                    Button(action: {
+                        viewModel.onActionClick(action: action)
+                        resetReactionAnimation(shouldShow: false)
+                    }, label: {
+                        HStack {
+                            Text(action.localizedTitle)
+                                .foregroundColor(SystemColors.textColor)
+                            Spacer()
+                            Image(systemName: action.iconName)
+                                .foregroundColor(SystemColors.textColor)
+                        }
+                    })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
 
-                if action != .more {
-                    customDivider()
+                    if action != .more {
+                        customDivider()
+                    }
                 }
-            }
         }
         .padding(.vertical)
         .background(

@@ -10,10 +10,10 @@ import SwiftUI
 struct ProfileImageView: View {
     // MARK: - Variables
     var imageName: String
-    @State private var isPresented = false
-    @Binding var isBlurred: Bool
+    @Binding var isPresented: Bool
     @Binding var shouldShowSelectionView: Bool
     var onCancelTap: () -> Void
+    var onProfileTap: () -> Void
 }
 
 // MARK: - Body
@@ -21,16 +21,10 @@ extension ProfileImageView {
     var body: some View {
         HStack {
             Spacer()
-            Button(action: presentProfile) {
-                profileHeaderView
-            }
-            .sheet(isPresented: $isPresented) {
-                profileSheetContent
-            }
+            profileHeaderView
             Spacer()
         }
         .background(.ultraThinMaterial)
-        .blur(radius: isBlurred ? 10 : 0)
     }
 
     // MARK: - Functions
@@ -39,7 +33,7 @@ extension ProfileImageView {
     }
 
     private var profileSheetContent: some View {
-        Text(ProfileConstants.profileName)
+        Text(appString.profileName)
     }
 }
 
@@ -55,7 +49,7 @@ extension ProfileImageView {
                     .clipShape(Circle())
 
                 HStack(alignment: .center, spacing: 2) {
-                    Text(ProfileConstants.profileName)
+                    Text(appString.profileName)
                         .foregroundColor(SystemColors.textColor)
                         .font(Font.system(size: 12).weight(.medium))
                     Image(systemName: SystemImage.arrowIcon)
@@ -64,13 +58,19 @@ extension ProfileImageView {
                 }
                 .padding(.bottom, 10)
             }
+            .onTapGesture {
+                onProfileTap()
+            }
+            .sheet(isPresented: $isPresented) {
+                profileSheetContent
+            }
             .frame(maxWidth: .infinity)
 
             if shouldShowSelectionView {
                 Button(action: {
                     onCancelTap()
                 }, label: {
-                    Text(MessageViewConstants.cancel)
+                    Text(appString.cancelText())
                         .foregroundColor(.blue)
                         .font(Font.system(size: 18).weight(.medium))
                 })

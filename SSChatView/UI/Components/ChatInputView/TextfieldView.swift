@@ -10,13 +10,14 @@ import SwiftUI
 struct TextfieldView: View {
 
     // MARK: - Variables
-    @State private var dragOffset: CGSize = .zero
     @Binding var messageText: String
+
+    @State private var dragOffset: CGSize = .zero
 }
 
-// MARK: - Body
 extension TextfieldView {
 
+    // MARK: - Body
     var body: some View {
         VStack {
             TextField(

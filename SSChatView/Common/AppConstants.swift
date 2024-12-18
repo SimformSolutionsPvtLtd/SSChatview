@@ -27,6 +27,8 @@ enum SystemImage {
     static let moreIcon = "ellipsis"
     static let forwardIcon = "arrowshape.turn.up.right"
     static let selectIcon = "checkmark"
+    static let crossIcon = "xmark"
+    static let checkmarkIcon = "checkmark"
 }
 
 // MARK: FontSize
@@ -61,9 +63,8 @@ enum AppConstants {
     static let screenHeight = UIScreen.main.bounds.height
     static let horizontalPadding: CGFloat = 14
     static let cornerRadius: CGFloat = 20
-    static let bottomID = "BottomID"
-    static let scrollAreaID = "ScrollAreaID"
     static let reactionViewHeight: CGFloat = 180
+    static let profileViewHeight: CGFloat = 180
 }
 
 // MARK: ChatInputViewConstants
@@ -90,7 +91,6 @@ enum TextfieldBorderConstants {
 // MARK: MessageViewConstants
 enum MessageViewConstants {
     static let spacing: CGFloat = 10
-    static let cancel = "Cancel"
 }
 
 // MARK: - Reaction Types
@@ -105,7 +105,6 @@ enum ReactionType: String, CaseIterable {
 // MARK: ProfileConstants
 enum ProfileConstants {
     static let profileImage = "profile"
-    static let profileName = "Test"
 }
 
 // MARK: CustomMenu
