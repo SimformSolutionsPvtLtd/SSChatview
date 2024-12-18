@@ -18,6 +18,7 @@ struct MessageResponseModel: Identifiable, Equatable {
     var contentCopy: String = ""
     var editedMessages: [String] = []
     var showEditedMessage: Bool = false
+    var timestamp: Date
 
     mutating func updateEditedMessages(newMessage: String) {
         editedMessages.append(content)

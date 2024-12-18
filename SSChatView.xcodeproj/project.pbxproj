@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E96742BF2FD3205659B22B6 /* Pods_SSChatView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */; };
 		830233B42CC930B700E0CF18 /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */; };
+		8305D86D2CEB234D00283516 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305D86C2CEB234900283516 /* DateFormatter.swift */; };
 		830F60472BDFC6D200D93090 /* NoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F60462BDFC6D200D93090 /* NoMessageView.swift */; };
 		8326653C2CA923C3007A14C2 /* ChatShapePathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8326653B2CA923C0007A14C2 /* ChatShapePathManager.swift */; };
 		833052FD2C9DA81800B8DF56 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833052FC2C9DA81500B8DF56 /* KeyboardReadable.swift */; };
@@ -48,6 +49,7 @@
 		83D46EC92B8DFD5900D275FE /* MessageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46EC82B8DFD5900D275FE /* MessageResponseModel.swift */; };
 		83D46ECF2B8DFD7100D275FE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46ECC2B8DFD7100D275FE /* MessageCell.swift */; };
 		83D46ED02B8DFD7100D275FE /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46ECD2B8DFD7100D275FE /* MessageView.swift */; };
+		83E19DAE2CEC691D00DAC9B7 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E19DAD2CEC691B00DAC9B7 /* DateHeaderView.swift */; };
 		83F177012C57C787005D3AC6 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F177002C57C787005D3AC6 /* ProfileImageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,7 @@
 		1141773F72BF1AA1CBF1DF4D /* Pods-SSChatView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.release.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.release.xcconfig"; sourceTree = "<group>"; };
 		2E81F6983A9B9C90667DA8E9 /* Pods_SSChatView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSChatView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
+		8305D86C2CEB234900283516 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		830F60462BDFC6D200D93090 /* NoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMessageView.swift; sourceTree = "<group>"; };
 		8326653B2CA923C0007A14C2 /* ChatShapePathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatShapePathManager.swift; sourceTree = "<group>"; };
 		833052FC2C9DA81500B8DF56 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		83D46EC82B8DFD5900D275FE /* MessageResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponseModel.swift; sourceTree = "<group>"; };
 		83D46ECC2B8DFD7100D275FE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		83D46ECD2B8DFD7100D275FE /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		83E19DAD2CEC691B00DAC9B7 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		83F177002C57C787005D3AC6 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		E2F12E46BDDA97E2C2A2FA7C /* Pods-SSChatView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSChatView.debug.xcconfig"; path = "Target Support Files/Pods-SSChatView/Pods-SSChatView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +160,7 @@
 		8339ACB22A78CDC000D0BB42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8305D86C2CEB234900283516 /* DateFormatter.swift */,
 				836A7C8C2CE7355D0018BC27 /* HeightTrackingModifier.swift */,
 				836A7C882CE725790018BC27 /* HeightChangePublisher.swift */,
 				830233B32CC930A200E0CF18 /* ScrollViewOffsetPreferenceKey.swift */,
@@ -242,6 +247,7 @@
 		83D46EBA2B8DF25500D275FE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				83E19DAA2CEC68FD00DAC9B7 /* DateHeaderView */,
 				8371F1E12CA6B353000ED39A /* MessageActionView */,
 				83F176FF2C57C770005D3AC6 /* ProfileView */,
 				83D46ECA2B8DFD7100D275FE /* Message */,
@@ -290,6 +296,14 @@
 				8345379F2C897D6C0022FD17 /* MessageActionView.swift */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		83E19DAA2CEC68FD00DAC9B7 /* DateHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				83E19DAD2CEC691B00DAC9B7 /* DateHeaderView.swift */,
+			);
+			path = DateHeaderView;
 			sourceTree = "<group>";
 		};
 		83F176FF2C57C770005D3AC6 /* ProfileView */ = {
@@ -485,6 +499,7 @@
 				8339ACCE2A78E66200D0BB42 /* Font+Extension.swift in Sources */,
 				83D46EC12B8DF2EC00D275FE /* MicView.swift in Sources */,
 				833053012C9DC29200B8DF56 /* MoveContentAboveKeyboard.swift in Sources */,
+				83E19DAE2CEC691D00DAC9B7 /* DateHeaderView.swift in Sources */,
 				8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */,
 				830F60472BDFC6D200D93090 /* NoMessageView.swift in Sources */,
 				83D46EBD2B8DF29B00D275FE /* CircleButtonWithPlusView.swift in Sources */,
@@ -504,6 +519,7 @@
 				8371F1E72CA726B5000ED39A /* CommonFunctions.swift in Sources */,
 				83D46EC32B8DF30900D275FE /* TextfieldView.swift in Sources */,
 				83D46EC92B8DFD5900D275FE /* MessageResponseModel.swift in Sources */,
+				8305D86D2CEB234D00283516 /* DateFormatter.swift in Sources */,
 				8371F1E32CA6B363000ED39A /* MessageFocusView.swift in Sources */,
 				836A7C892CE7257B0018BC27 /* HeightChangePublisher.swift in Sources */,
 				83C3E4682B87932F00C51561 /* R.generated.swift in Sources */,

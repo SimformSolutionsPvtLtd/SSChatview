@@ -15,6 +15,7 @@ struct MessageCell: View, KeyboardReadable {
     @Binding var isBlurred: Bool
     @Binding var shouldShowSelectionView: Bool
     @Binding var editMessageID: String
+    @Binding var showTimestamp: Bool
     @State var isSelected: Bool
     var onMessageSelection: (String) -> Void
     var onLongPress: (CGPoint) -> Void
@@ -51,6 +52,12 @@ extension MessageCell {
                     if currentMessage.isCurrentUser { Spacer() }
                     messageBubbleContent
                     if !currentMessage.isCurrentUser { Spacer() }
+                    if showTimestamp {
+                        Text(DateFormatter.timeFormatter(currentMessage.timestamp))
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 8)
+                    }
                 }
             }
         }
