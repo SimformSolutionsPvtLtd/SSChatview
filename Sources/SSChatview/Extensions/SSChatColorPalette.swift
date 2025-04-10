@@ -31,6 +31,7 @@ public protocol SSChatColorPalette {
     var currentUserMessageBackground: Color { get }
     var nonCurrentUserMessageText: Color { get }
     var nonCurrentUserMessageBackground: Color { get }
+    var selectedReactionBackground: Color { get }
 }
 
 // MARK: - Default Color Values
@@ -44,6 +45,7 @@ extension SSChatColorPalette {
     public var currentUserMessageBackground: Color { Color.blue }
     public var nonCurrentUserMessageText: Color { Color(UIColor.label) }
     public var nonCurrentUserMessageBackground: Color { Color(UIColor.systemGray6) }
+    public var selectedReactionBackground: Color { Color.green }
 }
 
 // MARK: - Default Color Palette Implementation
