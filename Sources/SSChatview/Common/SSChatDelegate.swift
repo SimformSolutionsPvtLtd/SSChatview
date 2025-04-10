@@ -47,4 +47,9 @@ public protocol SSChatDelegate: AnyObject {
     ///   - messageID: The identifier of the message that received a reaction.
     ///   - reaction: The type of reaction applied.
     func didReactToMessage(_ messageID: String, reaction: ReactionType)
+
+    /// Called when the user performs an undo send action on a message.
+    /// This removes the message from both the sender and the recipient's chat views.
+    /// - Parameter messageID: The identifier of the message to be undone and deleted.
+    func didUndoMessage(_ messageID: String)
 }

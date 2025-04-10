@@ -23,13 +23,13 @@ extension ChatViewModel {
 
     /// Appends a new message to the chat message array.
     /// - Parameter newMessage: The `MessageResponseModel` to be added.
-    func addMessage(newMessage: MessageResponseModel) {
+    private func addMessage(newMessage: MessageResponseModel) {
         self.messageArray.append(newMessage)
     }
 
     /// Deletes messages from the chat based on their IDs.
     /// - Parameter messagesToDelete: An array of message IDs to be removed.
-    func deleteMessage(messagesToDelete: [String]) {
+    private func deleteMessage(messagesToDelete: [String]) {
         self.messageArray.removeAll { messagesToDelete.contains($0.id) }
     }
 
@@ -37,7 +37,7 @@ extension ChatViewModel {
     /// - Parameters:
     ///   - messageID: The ID of the message to react to.
     ///   - reaction: The `ReactionType` to apply.
-    func reactMessage(_ messageID: String, reaction: ReactionType) {
+    private func reactMessage(_ messageID: String, reaction: ReactionType) {
         guard let index = self.messageArray.firstIndex(where: { $0.id == messageID }) else {
             print("Error: Message with ID \(messageID) not found.")
             return
@@ -49,13 +49,23 @@ extension ChatViewModel {
     /// - Parameters:
     ///   - id: The ID of the message to edit.
     ///   - editedMessage: The new content for the message.
-    func editMessage(id: String, editedMessage: String) {
+    private func editMessage(id: String, editedMessage: String) {
         if let index = self.messageArray.firstIndex(where: { $0.id == id }) {
             let currentContent = self.messageArray[index].content
             self.messageArray[index].editedMessages.append(currentContent)
             self.messageArray[index].content = editedMessage
         } else {
             print("Message with ID \(id) not found for editing.")
+        }
+    }
+
+    /// Undoes a sent message by removing it from the message array.
+    /// Typically used for "Undo Send" functionality.
+    ///
+    /// - Parameter id: The ID of the message to be removed.
+    private func undoMessage(id: String) {
+        if let index = messageArray.firstIndex(where: { $0.id == id }) {
+            self.messageArray.remove(at: index)
         }
     }
 }
@@ -143,4 +153,13 @@ extension ChatViewModel: SSChatDelegate {
         print("❤️‍🔥 Reacted to message ID [\(messageID)] with: \(reaction.rawValue)")
         reactMessage(messageID, reaction: reaction)
     }
+
+    /// Called when the user undoes a sent message.
+    /// This removes the message for both sender and receiver.
+    /// - Parameter messageID: The ID of the message to be undone.
+    func didUndoMessage(_ messageID: String) {
+        print("↩️ Undo message ID [\(messageID)]")
+        undoMessage(id: messageID)
+    }
+
 }

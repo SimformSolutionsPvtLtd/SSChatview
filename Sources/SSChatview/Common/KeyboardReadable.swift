@@ -57,20 +57,20 @@ extension KeyboardReadable {
     // MARK: - Keyboard Height Publisher
     /// A publisher for detecting the keyboard height when it appears or disappears.
     public var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
-        let willShowPublisher = NotificationCenter.default
-            .publisher(for: UIResponder.keyboardWillShowNotification)
-            .map { notification -> CGFloat in
-                if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-                    return keyboardFrame.height
-                }
-                return 0
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillChangeFrameNotification)
+            .compactMap { notification in
+                guard
+                    let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+                    let windowScene = UIApplication.shared.connectedScenes
+                        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+                    let window = windowScene.windows.first(where: \.isKeyWindow)
+                else { return nil }
+
+                let keyboardFrame = window.convert(frame, to: nil)
+
+                return keyboardFrame.origin.y >= UIScreen.main.bounds.height ? 0 : keyboardFrame.height
             }
-
-        let willHidePublisher = NotificationCenter.default
-            .publisher(for: UIResponder.keyboardWillHideNotification)
-            .map { _ in CGFloat(0) }
-
-        return Publishers.Merge(willShowPublisher, willHidePublisher)
             .eraseToAnyPublisher()
     }
 }

@@ -32,6 +32,7 @@ public protocol SSChatStrings {
     var smsText: String { get }
     var noMessagesText: String { get }
     var messagesDesc: String { get }
+    var undoSendText: String { get }
 }
 
 // MARK: - Default Localized Strings
@@ -42,6 +43,7 @@ extension SSChatStrings {
     public var messageText: String { localizedString("messageText") }
     public var editedText: String { localizedString("editedText") }
     public var hideEditsText: String { localizedString("hideEditsText") }
+    public var undoSendText: String { localizedString("undoSendText") }
 
     // MARK: Profile String
     public var profileName: String { localizedString("profileName") }

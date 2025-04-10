@@ -62,6 +62,9 @@ extension MessageFocusViewModel {
     /// Computes the scale factor to adjust the message's size relative to its height.
     func getScaleFactor(messageHeight: CGFloat, messageWidth: CGFloat, isWideMessage: Bool) -> CGFloat {
         let baseScale: CGFloat = 1.0
+        guard messageWidth != 0 else { return baseScale }
+        guard messageHeight != 0 else { return baseScale }
+
         if isWideMessage {
             let safeAreaInsets = UIApplication.shared.connectedScenes
                 .compactMap { ($0 as? UIWindowScene)?.keyWindow }
@@ -80,19 +83,42 @@ extension MessageFocusViewModel {
     }
 
     /// Calculates horizontal offset for the reaction view based on message width and sender.
-    func reactionXOffset(messageWidth: CGFloat) -> CGFloat {
-        let isCurrentUser = messageResponseModel.isCurrentUser
-        let reactionWidth = AppConstants.reactionViewWidth
+    func reactionXOffset(messageWidth: CGFloat, scaleFactor: CGFloat, isPortrait: Bool) -> CGFloat {
+            guard messageWidth != 0 else { return 0 }
+            let isCurrentUser = messageResponseModel.isCurrentUser
+            let reactionWidth = AppConstants.reactionViewWidth
 
-        let offset: CGFloat
-        if reactionWidth - messageWidth > 5 {
-            offset = reactionWidth - messageWidth
-        } else {
-            let maxOffset = AppConstants.screenWidth - messageWidth
-            let minOffset = reactionWidth / 5
-            offset = min(minOffset, maxOffset)
+            let offset: CGFloat
+            if reactionWidth - messageWidth > 5 {
+                offset = reactionWidth - messageWidth
+            } else {
+                let maxOffset = AppConstants.screenWidth - messageWidth
+                let minOffset = reactionWidth / 5
+                offset = min(minOffset, maxOffset)
+            }
+
+            let scaleAdjustment = isPortrait ? (1.0 - scaleFactor) * (AppConstants.screenWidth - messageWidth) : 0
+            let adjustedOffset = offset + scaleAdjustment
+            return isCurrentUser ? -adjustedOffset : adjustedOffset
+    }
+
+    /// Filters context menu actions based on sender, edit limits, and message time limits.
+    func filteredMenuActions() -> [CustomMenu] {
+        let timeSinceSent = Date().timeIntervalSince(messageResponseModel.timestamp)
+
+        return CustomMenu.allCases.filter { action in
+            switch action {
+            case .edit:
+                return messageResponseModel.isCurrentUser &&
+                       messageResponseModel.editedMessages.count < 5 &&
+                       timeSinceSent <= 15 * 60 // 15 minutes
+
+            case .undoSend:
+                return messageResponseModel.isCurrentUser && timeSinceSent <= 2 * 60 // 2 minutes
+
+            default:
+                return true
+            }
         }
-
-        return isCurrentUser ? -offset : offset
     }
 }

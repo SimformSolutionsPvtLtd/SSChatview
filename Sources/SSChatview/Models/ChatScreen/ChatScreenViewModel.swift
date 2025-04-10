@@ -18,6 +18,7 @@ public final class ChatScreenViewModel: ObservableObject {
     @Published var shouldShowSelectionView: Bool = false
     @Published var selectedMessage: MessageResponseModel?
     @Published var editMessageID: String = ""
+    @Published var undoSentMessageID: String = ""
 
     // MARK: - Init
 
@@ -58,6 +59,12 @@ extension ChatScreenViewModel {
         let deletedIDs = Array(selectedMessageIDs)
         shouldShowSelectionView = false
         delegate?.didDeleteMessages(deletedIDs)
+    }
+
+    /// Undoes a sent message and removes it for both users.
+    private func undoSentMessage() {
+        delegate?.didUndoMessage(undoSentMessageID)
+        undoSentMessageID = ""
     }
 
     /// Returns a label showing how many messages are selected for deletion.
@@ -106,6 +113,8 @@ extension ChatScreenViewModel {
             onMessageSelection(messageID: messageID)
         case .edit:
             editMessageID = messageID
+        case .undoSend:
+             undoSentMessage()
         }
 
         selectedMessage = nil

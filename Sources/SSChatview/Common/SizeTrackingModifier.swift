@@ -22,12 +22,8 @@ struct SizeTrackingModifier: ViewModifier {
                 GeometryReader { geometry in
                     Color.clear
                         .onAppear {
-                            if let width = width {
-                                width.wrappedValue = geometry.size.width
-                            }
-                            if let height = height {
-                                height.wrappedValue = geometry.size.height
-                            }
+                            width?.wrappedValue = geometry.size.width
+                            height?.wrappedValue = geometry.size.height
                         }
                         .onChange(of: geometry.size) { _, newSize in
                             if let width = width, newSize.width != width.wrappedValue {

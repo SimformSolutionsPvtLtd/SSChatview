@@ -47,7 +47,7 @@ extension MessageView {
         .overlay(scrollToBottomOverlayView, alignment: .bottomTrailing)
         .gesture(showTimestampGesture)
         .onChange(of: messages.count) {
-            viewModel.handleMessageListUpdate(currentMessages: messages)
+            viewModel.handleMessageListUpdate(currentMessages: messages, editMessageID: editMessageID)
         }
         .onChange(of: shouldShowSelectionView) { _, newValue in
             if !newValue { selectedMessageIDs.removeAll() }
@@ -82,6 +82,7 @@ extension MessageView {
                     onScrollToBottomTap: {
                         viewModel.scrollToBottom = true
                         viewModel.unreadMessageCount = 0
+                        editMessageID = ""
                     }
                 )
             }

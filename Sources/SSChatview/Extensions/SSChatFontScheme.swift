@@ -70,7 +70,7 @@ public struct DefaultFontScheme: SSChatFontScheme {
 // MARK: - System Font Sizes
 
 /// Common font sizes used throughout SSChatview.
-private enum SystemFontSize {
+enum SystemFontSize {
     static let small: CGFloat = 14
     static let regular: CGFloat = 18
     static let medium: CGFloat = 20
