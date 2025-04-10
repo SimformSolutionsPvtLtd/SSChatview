@@ -7,20 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8319D5F62DB5069900A38895 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8319D5F52DB5069100A38895 /* ChatViewModel.swift */; };
 		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
 		83567EFB2DA8ED5600DFED9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83567EFA2DA8ED5600DFED9F /* ContentView.swift */; };
 		83A41DC92DACD72900A39C9F /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 83A41DC82DACD72900A39C9F /* RswiftLibrary */; };
 		83A647212DB9797B0051B887 /* SSChatview in Frameworks */ = {isa = PBXBuildFile; productRef = 83A647202DB9797B0051B887 /* SSChatview */; };
+		83AC64CA2DA917EC00C7CABF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C72DA917EC00C7CABF /* Localizable.strings */; };
+		83AC64CB2DA917EC00C7CABF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C12DA917EC00C7CABF /* Poppins-Regular.ttf */; };
+		83AC64CC2DA917EC00C7CABF /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C32DA917EC00C7CABF /* Poppins-Thin.ttf */; };
+		83AC64CD2DA917EC00C7CABF /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C22DA917EC00C7CABF /* Poppins-SemiBold.ttf */; };
+		83AC64CE2DA917EC00C7CABF /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64BF2DA917EC00C7CABF /* Poppins-Bold.ttf */; };
+		83AC64CF2DA917EC00C7CABF /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C62DA917EC00C7CABF /* Color.xcassets */; };
+		83AC64D02DA917EC00C7CABF /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C02DA917EC00C7CABF /* Poppins-Medium.ttf */; };
+		83AC64D12DA917EC00C7CABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C52DA917EC00C7CABF /* Assets.xcassets */; };
+		83D116982DB83BA60051A682 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D116972DB83BA00051A682 /* Constants.swift */; };
+		83D150142DC0B603003BC990 /* ChatMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D150132DC0B5FD003BC990 /* ChatMessagesData.swift */; };
+		83D1501F2DC0C3A8003BC990 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D1501E2DC0C398003BC990 /* DateExtension.swift */; };
+		83EB089C2DAFA0C100A6781E /* CustomImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EB089B2DAFA0BB00A6781E /* CustomImageAssets.swift */; };
+		83F369C82DAFBF9B009772EC /* CustomColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F369C72DAFBF94009772EC /* CustomColorPalette.swift */; };
+		83F369D62DAFC5BD009772EC /* CustomStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F369D52DAFC5B9009772EC /* CustomStrings.swift */; };
+		83F369DE2DAFCB44009772EC /* CustomFontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F369DD2DAFCB3E009772EC /* CustomFontScheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8319D5F52DB5069100A38895 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		8336C9A32A60210F006D8431 /* SSChatviewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSChatviewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8336C9A62A60210F006D8431 /* SSChatViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatViewApp.swift; sourceTree = "<group>"; };
 		8336C9AD2A602110006D8431 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83567EFA2DA8ED5600DFED9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8360BAE12A791651002B0AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8384EA772DB2D75700AE024A /* SSChatview */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SSChatview; path = ..; sourceTree = "<group>"; };
+		83AC64BF2DA917EC00C7CABF /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		83AC64C02DA917EC00C7CABF /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		83AC64C12DA917EC00C7CABF /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		83AC64C22DA917EC00C7CABF /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		83AC64C32DA917EC00C7CABF /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		83AC64C52DA917EC00C7CABF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83AC64C62DA917EC00C7CABF /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		83AC64C72DA917EC00C7CABF /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		83D116972DB83BA00051A682 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83D150132DC0B5FD003BC990 /* ChatMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesData.swift; sourceTree = "<group>"; };
+		83D1501E2DC0C398003BC990 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		83EB089B2DAFA0BB00A6781E /* CustomImageAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageAssets.swift; sourceTree = "<group>"; };
+		83F369C72DAFBF94009772EC /* CustomColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPalette.swift; sourceTree = "<group>"; };
+		83F369D52DAFC5B9009772EC /* CustomStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStrings.swift; sourceTree = "<group>"; };
+		83F369DD2DAFCB3E009772EC /* CustomFontScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontScheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +89,13 @@
 			isa = PBXGroup;
 			children = (
 				8360BAE12A791651002B0AEE /* Info.plist */,
+				83D116972DB83BA00051A682 /* Constants.swift */,
+				83D150132DC0B5FD003BC990 /* ChatMessagesData.swift */,
+				8319D5F52DB5069100A38895 /* ChatViewModel.swift */,
 				83567EFA2DA8ED5600DFED9F /* ContentView.swift */,
 				8336C9A62A60210F006D8431 /* SSChatViewApp.swift */,
+				83F369C62DAFBF0F009772EC /* Helper */,
+				83AC64C92DA917EC00C7CABF /* Resources */,
 				8336C9AC2A602110006D8431 /* Preview Content */,
 			);
 			path = SSChatviewDemo;
@@ -70,6 +107,42 @@
 				8336C9AD2A602110006D8431 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		83AC64C42DA917EC00C7CABF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				83AC64BF2DA917EC00C7CABF /* Poppins-Bold.ttf */,
+				83AC64C02DA917EC00C7CABF /* Poppins-Medium.ttf */,
+				83AC64C12DA917EC00C7CABF /* Poppins-Regular.ttf */,
+				83AC64C22DA917EC00C7CABF /* Poppins-SemiBold.ttf */,
+				83AC64C32DA917EC00C7CABF /* Poppins-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		83AC64C92DA917EC00C7CABF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				83AC64C42DA917EC00C7CABF /* Fonts */,
+				83AC64C52DA917EC00C7CABF /* Assets.xcassets */,
+				83AC64C62DA917EC00C7CABF /* Color.xcassets */,
+				83AC64C72DA917EC00C7CABF /* Localizable.strings */,
+			);
+			name = Resources;
+			path = SSChatViewDemo/Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		83F369C62DAFBF0F009772EC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				83D1501E2DC0C398003BC990 /* DateExtension.swift */,
+				83F369DD2DAFCB3E009772EC /* CustomFontScheme.swift */,
+				83F369D52DAFC5B9009772EC /* CustomStrings.swift */,
+				83F369C72DAFBF94009772EC /* CustomColorPalette.swift */,
+				83EB089B2DAFA0BB00A6781E /* CustomImageAssets.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		89476420BA7024637795AE5C /* Frameworks */ = {
@@ -94,7 +167,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				832775622DB9015D0042150F /* PBXTargetDependency */,
+				8341770F2DB98894002D136B /* PBXTargetDependency */,
 			);
 			name = SSChatviewDemo;
 			productName = SSChatView;
@@ -145,6 +218,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */,
+				83AC64CA2DA917EC00C7CABF /* Localizable.strings in Resources */,
+				83AC64CB2DA917EC00C7CABF /* Poppins-Regular.ttf in Resources */,
+				83AC64CC2DA917EC00C7CABF /* Poppins-Thin.ttf in Resources */,
+				83AC64CD2DA917EC00C7CABF /* Poppins-SemiBold.ttf in Resources */,
+				83AC64CE2DA917EC00C7CABF /* Poppins-Bold.ttf in Resources */,
+				83AC64CF2DA917EC00C7CABF /* Color.xcassets in Resources */,
+				83AC64D02DA917EC00C7CABF /* Poppins-Medium.ttf in Resources */,
+				83AC64D12DA917EC00C7CABF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,17 +236,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83D150142DC0B603003BC990 /* ChatMessagesData.swift in Sources */,
+				83D1501F2DC0C3A8003BC990 /* DateExtension.swift in Sources */,
 				8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */,
+				83F369DE2DAFCB44009772EC /* CustomFontScheme.swift in Sources */,
+				8319D5F62DB5069900A38895 /* ChatViewModel.swift in Sources */,
+				83F369D62DAFC5BD009772EC /* CustomStrings.swift in Sources */,
+				83F369C82DAFBF9B009772EC /* CustomColorPalette.swift in Sources */,
 				83567EFB2DA8ED5600DFED9F /* ContentView.swift in Sources */,
+				83EB089C2DAFA0C100A6781E /* CustomImageAssets.swift in Sources */,
+				83D116982DB83BA60051A682 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		832775622DB9015D0042150F /* PBXTargetDependency */ = {
+		8341770F2DB98894002D136B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 832775612DB9015D0042150F /* RswiftGenerateInternalResources */;
+			productRef = 8341770E2DB98894002D136B /* RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -289,7 +378,7 @@
 		8336C9B22A602110006D8431 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -324,7 +413,7 @@
 		8336C9B32A602110006D8431 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -406,7 +495,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		832775612DB9015D0042150F /* RswiftGenerateInternalResources */ = {
+		8341770E2DB98894002D136B /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 83A41DC72DACD72900A39C9F /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = "plugin:RswiftGenerateInternalResources";

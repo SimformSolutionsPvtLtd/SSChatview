@@ -70,7 +70,7 @@ extension ChatScreenView {
         ZStack(alignment: .topTrailing) {
             VStack {
                 ProfileImageView(userName: userName,
-                                 userProfileImage: userProfileImage ?? config.images.profileImage,
+                                 userProfileImage: userProfileImage,
                                  isPresented: $isProfilePresented,
                                  shouldShowSelectionView: $viewModel.shouldShowSelectionView,
                                  onCancelTap: {
