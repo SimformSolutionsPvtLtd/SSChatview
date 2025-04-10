@@ -36,6 +36,7 @@ public protocol SSChatImageAssets {
     var select: String { get }
     var cross: String { get }
     var checkmark: String { get }
+    var scrollDownArrow: String { get }
 }
 
 // MARK: - Default Image Assets
@@ -54,6 +55,7 @@ extension SSChatImageAssets {
     public var select: String { "checkmark" }
     public var cross: String { "xmark" }
     public var checkmark: String { "checkmark" }
+    public var scrollDownArrow: String { "arrow_down" }
 }
 
 // MARK: - Default Assets Implementation

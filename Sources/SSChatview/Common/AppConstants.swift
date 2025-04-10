@@ -26,9 +26,13 @@ public enum AppConstants {
     static let horizontalPadding: CGFloat = 14
     static let cornerRadius: CGFloat = 20
     static let reactionViewHeight: CGFloat = 180
-    static let profileViewHeight: CGFloat = 180
     static let contentViewWidth: CGFloat = 220
     static let reactionViewWidth: CGFloat = 286
+    static let chatInputHeight: CGFloat = 60
+
+    static func profileViewHeight(isPortrait: Bool) -> CGFloat {
+        isPortrait ? 180 : 30
+    }
 
     // MARK: ChatInputView
     enum ChatInputView {

@@ -28,6 +28,11 @@ struct MessageCell: View, KeyboardReadable {
 
     // MARK: - Environment
     @Environment(\.ssChatConfig) private var config
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+
+    private var isPortrait: Bool {
+        verticalSizeClass == .regular
+    }
 }
 
 extension MessageCell {
@@ -251,7 +256,7 @@ extension MessageCell {
     }
 
     private func maxTextFieldHeight() -> CGFloat {
-        AppConstants.screenHeight - keyboardHeight - AppConstants.profileViewHeight // Prevents overlap with keyboard
+        AppConstants.screenHeight - keyboardHeight - AppConstants.profileViewHeight(isPortrait: isPortrait) // Prevents overlap with keyboard
     }
 
     // MARK: - Edited Message Context Menu
