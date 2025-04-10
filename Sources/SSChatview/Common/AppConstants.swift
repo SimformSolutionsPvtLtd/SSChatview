@@ -1,0 +1,74 @@
+//
+//  AppConstants.swift
+//  SSChatview
+//
+//  Created by Palak Doshi on 01/08/23.
+//
+
+import Foundation
+import SwiftUI
+
+// MARK: ScrollID
+enum ScrollID: String {
+    case bottomID      = "BottomID"
+    case scrollAreaID  = "ScrollAreaID"
+}
+
+// MARK: AppConstants
+public enum AppConstants {
+    static var screenHeight: CGFloat {
+        UIScreen.main.bounds.height
+    }
+
+    static let horizontalPadding: CGFloat = 14
+    static let cornerRadius: CGFloat = 20
+    static let reactionViewHeight: CGFloat = 180
+    static let profileViewHeight: CGFloat = 180
+
+    // MARK: ChatInputView
+    enum ChatInputView {
+        static let textFieldEdgeInsets = EdgeInsets(top: 5, leading: 15, bottom: 8, trailing: 45)
+        static let plusImageSize: CGFloat = 15
+        static let sendImageSize: CGFloat = 30
+        static let buttonSize: CGFloat = 35
+        static let offsetMinus15: CGFloat = -15
+        static let offsetMinus12: CGFloat = -12
+        static let offset12: CGFloat = 12
+        static let micImageSize: CGFloat = 15
+        static let textFieldPadding: CGFloat = 10
+        static let sendViewPadding: CGFloat = 8
+    }
+
+    // MARK: TextFieldBorder
+    enum TextFieldBorder {
+        static let cornerRadius: CGFloat = 25
+        static let trailingPadding: CGFloat = 15
+        static let bottomPadding: CGFloat = 8
+        static let leadingPadding: CGFloat = 15
+    }
+
+    // MARK: MessageView
+    enum MessageView {
+        static let spacing: CGFloat = 10
+    }
+}
+
+// MARK: - Reaction Types
+public enum ReactionType: String, CaseIterable {
+    case love, like, dislike, laugh, exclaim, none // `none` is used as default or null
+
+    var imageName: String {
+        self == .none ? "" : self.rawValue
+    }
+}
+
+// MARK: CustomMenu
+public enum CustomMenu: String, CaseIterable {
+    case edit
+    case copy
+    case more
+
+    var localizedTitle: String {
+        return self.rawValue.capitalized
+    }
+}

@@ -1,0 +1,69 @@
+//
+//  MessageFocusViewModel.swift
+//  SSChatview
+//
+//  Created by Palak Doshi on 27/09/24.
+//
+
+import Foundation
+
+// MARK: - MessageFocusViewModel
+/// ViewModel for managing the state and actions related to a focused message, including reactions and context menu actions.
+class MessageFocusViewModel: ObservableObject {
+
+    // MARK: - Variables
+    @Published var messageResponseModel: MessageResponseModel
+    @Published private var onActionClick: (String, CustomMenu) -> Void
+    @Published private var onReactionClick: (String, ReactionType) -> Void
+    @Published private(set) var reactions: Set<ReactionType> = []
+
+    // MARK: - init
+    init(messageResponseModel: MessageResponseModel,
+         onActionClick: @escaping (String, CustomMenu) -> Void,
+         onReactionClick: @escaping (String, ReactionType) -> Void) {
+        self.messageResponseModel = messageResponseModel
+        self.onActionClick = onActionClick
+        self.onReactionClick = onReactionClick
+    }
+}
+
+// MARK: - Methods
+extension MessageFocusViewModel {
+
+    /// Toggles the visibility of a reaction based on the 'shouldShow' flag.
+    func animateReactions(_ reaction: ReactionType, shouldShow: Bool) {
+        if shouldShow {
+            reactions.insert(reaction)
+        } else {
+            reactions.remove(reaction)
+        }
+    }
+
+    /// Checks if a specific reaction is currently active.
+    func isActive(_ reaction: ReactionType) -> Bool {
+        reactions.contains(reaction)
+    }
+
+    /// Updates the reaction for the current message and triggers the corresponding action callback.
+    func updateReaction(reaction: ReactionType) {
+        onReactionClick(messageResponseModel.id, reaction)
+    }
+
+    /// Handles a custom menu action (e.g., edit, copy) for the current message.
+    func onActionClick(action: CustomMenu) {
+        onActionClick(messageResponseModel.id, action)
+    }
+
+    /// Calculates the maximum allowed height for the message based on the screen and UI elements.
+    func getMessageHeight(currentHeight: CGFloat) -> CGFloat {
+        return min(currentHeight, (AppConstants.screenHeight - AppConstants.reactionViewHeight))
+    }
+
+    /// Computes the scale factor to adjust the message's size relative to its height.
+    func getScaleFactor(messageHeight: CGFloat) -> CGFloat {
+        let baseScale: CGFloat = 1.0
+        let availableHeight = AppConstants.screenHeight - AppConstants.reactionViewHeight
+        let dynamicScale = availableHeight / messageHeight
+        return min(dynamicScale, baseScale)
+    }
+}
