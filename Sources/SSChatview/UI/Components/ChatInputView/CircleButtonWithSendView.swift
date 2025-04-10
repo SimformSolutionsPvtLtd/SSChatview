@@ -1,0 +1,44 @@
+//
+//  CircleButtonWithSendView.swift
+//  SSChatview
+//
+//  Created by Palak Doshi on 27/02/24.
+//
+
+import SwiftUI
+
+/// SwiftUI view for a circular button with a send icon.
+struct CircleButtonWithSendView: View {
+    // MARK: - Variables
+    var onSendClick: () -> Void
+
+    // MARK: - Environment
+    @Environment(\.ssChatConfig) private var config
+}
+
+// MARK: - Body
+extension CircleButtonWithSendView {
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(.white) // Filling the circle with a white color.
+                .frame(
+                    width: ChatInputViewConstants.sendImageSize,
+                    height: ChatInputViewConstants.sendImageSize
+                ) // Setting the frame size of the circle.
+            Image(systemName: config.images.sendIconName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(
+                    width: ChatInputViewConstants.sendImageSize,
+                    height: ChatInputViewConstants.sendImageSize
+                ) // Setting the frame size of the send icon.
+                .foregroundColor(.green) // Setting the color of the send icon.
+        }
+        .padding(ChatInputViewConstants.sendViewPadding) // Adding padding around the ZStack.
+        .onTapGesture {
+            onSendClick()
+        }
+    }
+}
