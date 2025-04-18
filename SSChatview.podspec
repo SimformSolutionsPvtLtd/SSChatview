@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "A highly customizable SwiftUI chat view supporting 1-on-1 chats, group chats, replies, reactions and link previews."
 
   spec.description  = <<-DESC
-                     "A highly customizable SwiftUI chat view supporting 1-on-1 chats, group chats, replies, reactions and link previews."
+                     A highly customizable SwiftUI chat view supporting 1-on-1 chats, group chats, replies, reactions and link previews.
 
   spec.homepage     = "https://github.com/SimformSolutionsPvtLtd/SSChatview"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -50,6 +50,6 @@ Pod::Spec.new do |spec|
   spec.frameworks = ['SwiftUI']
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  # spec.requires_arc = true
+  spec.requires_arc = true
 
 end
