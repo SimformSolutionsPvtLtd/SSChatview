@@ -10,7 +10,7 @@
 		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
 		83567EFB2DA8ED5600DFED9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83567EFA2DA8ED5600DFED9F /* ContentView.swift */; };
-		8384EA792DB2D75C00AE024A /* SSChatview in Frameworks */ = {isa = PBXBuildFile; productRef = 8384EA782DB2D75C00AE024A /* SSChatview */; };
+		8364C5352DB2D80D00D59989 /* SSChatview in Frameworks */ = {isa = PBXBuildFile; productRef = 8364C5342DB2D80D00D59989 /* SSChatview */; };
 		83A189F92DAE6EF4005A963A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A189F82DAE6EEB005A963A /* Constants.swift */; };
 		83A41DC92DACD72900A39C9F /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 83A41DC82DACD72900A39C9F /* RswiftLibrary */; };
 		83AC64CA2DA917EC00C7CABF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83AC64C72DA917EC00C7CABF /* Localizable.strings */; };
@@ -57,7 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83A41DC92DACD72900A39C9F /* RswiftLibrary in Frameworks */,
-				8384EA792DB2D75C00AE024A /* SSChatview in Frameworks */,
+				8364C5352DB2D80D00D59989 /* SSChatview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,14 +485,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8364C5342DB2D80D00D59989 /* SSChatview */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SSChatview;
+		};
 		8371C9D82DB2D0FB00B90A6A /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 83A41DC72DACD72900A39C9F /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = "plugin:RswiftGenerateInternalResources";
-		};
-		8384EA782DB2D75C00AE024A /* SSChatview */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SSChatview;
 		};
 		83A41DC82DACD72900A39C9F /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
