@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SSChatview
+
+  Created by Palak Doshi on 15/04/25.
+  
+*/
+
+// MARK: App Strings
+"cancelText"                        = "Cancel";
+"deleteText"                        = "Delete";
+"messageText"                       = "Message";
+"editedText"                        = "Edited";
+"hideEditsText"                     = "Hide Edits";
+
+// MARK: Profile Constants
+"profileName"                       = "Test";
+
+// MARK: Message Text
+"smsText"                           = "SMS";
+"noMessagesText"                    = "No Messages";
+"messagesDesc"                      = "Messages you send or receive will appear here.";
