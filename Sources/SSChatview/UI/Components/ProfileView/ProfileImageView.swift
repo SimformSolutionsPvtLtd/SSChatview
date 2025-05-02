@@ -13,7 +13,7 @@ struct ProfileImageView: View {
 
     // MARK: - Variables
     var userName: String
-    var userProfileImage: String
+    let userProfileImage: String?
     @Binding var isPresented: Bool
     @Binding var shouldShowSelectionView: Bool
     var onCancelTap: () -> Void
@@ -21,6 +21,15 @@ struct ProfileImageView: View {
 
     // MARK: - Environment
     @Environment(\.ssChatConfig) private var config
+
+    // MARK: - Computed property
+    var displayImage: String {
+        if let userProfileImage, !userProfileImage.isEmpty {
+            return userProfileImage
+        } else {
+            return config.images.profileImage
+        }
+    }
 }
 
 // MARK: - Body
@@ -49,7 +58,7 @@ extension ProfileImageView {
     private var profileHeaderView: some View {
         ZStack(alignment: .trailing) {
             VStack(alignment: .center) {
-                Image.ssImage(userProfileImage)
+                Image.ssImage(displayImage)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 80, height: 80)
