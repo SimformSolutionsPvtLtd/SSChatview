@@ -12,6 +12,7 @@ public struct ChatScreenView: View {
 
     // MARK: - Environment
     @Environment(\.ssChatConfig) private var config
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     // MARK: - Bindings
     @Binding var messageArray: [MessageResponseModel]
@@ -27,6 +28,7 @@ public struct ChatScreenView: View {
     @State private var shouldShowDelete: Bool = false
     @State private var messageViewHeight: CGFloat = 0.0
     @State private var isLongMessage: Bool = false
+    @State private var isWideMessage: Bool = false
 
     // MARK: - Dependencies
     var userName: String
@@ -40,6 +42,10 @@ public struct ChatScreenView: View {
             .first?.windows
             .first(where: { $0.isKeyWindow })?
             .safeAreaInsets.top ?? 0
+    }
+
+    private var isPortrait: Bool {
+        verticalSizeClass == .regular
     }
 
     // MARK: - Init
@@ -107,7 +113,7 @@ extension ChatScreenView {
                         viewModel.editMessageID = ""
                     }
                 }
-                .trackHeight($messageViewHeight)
+                .trackSize(width: nil, height: $messageViewHeight)
 
                 if viewModel.shouldShowSelectionView {
                     ZStack(alignment: .bottom) {
@@ -139,7 +145,7 @@ extension ChatScreenView {
             .moveContentAboveKeyboard()
             .blur(radius: isBlurred ? 10 : 0)
 
-            if isLongMessage && isBlurred {
+            if (isLongMessage || isWideMessage) && isBlurred {
                 config.colors.primaryBackground
                     .ignoresSafeArea()
             }
@@ -157,6 +163,9 @@ extension ChatScreenView {
         .onTapGesture {
             isBlurred = false
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            isBlurred = false
+        }
     }
 }
 
@@ -168,9 +177,13 @@ extension ChatScreenView {
         VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
             if isLongMessage {
                 Spacer(minLength: 60)
-            } else {
+            } else if isPortrait {
                 Spacer()
                     .frame(maxHeight: (longPressPosition.y - 72) > 0 ? (longPressPosition.y - 72) : .infinity)
+            } else {
+                let offset: CGFloat = longPressPosition.y < 70 ? (longPressPosition.y + 52) : (longPressPosition.y - 12)
+                Spacer()
+                    .frame(maxHeight: (longPressPosition.y + 12) > 0 ? offset : .infinity)
             }
             MessageFocusView(
                 viewModel: .init(
@@ -180,12 +193,15 @@ extension ChatScreenView {
                         viewModel.messageActionClick(messageID: messageID, action: action)
                     },
                     onReactionClick: { messageID, reaction in
-                        viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
+                        if reaction != .none {
+                            viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
+                        }
                         isBlurred = false
                     }
                 ),
                 messageViewHeight: $messageViewHeight,
-                isLongMessage: $isLongMessage
+                isLongMessage: $isLongMessage,
+                isWideMessage: $isWideMessage
             )
         }
 
@@ -193,34 +209,43 @@ extension ChatScreenView {
     }
 
     // MARK: - DeleteBottomSheetView
-    private var deleteBottomSheetView: some View {
-        VStack(spacing: 8) {
-            Button(action: {
-                shouldShowDelete = false
-                viewModel.deleteSelectedMessages()
-            }, label: {
-                Text(viewModel.getDeleteMessageCount())
-                    .frame(maxWidth: .infinity, maxHeight: 60)
-                    .background(config.colors.deleteAlertBackground)
-                    .foregroundColor(.red)
-                    .font(.headline)
-                    .cornerRadius(10)
-            })
+    public var deleteBottomSheetView: some View {
+        GeometryReader { geometry in
+            let isPortrait = geometry.size.height > geometry.size.width
+            let maxButtonWidth: CGFloat? = isPortrait ? nil : 350
+            VStack {
+                Spacer()
 
-            Button(action: {
-                withAnimation {
-                    shouldShowDelete = false
+                VStack(spacing: 12) {
+                    Button(action: {
+                        shouldShowDelete = false
+                        viewModel.deleteSelectedMessages()
+                    }) {
+                        Text(viewModel.getDeleteMessageCount())
+                            .frame(maxWidth: maxButtonWidth ?? .infinity, maxHeight: 60)
+                            .background(config.colors.deleteAlertBackground)
+                            .foregroundColor(.red)
+                            .font(.headline)
+                            .cornerRadius(10)
+                    }
+
+                    Button(action: {
+                        withAnimation {
+                            shouldShowDelete = false
+                        }
+                    }) {
+                        Text(config.strings.cancelText)
+                            .frame(maxWidth: maxButtonWidth ?? .infinity, maxHeight: 60)
+                            .background(config.colors.deleteAlertBackground)
+                            .foregroundColor(.blue)
+                            .font(.headline)
+                            .cornerRadius(10)
+                    }
                 }
-            }, label: {
-                Text(config.strings.cancelText)
-                    .frame(maxWidth: .infinity, maxHeight: 60)
-                    .background(config.colors.deleteAlertBackground)
-                    .foregroundColor(.blue)
-                    .font(.headline)
-                    .cornerRadius(10)
-            })
+                .padding(.horizontal)
+                .padding(.bottom, 16)
+            }
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity)
-        .padding()
     }
 }

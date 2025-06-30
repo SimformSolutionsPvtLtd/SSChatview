@@ -216,16 +216,17 @@ extension MessageCell {
                     Image.ssImage(reaction)
                         .padding(8)
                         .frame(width: 40, height: 40)
-                        .background(config.colors.primaryBorder)
+                        .foregroundColor(.white)
+                        .background(config.colors.selectedReactionBackground)
                         .clipShape(Circle())
 
                     Circle()
-                        .foregroundColor(config.colors.primaryBorder)
+                        .foregroundColor(config.colors.selectedReactionBackground)
                         .offset(y: 5)
                         .frame(width: 12, height: 12)
 
                     Circle()
-                        .foregroundColor(config.colors.primaryBorder)
+                        .foregroundColor(config.colors.selectedReactionBackground)
                         .frame(width: 6, height: 6)
                         .offset(x: currentMessage.isCurrentUser ? -5 : 5, y: 10)
                 }

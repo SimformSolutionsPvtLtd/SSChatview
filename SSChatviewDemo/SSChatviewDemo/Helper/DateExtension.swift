@@ -13,15 +13,19 @@ extension Date {
     /// Generates a random time earlier today.
     /// - Returns: A `Date` object with a random hour and minute before the current time today.
     static func randomPastTimeToday() -> Date {
-        let now = Date.now
+        let now = Date()
         let calendar = Calendar.current
+        let currentHour = calendar.component(.hour, from: now)
 
-        // Generate a random hour less than the current hour to ensure it's in the past
-        let hour = Int.random(in: 0..<calendar.component(.hour, from: now))
-        let minute = Int.random(in: 0..<60)
+        // If it's midnight (hour == 0), return now or fallback to a fixed earlier time (e.g., 11:59 PM yesterday)
+        guard currentHour > 0 else {
+            return calendar.date(byAdding: .minute, value: -1, to: now) ?? now
+        }
 
-        // Set the generated hour and minute for today's date
-        return calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now)!
+        let randomHour = Int.random(in: 0..<currentHour)
+        let randomMinute = Int.random(in: 0..<60)
+
+        return calendar.date(bySettingHour: randomHour, minute: randomMinute, second: 0, of: now) ?? now
     }
 
     /// Generates a random past date and time from earlier in the current week.
@@ -30,18 +34,22 @@ extension Date {
         let calendar = Calendar.current
         let now = Date()
 
-        // Determine today's weekday (1 = Sunday, 7 = Saturday)
         let weekdayToday = calendar.component(.weekday, from: now)
 
-        // Pick a random offset from earlier days of this week (excluding today)
-        let randomDayOffset = Int.random(in: 1..<weekdayToday)
+        // If today is Sunday (1), there's no earlier day this week — return a fallback like "yesterday"
+        guard weekdayToday > 1 else {
+            return calendar.date(byAdding: .day, value: -1, to: now) ?? now
+        }
 
-        // Generate a random hour and minute
+        // Pick a random day earlier this week
+        let randomDayOffset = Int.random(in: 1..<weekdayToday)
+        guard let randomDate = calendar.date(byAdding: .day, value: -randomDayOffset, to: now) else {
+            return now
+        }
+
         let hour = Int.random(in: 0..<24)
         let minute = Int.random(in: 0..<60)
 
-        // Create a date by subtracting the random offset in days, and setting random time
-        let randomDate = calendar.date(byAdding: .day, value: -randomDayOffset, to: now)!
-        return calendar.date(bySettingHour: hour, minute: minute, second: 0, of: randomDate)!
+        return calendar.date(bySettingHour: hour, minute: minute, second: 0, of: randomDate) ?? randomDate
     }
 }

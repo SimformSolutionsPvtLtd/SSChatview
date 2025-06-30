@@ -21,14 +21,19 @@ struct ProfileImageView: View {
 
     // MARK: - Environment
     @Environment(\.ssChatConfig) private var config
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     // MARK: - Computed property
-    var displayImage: String {
+    private var displayImage: String {
         if let userProfileImage, !userProfileImage.isEmpty {
             return userProfileImage
         } else {
             return config.images.profileImage
         }
+    }
+
+    private var isPortrait: Bool {
+        verticalSizeClass == .regular
     }
 }
 
@@ -58,11 +63,13 @@ extension ProfileImageView {
     private var profileHeaderView: some View {
         ZStack(alignment: .trailing) {
             VStack(alignment: .center) {
-                Image.ssImage(displayImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
+                if isPortrait {
+                    Image.ssImage(displayImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                }
 
                 HStack(alignment: .center, spacing: 2) {
                     Text(userName)
@@ -72,7 +79,7 @@ extension ProfileImageView {
                         .font(config.fonts.small)
                         .foregroundColor(.gray)
                 }
-                .padding(.bottom, 10)
+                .padding(.vertical, 4)
             }
             .onTapGesture {
                 onProfileTap()
@@ -91,7 +98,7 @@ extension ProfileImageView {
                         .font(config.fonts.regular)
                 })
                 .padding(.trailing, 16)
-                .padding(.bottom, 10)
+                .padding(.vertical, 5)
             }
         }
         .frame(maxWidth: .infinity)

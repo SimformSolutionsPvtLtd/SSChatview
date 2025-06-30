@@ -19,11 +19,16 @@ public enum AppConstants {
     static var screenHeight: CGFloat {
         UIScreen.main.bounds.height
     }
+    static var screenWidth: CGFloat {
+        UIScreen.main.bounds.width
+    }
 
     static let horizontalPadding: CGFloat = 14
     static let cornerRadius: CGFloat = 20
     static let reactionViewHeight: CGFloat = 180
     static let profileViewHeight: CGFloat = 180
+    static let contentViewWidth: CGFloat = 220
+    static let reactionViewWidth: CGFloat = 286
 
     // MARK: ChatInputView
     enum ChatInputView {

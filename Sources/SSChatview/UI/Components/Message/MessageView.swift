@@ -38,8 +38,11 @@ extension MessageView {
             scrollID: $editMessageID
         ) {
             if messages.isEmpty {
-                Spacer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack {
+                    Spacer(minLength: AppConstants.screenHeight / 4)
+                    NoMessageView()
+                }
+                .frame(maxWidth: .infinity)
             } else {
                 messageList
             }
@@ -68,8 +71,7 @@ extension MessageView {
 extension MessageView {
     private var messageList: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ForEach(messages.indices, id: \.self) { index in
-                let message = messages[index]
+            ForEach(Array(messages.enumerated()), id: \.element.id) { index, message in
 
                 if shouldShowDateHeader(for: message, at: index) {
                     DateHeaderView(date: message.timestamp)
