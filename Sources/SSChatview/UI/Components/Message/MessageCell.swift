@@ -56,7 +56,6 @@ extension MessageCell {
         ZStack(alignment: currentMessage.isCurrentUser ? .topLeading : .topTrailing) {
             if currentMessage.id == editMessageID {
                 editMessageContent
-                    .padding(.top, 20)
             } else {
                 HStack {
                     if currentMessage.isCurrentUser { Spacer() }
@@ -185,7 +184,7 @@ extension MessageCell {
                         self.keyboardHeight = height
                     }
                 }
-                .lineLimit(max(Int(maxTextFieldHeight() / AppConstants.messageLineHeight) - 1, 2))
+                .lineLimit(max(Int(maxTextFieldHeight() / AppConstants.messageLineHeight) - 1, 1))
 
             // Check Button
             Button(action: {

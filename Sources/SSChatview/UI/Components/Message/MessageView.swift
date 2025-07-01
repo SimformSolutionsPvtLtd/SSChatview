@@ -76,7 +76,7 @@ extension MessageView {
     /// Overlay view that appears when user is not at bottom or has unread messages.
     private var scrollToBottomOverlayView: some View {
         Group {
-            if !viewModel.isAtBottom || viewModel.unreadMessageCount > 0 {
+            if (!viewModel.isAtBottom || viewModel.unreadMessageCount > 0) && editMessageID.isEmpty {
                 ScrollToBottomView(
                     unreadMessageCount: viewModel.unreadMessageCount,
                     onScrollToBottomTap: {
