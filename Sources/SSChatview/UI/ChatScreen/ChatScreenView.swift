@@ -144,7 +144,7 @@ extension ChatScreenView {
                         }
                     }
                 } else {
-                    if viewModel.editMessageID.isEmpty || isPortrait {
+                    if viewModel.editMessageID.isEmpty {
                         ChatInputView(
                             message: $currentMessage,
                             isBlurred: $isBlurred

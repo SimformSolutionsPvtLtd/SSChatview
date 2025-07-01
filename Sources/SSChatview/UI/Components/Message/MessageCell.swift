@@ -185,7 +185,7 @@ extension MessageCell {
                         self.keyboardHeight = height
                     }
                 }
-                .lineLimit(max(Int(maxTextFieldHeight() / AppConstants.messageLineHeight) - 1, 1))
+                .lineLimit(max(Int(maxTextFieldHeight() / AppConstants.messageLineHeight) - 1, 2))
 
             // Check Button
             Button(action: {
@@ -256,7 +256,7 @@ extension MessageCell {
     }
 
     private func maxTextFieldHeight() -> CGFloat {
-        AppConstants.screenHeight - keyboardHeight - AppConstants.chatInputHeight - AppConstants.profileViewHeight(isPortrait: isPortrait) - (isPortrait ? 0 : 8)
+        AppConstants.screenHeight - keyboardHeight - AppConstants.profileViewHeight(isPortrait: isPortrait)
     }
 
     // MARK: - Edited Message Context Menu
