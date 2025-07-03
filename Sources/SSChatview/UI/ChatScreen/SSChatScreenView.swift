@@ -1,5 +1,5 @@
 //
-//  ChatScreenView.swift
+//  SSChatScreenView.swift
 //  SSChatview
 //
 //  Created by Palak Doshi on 22/02/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A view representing the chat screen, which includes a profile image, message list, and input field.
-public struct ChatScreenView: View {
+public struct SSChatScreenView: View {
 
     // MARK: - Environment
     @Environment(\.ssChatConfig) private var config
@@ -72,7 +72,7 @@ public struct ChatScreenView: View {
 }
 
 // MARK: - Body
-extension ChatScreenView {
+extension SSChatScreenView {
     public var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(spacing: 0) {
@@ -184,8 +184,8 @@ extension ChatScreenView {
     }
 }
 
-// MARK: - ChatScreenView Extension
-extension ChatScreenView {
+// MARK: - SSChatScreenView Extension
+extension SSChatScreenView {
 
     // MARK: - MessageFocusView
     private func messsageActionView(selectedMessage: MessageResponseModel) -> some View {

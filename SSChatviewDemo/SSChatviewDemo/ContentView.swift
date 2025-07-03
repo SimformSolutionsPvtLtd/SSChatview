@@ -32,7 +32,7 @@ extension ContentView {
     var body: some View {
         VStack {
             // Displays chat UI with user details, message list, and view model as delegate for actions.
-            ChatScreenView(
+            SSChatScreenView(
                 delegate: viewModel,
                 messageArray: $viewModel.messageArray,
                 userName: userName,

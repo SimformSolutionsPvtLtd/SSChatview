@@ -59,7 +59,7 @@ extension SSChatStrings {
         #if SWIFT_PACKAGE
         return NSLocalizedString(key, bundle: .module, comment: "")
         #else
-        return NSLocalizedString(key, bundle: .sschatview, comment: "")
+        return NSLocalizedString(key, bundle: Bundle(), comment: "")
         #endif
     }
 }
