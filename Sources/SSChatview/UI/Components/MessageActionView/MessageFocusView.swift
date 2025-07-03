@@ -167,27 +167,26 @@ private extension MessageFocusView {
 private extension MessageFocusView {
     var customContextMenuView: some View {
         VStack(spacing: 8) {
-            ForEach(CustomMenu.allCases.filter { $0 != .edit ||
-                isCurrentUser && viewModel.messageResponseModel.editedMessages.count < 5 }, id: \.self) { action in
-                    Button(action: {
-                        viewModel.onActionClick(action: action)
-                        animateReactionView(shouldShow: false)
-                    }, label: {
-                        HStack {
-                            Text(action.localizedTitle)
-                                .foregroundColor(config.colors.textColor)
-                            Spacer()
-                            Image.ssImage(iconName(for: action))
-                                .foregroundColor(config.colors.textColor)
-                        }
-                    })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-
-                    if action != .more {
-                        customDivider()
+            ForEach(viewModel.filteredMenuActions(), id: \.self) { action in
+                Button(action: {
+                    viewModel.onActionClick(action: action)
+                    animateReactionView(shouldShow: false)
+                }, label: {
+                    HStack {
+                        Text(localizedTitle(for: action))
+                            .foregroundColor(config.colors.textColor)
+                        Spacer()
+                        Image.ssImage(iconName(for: action))
+                            .foregroundColor(config.colors.textColor)
                     }
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+
+                if action != .more {
+                    customDivider()
                 }
+            }
         }
         .padding(.vertical)
         .background(
@@ -203,8 +202,18 @@ private extension MessageFocusView {
     func iconName(for action: CustomMenu) -> String {
         switch action {
         case .edit: return config.images.edit
+        case .undoSend: return config.images.undoSend
         case .copy: return config.images.copy
         case .more: return config.images.more
+        }
+    }
+
+    func localizedTitle(for action: CustomMenu) -> String {
+        switch action {
+        case .undoSend:
+            return config.strings.undoSendText
+        default:
+            return action.rawValue.capitalized
         }
     }
 }
@@ -258,7 +267,16 @@ private extension MessageFocusView {
     }
 
     var reactionXOffset: CGFloat {
-        viewModel.reactionXOffset(messageWidth: messageWidth)
+        let longMessageScaleFactor = viewModel.getScaleFactor(
+            messageHeight: messageHeight,
+            messageWidth: messageWidth,
+            isWideMessage: isWideMessage
+        )
+        return viewModel.reactionXOffset(
+            messageWidth: messageWidth,
+            scaleFactor: longMessageScaleFactor,
+            isPortrait: isPortrait
+        )
     }
 
     var inverseScaleFactor: CGFloat {

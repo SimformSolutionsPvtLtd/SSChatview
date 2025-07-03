@@ -47,7 +47,7 @@ extension MessageView {
         .overlay(scrollToBottomOverlayView, alignment: .bottomTrailing)
         .gesture(showTimestampGesture)
         .onChange(of: messages.count) {
-            viewModel.handleMessageListUpdate(currentMessages: messages)
+            viewModel.handleMessageListUpdate(currentMessages: messages, editMessageID: editMessageID)
         }
         .onChange(of: shouldShowSelectionView) { _, newValue in
             if !newValue { selectedMessageIDs.removeAll() }
@@ -76,12 +76,13 @@ extension MessageView {
     /// Overlay view that appears when user is not at bottom or has unread messages.
     private var scrollToBottomOverlayView: some View {
         Group {
-            if !viewModel.isAtBottom || viewModel.unreadMessageCount > 0 {
+            if (!viewModel.isAtBottom || viewModel.unreadMessageCount > 0) && editMessageID.isEmpty {
                 ScrollToBottomView(
                     unreadMessageCount: viewModel.unreadMessageCount,
                     onScrollToBottomTap: {
                         viewModel.scrollToBottom = true
                         viewModel.unreadMessageCount = 0
+                        editMessageID = ""
                     }
                 )
             }

@@ -29,10 +29,13 @@ public enum AppConstants {
     static let contentViewWidth: CGFloat = 220
     static let reactionViewWidth: CGFloat = 286
     static let chatInputHeight: CGFloat = 60
+    static var portraitProfileViewHeight: CGFloat = 0
 
     static func profileViewHeight(isPortrait: Bool) -> CGFloat {
-        isPortrait ? 180 : 30
+        return isPortrait ? portraitProfileViewHeight : 33
     }
+
+    static let messageLineHeight = UIFont.systemFont(ofSize: SystemFontSize.regular).lineHeight + 8
 
     // MARK: ChatInputView
     enum ChatInputView {
@@ -74,10 +77,7 @@ public enum ReactionType: String, CaseIterable {
 // MARK: CustomMenu
 public enum CustomMenu: String, CaseIterable {
     case edit
+    case undoSend
     case copy
     case more
-
-    var localizedTitle: String {
-        return self.rawValue.capitalized
-    }
 }

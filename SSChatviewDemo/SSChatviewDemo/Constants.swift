@@ -29,4 +29,5 @@ enum ChatEventType {
     case add, delete, react, edit
 }
 
+// MARK: - UserInfo
 let userName = "Test User"

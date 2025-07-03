@@ -53,6 +53,8 @@ struct CustomScrollView<Content: View>: View, KeyboardReadable {
     @State private var contentHeight: CGFloat = 0
     @State private var userManuallyScrolled = false
     @State private var programmaticScroll = false
+    @State private var lastKeyboardHeight: CGFloat = 0
+    @State private var textfieldHeight: CGFloat = 0
 
     @ViewBuilder let content: Content
 
@@ -62,6 +64,12 @@ struct CustomScrollView<Content: View>: View, KeyboardReadable {
 
     private var isPortrait: Bool {
         verticalSizeClass == .regular
+    }
+
+    private var visibleContentHeight: CGFloat {
+        AppConstants.screenHeight
+        - AppConstants.profileViewHeight(isPortrait: isPortrait)
+        - AppConstants.chatInputHeight
     }
 }
 
@@ -124,12 +132,16 @@ extension CustomScrollView {
                     handleKeyboardVisibilityChange(visible: keyboardVisible)
                 }
             }
-            .onReceive(HeightChangePublisher.heightChangePublisher) { _ in
+            .onReceive(HeightChangePublisher.heightChangePublisher) { height in
+                textfieldHeight = height
                 if isKeyboardVisible && !scrollID.isEmpty {
                     withAnimation {
                         scrollToDisplayScrollID(scrollView: scrollView)
                     }
                 }
+            }
+            .onReceive(keyboardHeightPublisher) { currentKeyboardHeight in
+                handleKeyboardHeightChange(currentKeyboardHeight, scrollView: scrollView)
             }
         }
         .onAppear {
@@ -143,6 +155,14 @@ extension CustomScrollView {
     /// Scrolls to the expanded text field, ensuring it’s visible above the keyboard
     private func scrollToDisplayScrollID(scrollView: ScrollViewProxy) {
         scrollView.scrollTo(scrollID, anchor: .bottom)
+
+        let totalBottomInset = lastKeyboardHeight + textfieldHeight + 30
+
+        if totalBottomInset > visibleContentHeight {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                scrollView.scrollTo(scrollID, anchor: .bottom) // Reveal message hidden by keyboard
+            }
+        }
     }
 }
 
@@ -154,6 +174,17 @@ extension CustomScrollView {
         if visible {
             scrollToBottom = true  // Trigger scroll to bottom when the keyboard is shown
             isKeyboardTriggeredScroll = true
+        }
+    }
+
+    /// Handles significant keyboard height changes and triggers scroll to the latest visible message.
+    private func handleKeyboardHeightChange(_ currentHeight: CGFloat, scrollView: ScrollViewProxy) {
+        let heightChangedSignificantly = abs(currentHeight - lastKeyboardHeight) > 30
+        guard heightChangedSignificantly else { return }
+
+        lastKeyboardHeight = currentHeight
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            scrollToDisplayScrollID(scrollView: scrollView)
         }
     }
 }
@@ -185,11 +216,7 @@ extension CustomScrollView {
     }
 
     private func evaluateScrollPosition() {
-        let viewportHeight = AppConstants.screenHeight
-        - AppConstants.profileViewHeight(isPortrait: isPortrait)
-        - AppConstants.chatInputHeight
-
-        let currentVisibleHeight = abs(scrollOffset) + viewportHeight
+        let currentVisibleHeight = abs(scrollOffset) + visibleContentHeight
         let distanceFromBottom = contentHeight - currentVisibleHeight
 
         let isAtBottom = distanceFromBottom <= 20

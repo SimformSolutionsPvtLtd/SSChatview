@@ -23,19 +23,24 @@ final class MessageViewModel: ObservableObject {
 extension MessageViewModel {
 
     /// Handles updates to the message list and manages scroll state and unread count.
-    func handleMessageListUpdate(currentMessages: [MessageResponseModel]) {
+    func handleMessageListUpdate(currentMessages: [MessageResponseModel], editMessageID: String) {
+        let isEditing = !editMessageID.isEmpty
         guard previousMessageCount <= currentMessages.count else {
             previousMessageCount = currentMessages.count
             return
         }
 
         let newMessages = currentMessages.suffix(from: previousMessageCount)
+        let receivedMessages = newMessages.filter { !$0.isCurrentUser }
 
-        if isAtBottom || newMessages.allSatisfy({ $0.isCurrentUser }) {
+        if isEditing {
+            scrollToBottom = false
+            unreadMessageCount += receivedMessages.count
+        } else if isAtBottom || newMessages.allSatisfy({ $0.isCurrentUser }) {
             scrollToBottom = true
             unreadMessageCount = 0
         } else {
-            unreadMessageCount += newMessages.filter { !$0.isCurrentUser }.count
+            unreadMessageCount += receivedMessages.count
             scrollToBottom = false
         }
 

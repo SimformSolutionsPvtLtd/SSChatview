@@ -56,7 +56,6 @@ extension MessageCell {
         ZStack(alignment: currentMessage.isCurrentUser ? .topLeading : .topTrailing) {
             if currentMessage.id == editMessageID {
                 editMessageContent
-                    .padding(.vertical, 14)
             } else {
                 HStack {
                     if currentMessage.isCurrentUser { Spacer() }
@@ -185,7 +184,7 @@ extension MessageCell {
                         self.keyboardHeight = height
                     }
                 }
-                .lineLimit(Int(maxTextFieldHeight()/40))
+                .lineLimit(max(Int(maxTextFieldHeight() / AppConstants.messageLineHeight) - 1, 1))
 
             // Check Button
             Button(action: {
@@ -256,7 +255,7 @@ extension MessageCell {
     }
 
     private func maxTextFieldHeight() -> CGFloat {
-        AppConstants.screenHeight - keyboardHeight - AppConstants.profileViewHeight(isPortrait: isPortrait) // Prevents overlap with keyboard
+        AppConstants.screenHeight - keyboardHeight - AppConstants.profileViewHeight(isPortrait: isPortrait)
     }
 
     // MARK: - Edited Message Context Menu

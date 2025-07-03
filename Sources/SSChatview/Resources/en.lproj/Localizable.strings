@@ -12,6 +12,7 @@
 "messageText"                       = "Message";
 "editedText"                        = "Edited";
 "hideEditsText"                     = "Hide Edits";
+"undoSendText"                      = "Undo Send";
 
 // MARK: Profile Constants
 "profileName"                       = "Test";

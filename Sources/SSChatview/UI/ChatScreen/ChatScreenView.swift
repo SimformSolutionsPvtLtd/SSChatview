@@ -29,6 +29,7 @@ public struct ChatScreenView: View {
     @State private var messageViewHeight: CGFloat = 0.0
     @State private var isLongMessage: Bool = false
     @State private var isWideMessage: Bool = false
+    @State private var profileViewHeight: CGFloat = 0
 
     // MARK: - Dependencies
     var userName: String
@@ -74,7 +75,7 @@ public struct ChatScreenView: View {
 extension ChatScreenView {
     public var body: some View {
         ZStack(alignment: .topTrailing) {
-            VStack {
+            VStack(spacing: 0) {
                 ProfileImageView(userName: userName,
                                  userProfileImage: userProfileImage,
                                  isPresented: $isProfilePresented,
@@ -90,6 +91,17 @@ extension ChatScreenView {
                 })
                 .padding(.top, topPadding)
                 .disabledWithOpacity(isBlurred)
+                .trackSize(width: nil, height: $profileViewHeight)
+                .onChange(of: profileViewHeight) { _, profileViewHeight in
+                    if isPortrait && AppConstants.portraitProfileViewHeight == 0 && profileViewHeight > 0 {
+                        AppConstants.portraitProfileViewHeight = profileViewHeight
+                    }
+                }
+                .onChange(of: verticalSizeClass) {
+                    if isPortrait, AppConstants.portraitProfileViewHeight == 0, profileViewHeight > 0 {
+                        AppConstants.portraitProfileViewHeight = profileViewHeight
+                    }
+                }
 
                 MessageView(
                     messages: $messageArray,
@@ -101,6 +113,7 @@ extension ChatScreenView {
                         self.longPressPosition = position
                         viewModel.selectedMessage = model
                         viewModel.editMessageID = ""
+                        viewModel.undoSentMessageID = model.id
                     }, onMessageEdit: { messageID, editedMessage in
                         viewModel.updateEditedMessage(messageID: messageID, editedMessage: editedMessage)
                     }
@@ -131,15 +144,17 @@ extension ChatScreenView {
                         }
                     }
                 } else {
-                    ChatInputView(
-                        message: $currentMessage,
-                        isBlurred: $isBlurred
-                    ) {
-                        viewModel.sendMessage(currentMessage)
-                        currentMessage = ""
+                    if viewModel.editMessageID.isEmpty {
+                        ChatInputView(
+                            message: $currentMessage,
+                            isBlurred: $isBlurred
+                        ) {
+                            viewModel.sendMessage(currentMessage)
+                            currentMessage = ""
+                        }
+                        .disabledWithOpacity(!viewModel.editMessageID.isEmpty)
+                        .layoutPriority(currentMessage.isEmpty ? 0 : 1)
                     }
-                    .disabledWithOpacity(!viewModel.editMessageID.isEmpty)
-                    .layoutPriority(currentMessage.isEmpty ? 0 : 1)
                 }
             }
             .moveContentAboveKeyboard()
@@ -176,10 +191,10 @@ extension ChatScreenView {
     private func messsageActionView(selectedMessage: MessageResponseModel) -> some View {
         VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
             if isLongMessage {
-                Spacer(minLength: 60)
+                Spacer(minLength: AppConstants.reactionViewHeight - 60)
             } else if isPortrait {
                 Spacer()
-                    .frame(maxHeight: (longPressPosition.y - 72) > 0 ? (longPressPosition.y - 72) : .infinity)
+                    .frame(maxHeight: (longPressPosition.y - 12) > 0 ? (longPressPosition.y - 12) : .infinity)
             } else {
                 let offset: CGFloat = longPressPosition.y < 70 ? (longPressPosition.y + 52) : (longPressPosition.y - 12)
                 Spacer()
@@ -215,37 +230,44 @@ extension ChatScreenView {
             let maxButtonWidth: CGFloat? = isPortrait ? nil : 350
             VStack {
                 Spacer()
-
                 VStack(spacing: 12) {
-                    Button(action: {
-                        shouldShowDelete = false
-                        viewModel.deleteSelectedMessages()
-                    }) {
-                        Text(viewModel.getDeleteMessageCount())
-                            .frame(maxWidth: maxButtonWidth ?? .infinity, maxHeight: 60)
-                            .background(config.colors.deleteAlertBackground)
-                            .foregroundColor(.red)
-                            .font(.headline)
-                            .cornerRadius(10)
-                    }
-
-                    Button(action: {
-                        withAnimation {
-                            shouldShowDelete = false
-                        }
-                    }) {
-                        Text(config.strings.cancelText)
-                            .frame(maxWidth: maxButtonWidth ?? .infinity, maxHeight: 60)
-                            .background(config.colors.deleteAlertBackground)
-                            .foregroundColor(.blue)
-                            .font(.headline)
-                            .cornerRadius(10)
-                    }
+                    deleteButton(maxWidth: maxButtonWidth)
+                    cancelButton(maxWidth: maxButtonWidth)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 16)
             }
             .frame(maxWidth: .infinity)
+        }
+    }
+
+    // MARK: - Methods
+    private func deleteButton(maxWidth: CGFloat?) -> some View {
+        Button(action: {
+            shouldShowDelete = false
+            viewModel.deleteSelectedMessages()
+        }) {
+            Text(viewModel.getDeleteMessageCount())
+                .frame(maxWidth: maxWidth ?? .infinity, maxHeight: 60)
+                .background(config.colors.deleteAlertBackground)
+                .foregroundColor(.red)
+                .font(.headline)
+                .cornerRadius(10)
+        }
+    }
+
+    private func cancelButton(maxWidth: CGFloat?) -> some View {
+        Button(action: {
+            withAnimation {
+                shouldShowDelete = false
+            }
+        }) {
+            Text(config.strings.cancelText)
+                .frame(maxWidth: maxWidth ?? .infinity, maxHeight: 60)
+                .background(config.colors.deleteAlertBackground)
+                .foregroundColor(.blue)
+                .font(.headline)
+                .cornerRadius(10)
         }
     }
 }

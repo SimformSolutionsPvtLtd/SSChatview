@@ -62,7 +62,7 @@ extension ProfileImageView {
 extension ProfileImageView {
     private var profileHeaderView: some View {
         ZStack(alignment: .trailing) {
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 0) {
                 if isPortrait {
                     Image.ssImage(displayImage)
                         .resizable()
