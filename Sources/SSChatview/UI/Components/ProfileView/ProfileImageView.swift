@@ -64,8 +64,7 @@ extension ProfileImageView {
         ZStack(alignment: .trailing) {
             VStack(alignment: .center, spacing: 0) {
                 if isPortrait {
-                    Image.ssImage(displayImage)
-                        .resizable()
+                    SSProfileImageView(name: displayImage)
                         .scaledToFill()
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
