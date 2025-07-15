@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "SSChatview"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.0"
   spec.summary      = "A highly customizable SwiftUI chat view which supports feature-rich chat interface."
 
   spec.description  = <<-DESC
