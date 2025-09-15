@@ -1,0 +1,31 @@
+/*
+ Localizable.strings
+ SSChatview
+
+ Created by Palak Doshi on 01/08/23.
+
+ */
+// MARK: - Chat Labels
+"smsText" = "iMessage";
+
+// MARK: - Message Text
+"helloText"                     = "Hello!";
+"helloReplyText"                = "Hi, there!";
+
+"shortLoremText1"               = "Lorem ipsum dolor sit amet.";
+"shortLoremText2"               = "Lorem ipsum dolor sit amet, consectetur adipiscing.";
+"mediumLoremText"               = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Curabitur vehicula urna at nunc varius, quis lacinia felis ullamcorper. Ut tincidunt arcu at purus tincidunt, nec auctor nisl auctor.";
+"briefLoremText"                = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.";
+
+"extendedLoremText"             = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+"longLoremText1"                = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+"singleNumberText2"            = "2";
+"editedNumberText2_1"          = "2-1";
+"editedNumberText2_2"          = "2-2";
+
+"singleNumberText3"            = "3";
+"editedNumberText3_1"          = "3-1";
+"editedNumberText3_2"          = "3-2";
+"editedNumberText3_3"          = "3-3";
