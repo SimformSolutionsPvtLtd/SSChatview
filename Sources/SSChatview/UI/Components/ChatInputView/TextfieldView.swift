@@ -31,13 +31,14 @@ extension TextfieldView {
             ) // Displaying a vertical text input field.
             .font(config.fonts.regular)
             .padding(AppConstants.ChatInputView.textFieldPadding)
-            .gesture(
+            .simultaneousGesture(
                 DragGesture()
                     .onChanged { gesture in
                         dragOffset = gesture.translation
                     }
-                    .onEnded { _ in
-                        if dragOffset.height > 50 {
+                    .onEnded { gesture in
+                        let dragThreshold: CGFloat = messageText.count > 100 ? 30 : 50
+                        if gesture.translation.height > dragThreshold {
                             dismissKeyboard()
                         }
                         dragOffset = .zero

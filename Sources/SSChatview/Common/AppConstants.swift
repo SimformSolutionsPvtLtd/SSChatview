@@ -44,7 +44,6 @@ public enum AppConstants {
         static let sendImageSize: CGFloat = 30
         static let buttonSize: CGFloat = 35
         static let offsetMinus15: CGFloat = -15
-        static let offsetMinus12: CGFloat = -12
         static let offset12: CGFloat = 12
         static let micImageSize: CGFloat = 15
         static let textFieldPadding: CGFloat = 10
@@ -54,9 +53,8 @@ public enum AppConstants {
     // MARK: TextFieldBorder
     enum TextFieldBorder {
         static let cornerRadius: CGFloat = 25
-        static let trailingPadding: CGFloat = 15
-        static let bottomPadding: CGFloat = 8
-        static let leadingPadding: CGFloat = 15
+        static let horizontalPadding: CGFloat = 15
+        static let verticalPadding: CGFloat = 8
     }
 
     // MARK: MessageView
