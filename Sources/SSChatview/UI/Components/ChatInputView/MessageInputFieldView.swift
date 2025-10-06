@@ -30,9 +30,8 @@ extension MessageInputFieldView {
             .overlay(
                 RoundedRectangle(cornerRadius: AppConstants.TextFieldBorder.cornerRadius)
                     .stroke(config.colors.primaryBorder, lineWidth: 1)
-                    .padding(.leading, AppConstants.TextFieldBorder.leadingPadding)
-                    .padding(.trailing, AppConstants.TextFieldBorder.trailingPadding)
-                    .padding(.bottom, AppConstants.TextFieldBorder.bottomPadding)
+                    .padding(.horizontal, AppConstants.TextFieldBorder.horizontalPadding)
+                    .padding(.vertical, AppConstants.TextFieldBorder.verticalPadding)
             )
             .overlay(
                 Group {
@@ -59,7 +58,7 @@ extension MessageInputFieldView {
                         ).disabled(true)
                     }
                 }
-                    .offset(x: 0, y: AppConstants.ChatInputView.offsetMinus12)
+                    .offset(x: 0, y: -AppConstants.ChatInputView.sendViewPadding)
                     .padding(.horizontal, AppConstants.horizontalPadding),
                 alignment: .bottomTrailing
             )

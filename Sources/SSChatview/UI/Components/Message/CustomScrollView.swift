@@ -208,7 +208,7 @@ extension CustomScrollView {
             userManuallyScrolled = true
 
             // Dismiss keyboard on fast scroll or when reaching top of scroll view
-            if (scrollSpeed > 50 || offsetValue == 0) && isKeyboardVisible {
+            if (abs(scrollSpeed) > AppConstants.CustomScrollView.scrollSpeedThreshold || offsetValue == 0) && isKeyboardVisible {
                 isKeyboardVisible = false
                 dismissKeyboard()
             }
