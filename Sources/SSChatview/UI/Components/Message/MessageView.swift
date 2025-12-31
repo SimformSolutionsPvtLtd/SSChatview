@@ -49,12 +49,18 @@ extension MessageView {
         .onChange(of: messages.count) {
             viewModel.handleMessageListUpdate(currentMessages: messages, editMessageID: editMessageID)
         }
+        .onChange(of: editMessageID) { oldValue, newValue in
+            // Restore scroll to bottom when editing completes
+            if !oldValue.isEmpty && newValue.isEmpty {
+                viewModel.scrollToBottom = true
+            }
+        }
         .onChange(of: shouldShowSelectionView) { _, newValue in
             if !newValue { selectedMessageIDs.removeAll() }
         }
         .onAppear {
             viewModel.previousMessageCount = messages.count
-            DispatchQueue.main.async {
+            if !messages.isEmpty {
                 viewModel.scrollToBottom = true
             }
         }

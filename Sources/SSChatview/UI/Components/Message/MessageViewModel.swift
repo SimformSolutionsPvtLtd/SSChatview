@@ -32,11 +32,15 @@ extension MessageViewModel {
 
         let newMessages = currentMessages.suffix(from: previousMessageCount)
         let receivedMessages = newMessages.filter { !$0.isCurrentUser }
+        let currentUserMessages = newMessages.filter { $0.isCurrentUser }
 
         if isEditing {
             scrollToBottom = false
             unreadMessageCount += receivedMessages.count
-        } else if isAtBottom || newMessages.allSatisfy({ $0.isCurrentUser }) {
+        } else if !currentUserMessages.isEmpty {
+            scrollToBottom = true
+            unreadMessageCount = 0
+        } else if isAtBottom {
             scrollToBottom = true
             unreadMessageCount = 0
         } else {
