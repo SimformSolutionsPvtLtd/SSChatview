@@ -45,16 +45,22 @@ extension MessageView {
             }
         }
         .overlay(scrollToBottomOverlayView, alignment: .bottomTrailing)
-        .gesture(showTimestampGesture)
+        .simultaneousGesture(showTimestampGesture)
         .onChange(of: messages.count) {
             viewModel.handleMessageListUpdate(currentMessages: messages, editMessageID: editMessageID)
+        }
+        .onChange(of: editMessageID) { oldValue, newValue in
+            // Restore scroll to bottom when editing completes
+            if !oldValue.isEmpty && newValue.isEmpty {
+                viewModel.scrollToBottom = true
+            }
         }
         .onChange(of: shouldShowSelectionView) { _, newValue in
             if !newValue { selectedMessageIDs.removeAll() }
         }
         .onAppear {
             viewModel.previousMessageCount = messages.count
-            DispatchQueue.main.async {
+            if !messages.isEmpty {
                 viewModel.scrollToBottom = true
             }
         }
@@ -107,14 +113,23 @@ extension MessageView {
 
     /// Gesture to show timestamps when dragging left beyond a threshold.
     private var showTimestampGesture: some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: AppConstants.TimestampGesture.minimumDragDistance)
             .onChanged { value in
-                if value.translation.width < -50 {
-                    withAnimation { viewModel.showTimestamp = true }
+                let isLeftSwipe = value.translation.width < AppConstants.TimestampGesture.horizontalThreshold
+                let isHorizontalDrag = abs(value.translation.height) < AppConstants.TimestampGesture.verticalThreshold
+                
+                if isLeftSwipe && isHorizontalDrag && !viewModel.showTimestamp {
+                    withAnimation(.easeInOut(duration: AppConstants.TimestampGesture.animationDuration)) {
+                        viewModel.showTimestamp = true
+                    }
                 }
             }
             .onEnded { _ in
-                withAnimation { viewModel.showTimestamp = false }
+                if viewModel.showTimestamp {
+                    withAnimation(.easeInOut(duration: AppConstants.TimestampGesture.animationDuration)) {
+                        viewModel.showTimestamp = false
+                    }
+                }
             }
     }
 }

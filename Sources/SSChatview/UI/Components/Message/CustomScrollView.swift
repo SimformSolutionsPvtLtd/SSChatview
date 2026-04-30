@@ -120,18 +120,16 @@ extension CustomScrollView {
             }
             .onReceive(keyboardWillChangePublisher, perform: { keyboardVisible in
                 isKeyboardVisible = keyboardVisible
-                if keyboardVisible && !scrollID.isEmpty {
-                    withAnimation {
-                        scrollToDisplayScrollID(scrollView: scrollView)
+                guard scrollID.isEmpty else {
+                    if keyboardVisible {
+                        withAnimation {
+                            scrollToDisplayScrollID(scrollView: scrollView)
+                        }
                     }
+                    return
                 }
+                handleKeyboardVisibilityChange(visible: keyboardVisible)
             })
-            .onReceive(keyboardDidChangePublisher) { keyboardVisible in
-                guard scrollID.isEmpty else { return }
-                DispatchQueue.main.async {
-                    handleKeyboardVisibilityChange(visible: keyboardVisible)
-                }
-            }
             .onReceive(HeightChangePublisher.heightChangePublisher) { height in
                 textfieldHeight = height
                 if isKeyboardVisible && !scrollID.isEmpty {
@@ -171,8 +169,8 @@ extension CustomScrollView {
     /// Handles visibility changes of the keyboard
     private func handleKeyboardVisibilityChange(visible: Bool) {
         isKeyboardVisible = visible
+        scrollToBottom = true
         if visible {
-            scrollToBottom = true  // Trigger scroll to bottom when the keyboard is shown
             isKeyboardTriggeredScroll = true
         }
     }
@@ -208,7 +206,7 @@ extension CustomScrollView {
             userManuallyScrolled = true
 
             // Dismiss keyboard on fast scroll or when reaching top of scroll view
-            if (scrollSpeed > 50 || offsetValue == 0) && isKeyboardVisible {
+            if (abs(scrollSpeed) > AppConstants.CustomScrollView.scrollSpeedThreshold || offsetValue == 0) && isKeyboardVisible {
                 isKeyboardVisible = false
                 dismissKeyboard()
             }
