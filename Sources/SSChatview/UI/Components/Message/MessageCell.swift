@@ -117,10 +117,13 @@ extension MessageCell {
                         Color.clear
                             .contentShape(Rectangle()) // Make sure the entire area is tappable
                             .onLongPressGesture {
-                                guard !isBlurred, !shouldShowSelectionView else { return }
+                                guard !isBlurred, !shouldShowSelectionView else {
+                                    return
+                                }
+                                
                                 dismissKeyboard()
-                                isBlurred = true
                                 editMessageID = ""
+                                
                                 let position = geometry.frame(in: .global)
                                 onLongPress(CGPoint(x: position.maxX, y: position.minY))
                             }

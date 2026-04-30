@@ -29,6 +29,7 @@ public enum AppConstants {
     static let contentViewWidth: CGFloat = 220
     static let reactionViewWidth: CGFloat = 286
     static let chatInputHeight: CGFloat = 60
+    static let blurRadius: CGFloat = 5
     static var portraitProfileViewHeight: CGFloat = 0
 
     static func profileViewHeight(isPortrait: Bool) -> CGFloat {
