@@ -7,6 +7,29 @@
 
 import SwiftUI
 
+// MARK: - MessageSelectionState
+/// Observable state for message selection to handle view invalidation in iOS 18+.
+/// @State mutations from nested callbacks don't trigger parent view re-evaluation in iOS 18,
+/// so @Observable ensures reliable state notifications.
+@Observable
+class MessageSelectionState {
+    var selectedMessage: MessageResponseModel?
+    var isBlurred: Bool = false
+    
+    func selectMessage(_ message: MessageResponseModel) {
+        self.selectedMessage = message
+    }
+    
+    func setBlurred(_ value: Bool) {
+        self.isBlurred = value
+    }
+    
+    func clear() {
+        self.selectedMessage = nil
+        self.isBlurred = false
+    }
+}
+
 /// A view representing the chat screen, which includes a profile image, message list, and input field.
 public struct SSChatScreenView: View {
 
@@ -21,6 +44,7 @@ public struct SSChatScreenView: View {
     @StateObject private var viewModel = ChatScreenViewModel()
 
     // MARK: - State
+    @State private var messageSelectionState = MessageSelectionState()
     @State private var currentMessage: String = ""
     @State private var longPressPosition: CGPoint = .zero
     @State private var isBlurred: Bool = false
@@ -74,100 +98,9 @@ public struct SSChatScreenView: View {
 // MARK: - Body
 extension SSChatScreenView {
     public var body: some View {
-        ZStack(alignment: .topTrailing) {
-            VStack(spacing: 0) {
-                ProfileImageView(userName: userName,
-                                 userProfileImage: userProfileImage,
-                                 isPresented: $isProfilePresented,
-                                 shouldShowSelectionView: $viewModel.shouldShowSelectionView,
-                                 onCancelTap: {
-                    viewModel.shouldShowSelectionView = false
-                }, onProfileTap: {
-                    if viewModel.editMessageID.isEmpty {
-                        isProfilePresented = false
-                    } else {
-                        viewModel.editMessageID = ""
-                    }
-                })
-                .padding(.top, topPadding)
-                .disabledWithOpacity(isBlurred)
-                .trackSize(width: nil, height: $profileViewHeight)
-                .onChange(of: profileViewHeight) { _, profileViewHeight in
-                    if isPortrait && AppConstants.portraitProfileViewHeight == 0 && profileViewHeight > 0 {
-                        AppConstants.portraitProfileViewHeight = profileViewHeight
-                    }
-                }
-                .onChange(of: verticalSizeClass) {
-                    if isPortrait, AppConstants.portraitProfileViewHeight == 0, profileViewHeight > 0 {
-                        AppConstants.portraitProfileViewHeight = profileViewHeight
-                    }
-                }
-
-                MessageView(
-                    messages: $messageArray,
-                    isBlurred: $isBlurred,
-                    shouldShowSelectionView: $viewModel.shouldShowSelectionView,
-                    selectedMessageIDs: $viewModel.selectedMessageIDs,
-                    editMessageID: $viewModel.editMessageID,
-                    onLongPress: { position, model in
-                        self.longPressPosition = position
-                        viewModel.selectedMessage = model
-                        viewModel.editMessageID = ""
-                        viewModel.undoSentMessageID = model.id
-                    }, onMessageEdit: { messageID, editedMessage in
-                        viewModel.updateEditedMessage(messageID: messageID, editedMessage: editedMessage)
-                    }
-                )
-                .onTapGesture {
-                    withAnimation {
-                        shouldShowDelete = false
-                        isBlurred = false
-                        viewModel.selectedMessage = nil
-                        viewModel.editMessageID = ""
-                    }
-                }
-                .trackSize(width: nil, height: $messageViewHeight)
-
-                if viewModel.shouldShowSelectionView {
-                    ZStack(alignment: .bottom) {
-                        MessageActionView {
-                            withAnimation {
-                                shouldShowDelete = true
-                            }
-                        }
-                        .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
-
-                        .sheet(isPresented: $shouldShowDelete) {
-                            deleteBottomSheetView
-                                .presentationDetents([.height(150)])
-                                .presentationBackground(Color.clear)
-                        }
-                    }
-                } else {
-                    if viewModel.editMessageID.isEmpty {
-                        ChatInputView(
-                            message: $currentMessage,
-                            isBlurred: $isBlurred
-                        ) {
-                            viewModel.sendMessage(currentMessage)
-                            currentMessage = ""
-                        }
-                        .disabledWithOpacity(!viewModel.editMessageID.isEmpty)
-                        .layoutPriority(currentMessage.isEmpty ? 0 : 1)
-                    }
-                }
-            }
-            .moveContentAboveKeyboard()
-            .blur(radius: isBlurred ? 10 : 0)
-
-            if (isLongMessage || isWideMessage) && isBlurred {
-                config.colors.primaryBackground
-                    .ignoresSafeArea()
-            }
-
-            if let selectedMessage = viewModel.selectedMessage, isBlurred {
-                messsageActionView(selectedMessage: selectedMessage)
-            }
+        ZStack(alignment: .topLeading) {
+            mainContentStack
+            messageFocusOverlay
         }
         .background(config.colors.primaryBackground.ignoresSafeArea(.all, edges: .all))
         .ignoresSafeArea(.all, edges: .top)
@@ -175,21 +108,158 @@ extension SSChatScreenView {
             viewModel.config = config
             viewModel.delegate = delegate
         }
-        .onTapGesture {
-            isBlurred = false
+    }
+}
+
+// MARK: - Main Content Stack
+extension SSChatScreenView {
+    
+    private var mainContentStack: some View {
+        VStack(spacing: 0) {
+            profileSection
+            messageListSection
+            messageActionOrInputSection
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            isBlurred = false
+        .moveContentAboveKeyboard()
+        .blur(radius: isBlurred ? AppConstants.blurRadius : 0)
+        .animation(.easeInOut(duration: 0.2), value: isBlurred)
+    }
+}
+
+// MARK: - Content Sections
+extension SSChatScreenView {
+    
+    private var profileSection: some View {
+        ProfileImageView(userName: userName,
+                         userProfileImage: userProfileImage,
+                         isPresented: $isProfilePresented,
+                         shouldShowSelectionView: $viewModel.shouldShowSelectionView,
+                         onCancelTap: {
+            viewModel.shouldShowSelectionView = false
+        }, onProfileTap: {
+            if viewModel.editMessageID.isEmpty {
+                isProfilePresented = false
+            } else {
+                viewModel.editMessageID = ""
+            }
+        })
+        .padding(.top, topPadding)
+        .disabledWithOpacity(isBlurred)
+        .trackSize(width: nil, height: $profileViewHeight)
+        .onChange(of: profileViewHeight) { _, profileViewHeight in
+            if isPortrait && AppConstants.portraitProfileViewHeight == 0 && profileViewHeight > 0 {
+                AppConstants.portraitProfileViewHeight = profileViewHeight
+            }
+        }
+        .onChange(of: verticalSizeClass) {
+            if isPortrait, AppConstants.portraitProfileViewHeight == 0, profileViewHeight > 0 {
+                AppConstants.portraitProfileViewHeight = profileViewHeight
+            }
+        }
+    }
+    
+    private var messageListSection: some View {
+        MessageView(
+            messages: $messageArray,
+            isBlurred: $isBlurred,
+            shouldShowSelectionView: $viewModel.shouldShowSelectionView,
+            selectedMessageIDs: $viewModel.selectedMessageIDs,
+            editMessageID: $viewModel.editMessageID,
+            onLongPress: handleLongPress,
+            onMessageEdit: { messageID, editedMessage in
+                self.viewModel.updateEditedMessage(messageID: messageID, editedMessage: editedMessage)
+            }
+        )
+        .onTapGesture {
+            guard messageSelectionState.isBlurred else { return }
+            withAnimation(.easeOut(duration: 0.2)) {
+                messageSelectionState.clear()
+                shouldShowDelete = false
+                isBlurred = false
+                viewModel.selectedMessage = nil
+                viewModel.editMessageID = ""
+            }
+        }
+        .trackSize(width: nil, height: $messageViewHeight)
+    }
+    
+    private var messageActionOrInputSection: some View {
+        Group {
+            if viewModel.shouldShowSelectionView {
+                ZStack(alignment: .bottom) {
+                    MessageActionView {
+                        withAnimation { shouldShowDelete = true }
+                    }
+                    .disabledWithOpacity(viewModel.selectedMessageIDs.isEmpty)
+                    .sheet(isPresented: $shouldShowDelete) {
+                        deleteBottomSheetView
+                            .presentationDetents([.height(150)])
+                            .presentationBackground(Color.clear)
+                    }
+                }
+            } else {
+                if viewModel.editMessageID.isEmpty {
+                    ChatInputView(
+                        message: $currentMessage,
+                        isBlurred: $isBlurred
+                    ) {
+                        viewModel.sendMessage(currentMessage)
+                        currentMessage = ""
+                    }
+                    .disabledWithOpacity(!viewModel.editMessageID.isEmpty)
+                    .layoutPriority(currentMessage.isEmpty ? 0 : 1)
+                }
+            }
+        }
+    }
+    
+    private var messageFocusOverlay: some View {
+        Group {
+            if let selectedMessage = messageSelectionState.selectedMessage, messageSelectionState.isBlurred {
+                ZStack(alignment: .topLeading) {
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation(.easeOut(duration: 0.2)) {
+                                messageSelectionState.clear()
+                                isBlurred = false
+                            }
+                        }
+                    
+                    messageActionOverlayView(selectedMessage: selectedMessage)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+                .zIndex(999)
+            }
         }
     }
 }
 
-// MARK: - SSChatScreenView Extension
+// MARK: - Event Handlers
 extension SSChatScreenView {
+    
+    private func handleLongPress(position: CGPoint, model: MessageResponseModel) {
+        longPressPosition = position
+        messageSelectionState.selectMessage(model)
+        viewModel.selectedMessage = model
+        viewModel.editMessageID = ""
+        viewModel.undoSentMessageID = model.id
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                self.messageSelectionState.setBlurred(true)
+                self.isBlurred = true
+            }
+        }
+    }
+}
 
-    // MARK: - MessageFocusView
-    private func messsageActionView(selectedMessage: MessageResponseModel) -> some View {
-        VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
+// MARK: - Message Action View
+extension SSChatScreenView {
+    
+    private func messageActionOverlayView(selectedMessage: MessageResponseModel) -> some View {
+        return VStack(alignment: selectedMessage.isCurrentUser ? .trailing : .leading, spacing: 0) {
             if isLongMessage {
                 Spacer(minLength: AppConstants.reactionViewHeight - 60)
             } else if isPortrait {
@@ -200,18 +270,25 @@ extension SSChatScreenView {
                 Spacer()
                     .frame(maxHeight: (longPressPosition.y + 12) > 0 ? offset : .infinity)
             }
+            
             MessageFocusView(
                 viewModel: .init(
                     messageResponseModel: selectedMessage,
                     onActionClick: { messageID, action in
-                        isBlurred = false
-                        viewModel.messageActionClick(messageID: messageID, action: action)
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            self.messageSelectionState.clear()
+                            self.isBlurred = false
+                        }
+                        self.viewModel.messageActionClick(messageID: messageID, action: action)
                     },
                     onReactionClick: { messageID, reaction in
-                        if reaction != .none {
-                            viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            self.messageSelectionState.clear()
+                            self.isBlurred = false
                         }
-                        isBlurred = false
+                        if reaction != .none {
+                            self.viewModel.updateReaction(messageID: messageID, selectedReaction: reaction)
+                        }
                     }
                 ),
                 messageViewHeight: $messageViewHeight,
@@ -219,20 +296,22 @@ extension SSChatScreenView {
                 isWideMessage: $isWideMessage
             )
         }
-
         .offset(x: selectedMessage.isCurrentUser ? -12 : 12)
     }
+}
 
-    // MARK: - DeleteBottomSheetView
-    public var deleteBottomSheetView: some View {
+// MARK: - Delete Action View
+extension SSChatScreenView {
+    
+    var deleteBottomSheetView: some View {
         GeometryReader { geometry in
             let isPortrait = geometry.size.height > geometry.size.width
             let maxButtonWidth: CGFloat? = isPortrait ? nil : 350
             VStack {
                 Spacer()
                 VStack(spacing: 12) {
-                    deleteButton(maxWidth: maxButtonWidth)
-                    cancelButton(maxWidth: maxButtonWidth)
+                    deleteButtonView(maxWidth: maxButtonWidth)
+                    cancelButtonView(maxWidth: maxButtonWidth)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 16)
@@ -240,9 +319,8 @@ extension SSChatScreenView {
             .frame(maxWidth: .infinity)
         }
     }
-
-    // MARK: - Methods
-    private func deleteButton(maxWidth: CGFloat?) -> some View {
+    
+    private func deleteButtonView(maxWidth: CGFloat?) -> some View {
         Button(action: {
             shouldShowDelete = false
             viewModel.deleteSelectedMessages()
@@ -256,7 +334,7 @@ extension SSChatScreenView {
         }
     }
 
-    private func cancelButton(maxWidth: CGFloat?) -> some View {
+    private func cancelButtonView(maxWidth: CGFloat?) -> some View {
         Button(action: {
             withAnimation {
                 shouldShowDelete = false

@@ -37,12 +37,18 @@ struct MessageFocusView: View {
 // MARK: - Body
 extension MessageFocusView {
     var body: some View {
-        VStack(alignment: isCurrentUser ? .trailing : .leading, spacing: 2) {
+        return VStack(alignment: isCurrentUser ? .trailing : .leading, spacing: 2) {
             messageBubbleView
 
             if !isLongMessage && isPortrait {
                 customContextMenuView
             }
+        }
+        .onAppear {
+            animateReactionView(shouldShow: true)
+        }
+        .onChange(of: messageViewHeight) { _, _ in
+            animateReactionView(shouldShow: true)
         }
     }
 }
@@ -65,9 +71,10 @@ private extension MessageFocusView {
 // MARK: - ReactionView
 private extension MessageFocusView {
     var reactionView: some View {
-        HStack(spacing: 25) {
+        return HStack(spacing: 25) {
             ForEach(ReactionType.allCases.filter { $0 != .none }, id: \.self) { reaction in
                 let isSelected = viewModel.messageResponseModel.reaction == reaction
+                let isActive = viewModel.isActive(reaction)
 
                 Button(action: {
                     viewModel.updateReaction(reaction: reaction)
@@ -86,7 +93,11 @@ private extension MessageFocusView {
                                 .foregroundColor(.gray)
                         }
                     }
-                    .scaleEffect(viewModel.isActive(reaction) ? 1 : 0)
+                    .scaleEffect(isActive ? 1 : 0, anchor: .center)
+                    .animation(
+                        .interpolatingSpring(stiffness: 170, damping: 15),
+                        value: isActive
+                    )
                 })
                 .buttonStyle(PlainButtonStyle())
             }
@@ -96,15 +107,8 @@ private extension MessageFocusView {
         .background(config.colors.tertiarySystemGroupedBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
         .scaleEffect(1, anchor: .bottomTrailing)
-        .animation(
-            .interpolatingSpring(stiffness: 170, damping: 15).delay(0.05),
-            value: true
-        )
         .onTapGesture {
             viewModel.updateReaction(reaction: .none)
-        }
-        .onAppear {
-            animateReactionView(shouldShow: true)
         }
     }
 }
@@ -292,11 +296,14 @@ private extension MessageFocusView {
 private extension MessageFocusView {
     func animateReactionView(shouldShow: Bool) {
         ReactionType.allCases.enumerated().forEach { index, reaction in
-            withAnimation(
-                .interpolatingSpring(stiffness: 170, damping: 15)
-                .delay(Double(index) * 0.1)
-            ) {
-                viewModel.animateReactions(reaction, shouldShow: shouldShow)
+            let delay = Double(index) * 0.1
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                withAnimation(
+                    .interpolatingSpring(stiffness: 170, damping: 15)
+                ) {
+                    viewModel.animateReactions(reaction, shouldShow: shouldShow)
+                }
             }
         }
     }

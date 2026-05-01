@@ -29,6 +29,7 @@ public enum AppConstants {
     static let contentViewWidth: CGFloat = 220
     static let reactionViewWidth: CGFloat = 286
     static let chatInputHeight: CGFloat = 60
+    static let blurRadius: CGFloat = 5
     static var portraitProfileViewHeight: CGFloat = 0
 
     static func profileViewHeight(isPortrait: Bool) -> CGFloat {
@@ -44,24 +45,36 @@ public enum AppConstants {
         static let sendImageSize: CGFloat = 30
         static let buttonSize: CGFloat = 35
         static let offsetMinus15: CGFloat = -15
-        static let offsetMinus12: CGFloat = -12
         static let offset12: CGFloat = 12
         static let micImageSize: CGFloat = 15
         static let textFieldPadding: CGFloat = 10
         static let sendViewPadding: CGFloat = 8
+        static let messageCharacterThreshold: Int = 100
+    }
+    
+    // MARK: CustomScrollView
+    enum CustomScrollView {
+        static let scrollSpeedThreshold: CGFloat = 30
     }
 
     // MARK: TextFieldBorder
     enum TextFieldBorder {
         static let cornerRadius: CGFloat = 25
-        static let trailingPadding: CGFloat = 15
-        static let bottomPadding: CGFloat = 8
-        static let leadingPadding: CGFloat = 15
+        static let horizontalPadding: CGFloat = 15
+        static let verticalPadding: CGFloat = 8
     }
 
     // MARK: MessageView
     enum MessageView {
         static let spacing: CGFloat = 10
+    }
+    
+    // MARK: TimestampGesture
+    enum TimestampGesture {
+        static let minimumDragDistance: CGFloat = 10
+        static let horizontalThreshold: CGFloat = -50
+        static let verticalThreshold: CGFloat = 30
+        static let animationDuration: CGFloat = 0.2
     }
 }
 
