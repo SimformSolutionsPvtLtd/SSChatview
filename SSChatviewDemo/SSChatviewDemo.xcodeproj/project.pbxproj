@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8319D5F62DB5069900A38895 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8319D5F52DB5069100A38895 /* ChatViewModel.swift */; };
-		8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatViewApp.swift */; };
+		8336C9A72A60210F006D8431 /* SSChatviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336C9A62A60210F006D8431 /* SSChatviewApp.swift */; };
 		8336C9AE2A602110006D8431 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8336C9AD2A602110006D8431 /* Preview Assets.xcassets */; };
 		83567EFB2DA8ED5600DFED9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83567EFA2DA8ED5600DFED9F /* ContentView.swift */; };
 		83A41DC92DACD72900A39C9F /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 83A41DC82DACD72900A39C9F /* RswiftLibrary */; };
@@ -33,7 +33,7 @@
 /* Begin PBXFileReference section */
 		8319D5F52DB5069100A38895 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		8336C9A32A60210F006D8431 /* SSChatviewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSChatviewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8336C9A62A60210F006D8431 /* SSChatViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatViewApp.swift; sourceTree = "<group>"; };
+		8336C9A62A60210F006D8431 /* SSChatviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChatviewApp.swift; sourceTree = "<group>"; };
 		8336C9AD2A602110006D8431 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83567EFA2DA8ED5600DFED9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8360BAE12A791651002B0AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				83D150132DC0B5FD003BC990 /* ChatMessagesData.swift */,
 				8319D5F52DB5069100A38895 /* ChatViewModel.swift */,
 				83567EFA2DA8ED5600DFED9F /* ContentView.swift */,
-				8336C9A62A60210F006D8431 /* SSChatViewApp.swift */,
+				8336C9A62A60210F006D8431 /* SSChatviewApp.swift */,
 				83F369C62DAFBF0F009772EC /* Helper */,
 				83AC64C92DA917EC00C7CABF /* Resources */,
 				8336C9AC2A602110006D8431 /* Preview Content */,
@@ -130,7 +130,7 @@
 				83AC64C72DA917EC00C7CABF /* Localizable.strings */,
 			);
 			name = Resources;
-			path = SSChatViewDemo/Resources;
+			 path = SSChatviewDemo/Resources;
 			sourceTree = SOURCE_ROOT;
 		};
 		83F369C62DAFBF0F009772EC /* Helper */ = {
@@ -238,7 +238,7 @@
 			files = (
 				83D150142DC0B603003BC990 /* ChatMessagesData.swift in Sources */,
 				83D1501F2DC0C3A8003BC990 /* DateExtension.swift in Sources */,
-				8336C9A72A60210F006D8431 /* SSChatViewApp.swift in Sources */,
+				8336C9A72A60210F006D8431 /* SSChatviewApp.swift in Sources */,
 				83F369DE2DAFCB44009772EC /* CustomFontScheme.swift in Sources */,
 				8319D5F62DB5069900A38895 /* ChatViewModel.swift in Sources */,
 				83F369D62DAFC5BD009772EC /* CustomStrings.swift in Sources */,
@@ -383,11 +383,11 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SSChatViewDemo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"SSChatviewDemo/Preview Content\"";
 				DEVELOPMENT_TEAM = K7XJG666ZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SSChatViewDemo/Info.plist;
+				INFOPLIST_FILE = SSChatviewDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,11 +418,11 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SSChatViewDemo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"SSChatviewDemo/Preview Content\"";
 				DEVELOPMENT_TEAM = K7XJG666ZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SSChatViewDemo/Info.plist;
+				INFOPLIST_FILE = SSChatviewDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
