@@ -1,4 +1,4 @@
-![Banner](Assets/SSChatview.png)
+![Banner](https://raw.githubusercontent.com/SimformSolutionsPvtLtd/SSChatview/master/Assets/SSChatview.png)
 
 # SSChatview
 ### Bring iMessage-like chat to life with rich features, seamless SwiftUI support and effortless customization.
@@ -32,7 +32,7 @@ SSChatView is a SwiftUI library that brings an iMessage-style chat experience to
 ## Demo Videos
 | React and Delete Message | Send Message and Scroll to Bottom | Edit Message | 
 | :--: | :-----: | :--: | 
-| <img width=260px src="Assets/React_Delete_Message.gif" /> | <img width=260px src="Assets/Send_ScrollToNew_Message.gif" /> | <img width=260px src="Assets/Edit_Message.gif" /> | 
+| <img width=260px src="https://raw.githubusercontent.com/SimformSolutionsPvtLtd/SSChatview/master/Assets/React_Delete_Message.gif" /> | <img width=260px src="https://raw.githubusercontent.com/SimformSolutionsPvtLtd/SSChatview/master/Assets/Send_ScrollToNew_Message.gif" /> | <img width=260px src="https://raw.githubusercontent.com/SimformSolutionsPvtLtd/SSChatview/master/Assets/Edit_Message.gif" /> | 
 
 ## Requirements
 - iOS 17.0+
